@@ -1,0 +1,3 @@
+name: FastTravelSigns
+main: de.germanspacebuild.plugins.fasttravel.FastTravel
+version: ${project.version}
