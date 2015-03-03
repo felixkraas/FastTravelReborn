@@ -4,6 +4,7 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import org.bukkit.entity.Player;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -15,11 +16,11 @@ public class FastTravelDB {
 
     private static Map<String, FastTravelSign> signs;
 
-    private static String saveFile;
+    private static File saveFile;
 
     public static void init(FastTravel plugin, String saveFile, boolean load) {
         FastTravelDB.plugin = plugin;
-        FastTravelDB.saveFile = saveFile;
+        FastTravelDB.saveFile = new File(plugin.getDataDir(), saveFile);
 
         signs = new HashMap<>();
 
@@ -47,7 +48,7 @@ public class FastTravelDB {
     public static void save(){
 
         if (plugin.getDBHandler() == DBType.File){
-            FileDBHandler.save(plugin.getDataDir() + "/signs.yml");
+            FileDBHandler.save(saveFile);
         }
 
     }

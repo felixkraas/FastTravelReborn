@@ -123,8 +123,8 @@ public class FastTravel extends JavaPlugin {
         return io;
     }
 
-    public String getDataDir(){
-        return dataDir.getPath();
+    public File getDataDir(){
+        return dataDir;
     }
 
     public DBType getDBHandler() {

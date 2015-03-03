@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,14 @@ public class FileDBHandler {
 
     private static List<String> filePlayers;
 
-    private static String saveFile;
+    private static File saveFile;
 
     static {
         plugin = FastTravel.getInstance();
         filePlayers = new ArrayList<>();
     }
 
-    public static void load(String saveFile){
+    public static void load(File saveFile){
 
         FileDBHandler.saveFile = saveFile;
 
@@ -110,7 +111,7 @@ public class FileDBHandler {
         }
     }
 
-    public static void save(String saveFile) {
+    public static void save(File saveFile) {
         YamlConfiguration signYAML = new YamlConfiguration();
         for (String signName : FastTravelDB.getSignMap().keySet()) {
             FastTravelSign sign = FastTravelDB.getSignMap().get(signName);
