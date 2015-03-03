@@ -1,7 +1,11 @@
 package de.germanspacebuild.plugins.fasttravel.util;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+
+import java.util.Arrays;
 
 /**
  * Created by oneill011990 on 03.03.15.
@@ -22,6 +26,25 @@ public class BlockUtil {
      * Blocks that are Signs in Bukkit.
      */
     public static Material[] signBlocks = {Material.SIGN_POST, Material.SIGN, Material.WALL_SIGN};
+
+    /**
+     * Checks if location is safe.
+     * @param loc Location to check.
+     * @return Is the location safe?
+     */
+    public static boolean safeLocation(Location loc) {
+        double y = loc.getY();
+        loc.setY(y + 1);
+        Block block1 = loc.getWorld().getBlockAt(loc);
+        loc.setY(y + 2);
+        Block block2 = loc.getWorld().getBlockAt(loc);
+        loc.setY(y);
+        Material mat1 = block1.getType();
+        Material mat2 = block2.getType();
+        if ((Arrays.asList(safeBlocks).contains(mat1)) && (Arrays.asList(safeBlocks).contains(mat2)))
+            return true;
+        return false;
+    }
 
 
     /**

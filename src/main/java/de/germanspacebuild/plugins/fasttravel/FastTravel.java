@@ -1,6 +1,7 @@
 package de.germanspacebuild.plugins.fasttravel;
 
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.Configuration;
@@ -20,13 +21,14 @@ import java.io.IOException;
  */
 public class FastTravel extends JavaPlugin {
 
-    FastTravel instance;
+    static FastTravel instance;
     Configuration config;
     File dataDir;
     Metrics metrics;
     Economy economy;
     UpdateChecker updateChecker;
     IOManager io;
+    DBType dbHandler;
 
     public boolean needUpdate;
     public String newVersion;
@@ -113,12 +115,20 @@ public class FastTravel extends JavaPlugin {
         }
     }
 
-    public FastTravel getInstance() {
+    public static FastTravel getInstance() {
         return instance;
     }
 
     public IOManager getIOManger(){
         return io;
+    }
+
+    public String getDataDir(){
+        return dataDir.getPath();
+    }
+
+    public DBType getDBHandler() {
+        return dbHandler;
     }
 
 }
