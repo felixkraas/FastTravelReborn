@@ -5,10 +5,12 @@ import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by oneill011990 on 03.03.15.
@@ -36,6 +38,12 @@ public class FastTravel extends JavaPlugin {
         instance = this;
         config = this.getConfig();
         dataDir = this.getDataFolder();
+
+        setupConfig();
+
+        setupEconomy();
+
+        metricsInit();
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -67,6 +75,42 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
+    }
+
+
+    public void setupEconomy() {
+
+        if (!config.getBoolean("Plugin.Economy")) {
+            return;
+        }
+
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            getLogger().warning("Could not find Vault! Disabling economy support.");
+            return;
+        }
+
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager()
+                .getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
+        if (economy == null) {
+            getLogger().warning("Could not find an economy plugin! Disabling economy support.");
+            return;
+        }
+        getLogger().info("Using " + economy.getName() + " for economy support.");
+    }
+
+    public void metricsInit(){
+        if (getConfig().getBoolean("Plugin.Metrics")){
+            try {
+                metrics = new Metrics(this);
+                metrics.start();
+            } catch (IOException e) {
+                // Failed to submit the stats :-(
+            }
+
+        }
     }
 
     public FastTravel getInstance() {
