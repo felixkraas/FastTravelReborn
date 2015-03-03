@@ -57,6 +57,15 @@ public class FastTravel extends JavaPlugin {
 
     public void setupConfig(){
         config.addDefault("Plugin.Update", true);
+        config.addDefault("Plugin.Debug.Enabled", false);
+        config.addDefault("Plugin.Debug.Log", false);
+        config.addDefault("Plugin.Metrics", true);
+        config.addDefault("Plugin.Economy", false);
+        config.addDefault("Plugin.Database", "FILE");
+        config.addDefault("Travel.Cooldown", 0);
+        config.addDefault("Travel.Warmup", 0);
+        config.addDefault("Travel.Price", 0);
+        config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
     }
 
