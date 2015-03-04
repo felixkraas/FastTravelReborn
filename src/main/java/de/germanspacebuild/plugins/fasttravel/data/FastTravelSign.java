@@ -74,22 +74,19 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void addPlayer(UUID player){
         players.add(player);
+        FastTravelDB.save();
     }
 
     public void clearPlayers(){
         players.clear();
+        FastTravelDB.save();
     }
 
     public void removePlayer(UUID player){
         players.remove(player);
+        FastTravelDB.save();
     }
 
-    /**
-     * Is sign already found by player?
-     *
-     * @param player Player to check.
-     * @return Was it found by player or not?
-     */
     public boolean foundBy(UUID player) {
         return players.contains(player);
     }
@@ -105,6 +102,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setName(String name) {
         this.name = name;
+        FastTravelDB.save();
     }
 
     public Location getTPLocation() {
@@ -113,6 +111,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setTpLoc(Location tpLoc) {
         this.tpLoc = tpLoc;
+        FastTravelDB.save();
     }
 
     public Location getSignLocation() {
@@ -121,6 +120,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setSignLoc(Location signLoc) {
         this.signLoc = signLoc;
+        FastTravelDB.save();
     }
 
     public Boolean isAutomatic() {
@@ -129,6 +129,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setAutomatic(Boolean automatic) {
         this.automatic = automatic;
+        FastTravelDB.save();
     }
 
     public double getPrice() {
@@ -137,6 +138,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setPrice(float price) {
         this.price = price;
+        FastTravelDB.save();
     }
 
     public int getRange() {
@@ -145,6 +147,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setRange(int range) {
         this.range = range;
+        FastTravelDB.save();
     }
 
     public UUID getCreator() {
@@ -153,6 +156,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setCreator(UUID creator) {
         this.creator = creator;
+        FastTravelDB.save();
     }
 
     public List<UUID> getPlayers() {
@@ -165,5 +169,6 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     public void setMarker(Boolean marker) {
         this.marker = marker;
+        FastTravelDB.save();
     }
 }

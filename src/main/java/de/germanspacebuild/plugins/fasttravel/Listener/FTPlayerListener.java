@@ -2,6 +2,7 @@ package de.germanspacebuild.plugins.fasttravel.Listener;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
+import de.germanspacebuild.plugins.fasttravel.events.FastTravelFoundEvent;
 import de.germanspacebuild.plugins.fasttravel.util.BlockUtil;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
 import org.bukkit.block.Sign;
@@ -44,8 +45,8 @@ public class FTPlayerListener implements Listener {
                     sign.getLine(1)));
             return;
         } else {
-            FastTravelDB.getSign(sign.getLine(1)).addPlayer(event.getPlayer().getUniqueId());
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found".replaceAll("%sign", sign.getLine(1)));
+            plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(event.getPlayer(),
+                    FastTravelDB.getSign(sign.getLine(1))));
         }
 
     }

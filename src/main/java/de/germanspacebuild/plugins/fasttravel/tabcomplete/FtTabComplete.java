@@ -26,7 +26,7 @@ public class FtTabComplete implements TabCompleter{
 
         Player player = ((Player) sender);
 
-        List<FastTravelSign> signs = FastTravelDB.getSignsFor(player);
+        List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
 
         return FastTravelUtil.sendSignNames(signs);
     }

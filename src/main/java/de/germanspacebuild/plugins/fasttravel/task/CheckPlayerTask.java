@@ -3,6 +3,7 @@ package de.germanspacebuild.plugins.fasttravel.task;
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
+import de.germanspacebuild.plugins.fasttravel.events.FastTravelFoundEvent;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class CheckPlayerTask implements Runnable {
             List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
             for (FastTravelSign sign : signs) {
                 if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()){
-                    sign.addPlayer(player.getUniqueId());
+                    plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
                 }
             }
         }

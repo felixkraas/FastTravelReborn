@@ -54,7 +54,7 @@ public class FTSignListener implements Listener{
                 event.getBlock().getZ());
         if (!Arrays.asList(BlockUtil.safeBlocks).contains(blockAbove)) {
             event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.BlockAbove");
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.BlockAbove.Is");
             return;
         }
 
@@ -69,7 +69,7 @@ public class FTSignListener implements Listener{
 
             // Economy support - set default price
             if (plugin.getEconomy() != null) {
-                float defPrice = (float) plugin.getConfig().getDouble("economy.default-price");
+                float defPrice = (float) plugin.getConfig().getDouble("Travel.Price");
                 if (defPrice > 0)
                     event.setLine(2, "Price: " + defPrice);
                 newFTSign.setPrice(defPrice);
@@ -77,7 +77,8 @@ public class FTSignListener implements Listener{
 
             FastTravelDB.addSign(newFTSign);
 
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Created");
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Created".replaceAll("%sign",
+                    newFTSign.getName()));
 
             newFTSign.addPlayer(event.getPlayer().getUniqueId());
 
