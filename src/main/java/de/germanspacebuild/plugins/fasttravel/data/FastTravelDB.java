@@ -69,10 +69,10 @@ public class FastTravelDB {
             return null;
     }
 
-    public static List<FastTravelSign> getSignsFor(Player player) {
+    public static List<FastTravelSign> getSignsFor(UUID player) {
         List<FastTravelSign> playerSigns = new ArrayList<>();
         for (FastTravelSign sign : signs.values()) {
-            if (sign.isAutomatic() || sign.foundBy(player.getUniqueId()))
+            if (sign.isAutomatic() || sign.foundBy(player))
                 playerSigns.add(sign);
         }
         Collections.sort(playerSigns);

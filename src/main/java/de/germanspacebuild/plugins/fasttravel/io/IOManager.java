@@ -4,6 +4,7 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.entity.Player;
 
 /**
  * Created by oneill011990 on 03.03.15.
@@ -47,9 +48,16 @@ public class IOManager {
         sender.sendMessage(parseColor(prefix + msg));
     }
 
+    public void send(Player player, String msg){
+        player.sendMessage(parseColor(prefix + msg));
+    }
+
     public void sendTranslation(CommandSender sender, String key) {
-        if (config.getBoolean("IO.Show-Prefix")) sender.sendMessage(parseColor(prefix + translate(key)));
-        else sender.sendMessage(parseColor(translate(key)));
+        sender.sendMessage(parseColor(prefix + translate(key)));
+    }
+
+    public void sendTranslation(Player player, String key){
+        player.sendMessage(prefix + translate(key));
     }
 
     public void sendFewArgs(CommandSender sender, String usage) {

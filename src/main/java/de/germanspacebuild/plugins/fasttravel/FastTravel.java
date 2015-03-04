@@ -1,6 +1,7 @@
 package de.germanspacebuild.plugins.fasttravel;
 
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import net.milkbowl.vault.economy.Economy;
@@ -20,6 +21,8 @@ import java.io.IOException;
  * @author oneill011990
  */
 public class FastTravel extends JavaPlugin {
+
+    public static final String PERMS_BASE = "fasttravelsigns.";
 
     static FastTravel instance;
     Configuration config;
@@ -58,6 +61,9 @@ public class FastTravel extends JavaPlugin {
             needUpdate = true;
             newVersion = updateChecker.getLink();
         }
+
+        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
+
     }
 
     @Override
