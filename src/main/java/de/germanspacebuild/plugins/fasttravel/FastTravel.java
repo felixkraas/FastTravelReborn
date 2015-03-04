@@ -138,6 +138,10 @@ public class FastTravel extends JavaPlugin {
         return dataDir;
     }
 
+    public Economy getEconomy(){
+        return economy;
+    }
+
     public DBType getDBHandler() {
         return dbHandler;
     }

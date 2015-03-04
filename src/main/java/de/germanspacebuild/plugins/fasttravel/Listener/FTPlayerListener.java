@@ -4,7 +4,6 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.util.BlockUtil;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
-import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**

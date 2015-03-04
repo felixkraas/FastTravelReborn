@@ -2,7 +2,6 @@ package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.*;
