@@ -1,5 +1,7 @@
 package de.germanspacebuild.plugins.fasttravel;
 
+import de.germanspacebuild.plugins.fasttravel.Listener.FTBlockListener;
+import de.germanspacebuild.plugins.fasttravel.Listener.FTPlayerListener;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
@@ -51,6 +53,9 @@ public class FastTravel extends JavaPlugin {
         metricsInit();
 
         PluginManager pm = getServer().getPluginManager();
+
+        pm.registerEvents(new FTPlayerListener(this), this);
+        pm.registerEvents(new FTBlockListener(this), this);
 
         //Updatecheck
         updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
