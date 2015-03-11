@@ -62,7 +62,7 @@ public class Translator {
             loadedFiles.add(langs.get(i).getFile());
             languages.put(langs.get(i).getName(), langs.get(i).getKeys());
         }
-        File[] langFiles = new File(plugin.getInstance().getDataFolder(), "lang").listFiles();
+        File[] langFiles = new File(plugin.getInstance().getDataDir(), "/lang").listFiles();
         for (int i = 0; i < langFiles.length; i++) {
             if (loadedFiles.indexOf(langFiles[i]) == -1)  loadLanguageFile(langFiles[i]);
         }

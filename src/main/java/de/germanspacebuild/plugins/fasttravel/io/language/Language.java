@@ -45,6 +45,8 @@ public abstract class Language {
         languages = new ArrayList<Language>();
         this.config = config;
         this.plugin = plugin;
+        createLanguageFile();
+        updateLanguage();
     }
 
     public abstract void createLanguageFile();

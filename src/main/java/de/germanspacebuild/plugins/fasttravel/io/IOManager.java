@@ -36,14 +36,15 @@ public class IOManager {
     private Configuration config;
     private Translator translator;
 
-    private final String prefix = ChatColor.LIGHT_PURPLE + "[" + plugin.getDescription().getName() + "] " +
-            ChatColor.WHITE;
+    private final String prefix;
 
     public IOManager(FastTravel plugin) {
         this.plugin = plugin;
         this.config = this.plugin.getConfig();
         translator = new Translator(plugin);
         translator.init();
+        prefix = ChatColor.LIGHT_PURPLE + "[" + plugin.getDescription().getName() + "] " +
+                ChatColor.WHITE;
     }
 
     public void broadcast(String msg) {
@@ -76,26 +77,6 @@ public class IOManager {
 
     public void sendTranslation(Player player, String key){
         player.sendMessage(prefix + translate(key));
-    }
-
-    public void sendFewArgs(CommandSender sender, String usage) {
-        if (config.getBoolean("IO.Show-Prefix")) {
-            sender.sendMessage(parseColor(prefix + translate("Command.FewArgs")));
-            sender.sendMessage(parseColor(prefix + translate("Command.Usage").replaceAll("%usage%", usage)));
-        }else {
-            sender.sendMessage(parseColor(translate("Command.FewArgs")));
-            sender.sendMessage(parseColor(translate("Command.Usage").replaceAll("%usage%", usage)));
-        }
-    }
-
-    public void sendManyArgs(CommandSender sender, String usage) {
-        if (config.getBoolean("IO.Show-Prefix")) {
-            sender.sendMessage(parseColor(prefix + translate("Command.ManyArgs")));
-            sender.sendMessage(parseColor(prefix + translate("Command.Usage").replaceAll("%usage%", usage)));
-        }else {
-            sender.sendMessage(parseColor(translate("Command.ManyArgs")));
-            sender.sendMessage(parseColor(translate("Command.Usage").replaceAll("%usage%", usage)));
-        }
     }
 
     public String translate(String key) {

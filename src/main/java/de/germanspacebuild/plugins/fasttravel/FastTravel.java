@@ -30,6 +30,8 @@ import de.germanspacebuild.plugins.fasttravel.Listener.FTPlayerListener;
 import de.germanspacebuild.plugins.fasttravel.Listener.FTSignListener;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.germanspacebuild.plugins.fasttravel.io.language.Language;
+import de.germanspacebuild.plugins.fasttravel.io.language.en;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
@@ -50,6 +52,7 @@ public class FastTravel extends JavaPlugin {
     static FastTravel instance;
     Configuration config;
     File dataDir;
+    File langDir;
     Metrics metrics;
     Economy economy;
     UpdateChecker updateChecker;
@@ -62,10 +65,24 @@ public class FastTravel extends JavaPlugin {
 
     @Override
     public void onEnable(){
+
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdir();
+        }
+
+        if (!new File(getDataFolder() + "/lang").exists()) {
+            new File(getDataFolder() + "/lang").mkdir();
+        }
+
+        //Init language
+        initLanguages();
+
         io = new IOManager(this);
         instance = this;
         config = this.getConfig();
         dataDir = this.getDataFolder();
+        langDir = new File(getDataFolder() + "/lang");
+
 
         setupConfig();
 
@@ -150,6 +167,10 @@ public class FastTravel extends JavaPlugin {
         }
     }
 
+    private void initLanguages() {
+        Language en = new en(this);
+    }
+
     public static FastTravel getInstance() {
         return instance;
     }
@@ -160,6 +181,10 @@ public class FastTravel extends JavaPlugin {
 
     public File getDataDir(){
         return dataDir;
+    }
+
+    public File getLangDir() {
+        return langDir;
     }
 
     public Economy getEconomy(){

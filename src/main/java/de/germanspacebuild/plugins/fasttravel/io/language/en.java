@@ -45,7 +45,7 @@ public class en extends Language {
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(plugin.getDataDir(), "/lang/en.lang");
+        langFile = new File(plugin.getLangDir() + "en.lang");
         if (!langFile.exists()){
             try {
                 langFile.createNewFile();
