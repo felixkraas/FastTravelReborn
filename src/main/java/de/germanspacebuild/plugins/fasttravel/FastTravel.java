@@ -37,6 +37,7 @@ import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,7 +53,7 @@ public class FastTravel extends JavaPlugin {
     static FastTravel instance;
     Configuration config;
     File dataDir;
-    File langDir;
+    static File langDir;
     Metrics metrics;
     Economy economy;
     UpdateChecker updateChecker;
@@ -65,23 +66,18 @@ public class FastTravel extends JavaPlugin {
 
     @Override
     public void onEnable(){
-
-        if (!getDataFolder().exists()) {
-            getDataFolder().mkdir();
-        }
-
-        if (!new File(getDataFolder() + "/lang").exists()) {
-            new File(getDataFolder() + "/lang").mkdir();
-        }
-
-        //Init language
-        initLanguages();
-
-        io = new IOManager(this);
         instance = this;
         config = this.getConfig();
         dataDir = this.getDataFolder();
-        langDir = new File(getDataFolder() + "/lang");
+        langDir = new File(getDataFolder(), "lang");
+
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+        if (!langDir.exists()) {
+            langDir.mkdir();
+        }
 
 
         setupConfig();
@@ -89,6 +85,10 @@ public class FastTravel extends JavaPlugin {
         setupEconomy();
 
         metricsInit();
+
+        //Init language
+        initLanguages();
+        io = new IOManager(this);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -107,6 +107,17 @@ public class FastTravel extends JavaPlugin {
             newVersion = updateChecker.getLink();
         }
 
+        if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
+            this.dbHandler = DBType.File;
+            FastTravelDB.init(this, "signs.yml", true);
+        } else if (config.getString("Plugin.Database").equalsIgnoreCase("MySQL")) {
+            this.dbHandler = DBType.MySQL;
+        } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {
+            this.dbHandler = DBType.SQLite;
+        } else {
+            io.sendConsole(io.translate("Plugin.InvalidDB"));
+        }
+
         getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
 
     }
@@ -118,6 +129,12 @@ public class FastTravel extends JavaPlugin {
     }
 
     public void setupConfig(){
+        File confFile = new File(dataDir, "config.yml");
+        try {
+            getConfig().load(confFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
         config.addDefault("Plugin.Update", true);
         config.addDefault("Plugin.Debug.Enabled", false);
         config.addDefault("Plugin.Debug.Log", false);
@@ -129,6 +146,12 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
+        config.options().copyDefaults(true);
+        try {
+            getConfig().save(confFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -169,6 +192,7 @@ public class FastTravel extends JavaPlugin {
 
     private void initLanguages() {
         Language en = new en(this);
+        Language.addLanguage(en);
     }
 
     public static FastTravel getInstance() {
@@ -183,7 +207,7 @@ public class FastTravel extends JavaPlugin {
         return dataDir;
     }
 
-    public File getLangDir() {
+    public static File getLangDir() {
         return langDir;
     }
 
