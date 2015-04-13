@@ -107,6 +107,7 @@ public class FastTravel extends JavaPlugin {
             newVersion = updateChecker.getLink();
         }
 
+
         if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
             this.dbHandler = DBType.File;
             FastTravelDB.init(this, "signs.yml", true);
