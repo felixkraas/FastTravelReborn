@@ -45,7 +45,7 @@ public class en extends Language {
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(plugin.getLangDir() + "en.lang");
+        langFile = new File(FastTravel.getLangDir(), "en.lang");
         if (!langFile.exists()){
             try {
                 langFile.createNewFile();
@@ -65,6 +65,7 @@ public class en extends Language {
             //Plugin
             set("Plugin.Update", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
                     " Get it here: &3%link");
+            set("Plugin.InvalidDB", "Database you set in config is invalid. Falling back to YAML-File.");
 
             //Permissions
             set("Perms.Not", "&4You don't have permission to do that. Contact an admin if you think this is an error.");

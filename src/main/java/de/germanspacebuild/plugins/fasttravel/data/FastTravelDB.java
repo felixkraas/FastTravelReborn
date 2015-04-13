@@ -70,7 +70,7 @@ public class FastTravelDB {
 
     public static void save(){
 
-        if (plugin.getDBHandler() == DBType.File){
+        if (plugin.getDBHandler() == DBType.File) {
             FileDBHandler.save(saveFile);
         }
 

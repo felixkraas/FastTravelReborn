@@ -62,12 +62,12 @@ public class Translator {
             loadedFiles.add(langs.get(i).getFile());
             languages.put(langs.get(i).getName(), langs.get(i).getKeys());
         }
-        File[] langFiles = new File(plugin.getInstance().getDataDir(), "/lang").listFiles();
+        File[] langFiles = plugin.getLangDir().listFiles();
         for (int i = 0; i < langFiles.length; i++) {
             if (loadedFiles.indexOf(langFiles[i]) == -1)  loadLanguageFile(langFiles[i]);
         }
         if (languages.get(language) == null) {
-            io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to en!");
+            io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to 'en'!");
             language = "en";
             config.set("IO.Language", "en");
         }
@@ -96,8 +96,11 @@ public class Translator {
     }
 
     public String getKey(String key) {
-        if (languages.get(language) == null) return "Language " + language + " doesn't seem to exist. Please change it in the config.yml!";
-        if (languages.get(language).getString(key) != null) return languages.get(language).getString(key);
-        else return "Key " + key + " couldn't be found. Please check your lang Files!";
+        if (languages.get(language) == null)
+            return "Language " + language + " doesn't seem to exist. Please change it in the config.yml!";
+        if (languages.get(language).getString(key) != null)
+            return languages.get(language).getString(key);
+        else
+            return "Key " + key + " couldn't be found. Please check your lang Files!";
     }
 }
