@@ -63,8 +63,10 @@ public class en extends Language {
             lang.load(langFile);
 
             //Plugin
-            set("Plugin.Update", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
+            set("Plugin.Update.Player", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
                     " Get it here: &3%link");
+            set("Plugin.Update.Console", "You are using v%old of FastTravelSigns. Latest version is v%new." +
+                    " Get it here: %link");
             set("Plugin.InvalidDB", "Database you set in config is invalid. Falling back to YAML-File.");
 
             //Permissions
@@ -90,6 +92,7 @@ public class en extends Language {
             //Travel
             set("Travel.Success", "You traveled to &b%sign&f.");
 
+            save();
 
 
         } catch (IOException e) {

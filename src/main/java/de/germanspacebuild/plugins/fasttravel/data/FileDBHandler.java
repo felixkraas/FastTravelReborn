@@ -59,7 +59,11 @@ public class FileDBHandler {
         FileDBHandler.saveFile = saveFile;
 
         YamlConfiguration signYAML = new YamlConfiguration();
+
         try {
+            if (!saveFile.exists()){
+                saveFile.createNewFile();
+            }
             signYAML.load(saveFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();

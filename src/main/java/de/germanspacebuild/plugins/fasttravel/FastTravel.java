@@ -101,7 +101,7 @@ public class FastTravel extends JavaPlugin {
         updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
 
         if (updateChecker.updateFound()){
-            io.sendConsole(io.translate("Plugin.Update").replace("%old", this.getDescription().getVersion())
+            io.sendConsole(io.translate("Plugin.Update.Console").replace("%old", this.getDescription().getVersion())
                     .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
             needUpdate = true;
             newVersion = updateChecker.getLink();
@@ -132,6 +132,9 @@ public class FastTravel extends JavaPlugin {
     public void setupConfig(){
         File confFile = new File(dataDir, "config.yml");
         try {
+            if (!confFile.exists()) {
+                confFile.createNewFile();
+            }
             getConfig().load(confFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
