@@ -28,10 +28,13 @@ import de.germanspacebuild.plugins.fasttravel.Listener.FTBlockListener;
 import de.germanspacebuild.plugins.fasttravel.Listener.FTEntityListener;
 import de.germanspacebuild.plugins.fasttravel.Listener.FTPlayerListener;
 import de.germanspacebuild.plugins.fasttravel.Listener.FTSignListener;
+import de.germanspacebuild.plugins.fasttravel.commands.FastTravelCommand;
+import de.germanspacebuild.plugins.fasttravel.commands.ListCommand;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
 import de.germanspacebuild.plugins.fasttravel.io.language.en;
+import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
@@ -97,10 +100,17 @@ public class FastTravel extends JavaPlugin {
         pm.registerEvents(new FTSignListener(this), this);
         pm.registerEvents(new FTEntityListener(), this);
 
+        //Commands
+        getCommand("ft").setExecutor(new FastTravelCommand(this));
+        getCommand("ftlist").setExecutor(new ListCommand(this));
+
+        //Tab-Completer
+        getCommand("ft").setTabCompleter(new FtTabComplete());
+
         //Updatecheck
         updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
 
-        if (updateChecker.updateFound()){
+        if (updateChecker.updateFound()) {
             io.sendConsole(io.translate("Plugin.Update.Console").replace("%old", this.getDescription().getVersion())
                     .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
             needUpdate = true;

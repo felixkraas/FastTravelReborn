@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by oneill011990 on 03.03.2015.
  */
-public class FtTabComplete implements TabCompleter{
+public class FtTabComplete implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

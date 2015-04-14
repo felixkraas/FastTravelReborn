@@ -72,6 +72,9 @@ public class en extends Language {
             //Permissions
             set("Perms.Not", "&4You don't have permission to do that. Contact an admin if you think this is an error.");
 
+            //Player
+            set("Player.Removed", "You have been removed from&b %sign&f.");
+
             //Sign
             set("Sign.PlaceAbove", "You can't place blocks above FastTravelSigns.");
             set("Sign.PlaceAbove.Is", "You can't place FastTravelSigns directly below blocks.");
@@ -82,15 +85,22 @@ public class en extends Language {
             set("Sign.InvalidName", "You may not use anything but letters in sign names.");
             set("Sign.Exists", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
+            set("Sign.ExistsNot", "Sign&b %sign &fdoes not exist.");
 
             //Economy
             set("Econ.MoneyLess", "You don't have the money to travel. It would cost &2%cost&f.");
             set("Econ.Charged", "You have been charged &2%cost&f.");
             set("Econ.Error", "Something is broken with economy. Please contact admin or plugin author." +
-                    " You might travel anyway");
+                    " You might travel anyway.");
 
             //Travel
             set("Travel.Success", "You traveled to &b%sign&f.");
+
+            //Commands
+            set("Command.Player", "This command has to be executed by a player.");
+            set("Command.NoSign", "You need to specify a sign.");
+            set("Command.Auto.On", "Sign&b %sign&f is now available for all players.");
+            set("Command.Auto.Off", "Sign&b %sign&f is no longer available for all players.");
 
             save();
 
