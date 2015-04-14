@@ -24,14 +24,13 @@
 
 package de.germanspacebuild.plugins.fasttravel;
 
-import de.germanspacebuild.plugins.fasttravel.Listener.FTBlockListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTEntityListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTPlayerListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTSignListener;
+import de.germanspacebuild.plugins.fasttravel.Listener.*;
+import de.germanspacebuild.plugins.fasttravel.commands.*;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
 import de.germanspacebuild.plugins.fasttravel.io.language.en;
+import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.util.DBType;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
@@ -96,12 +95,26 @@ public class FastTravel extends JavaPlugin {
         pm.registerEvents(new FTBlockListener(this), this);
         pm.registerEvents(new FTSignListener(this), this);
         pm.registerEvents(new FTEntityListener(), this);
+        pm.registerEvents(new FTInventoryListener(this), this);
+
+        //Commands
+        getCommand("ft").setExecutor(new FastTravelCommand(this));
+        getCommand("ftlist").setExecutor(new ListCommand(this));
+        getCommand("ftclear").setExecutor(new ClearCommand(this));
+        getCommand("ftauto").setExecutor(new AutoCommand(this));
+        getCommand("ftdelete").setExecutor(new DeleteCommand(this));
+        getCommand("ftmenu").setExecutor(new MenuCommand(this));
+        getCommand("ftprice").setExecutor(new PriceCommand(this));
+        getCommand("ftrange").setExecutor(new SetRangeCommand(this));
+
+        //Tab-Completer
+        getCommand("ft").setTabCompleter(new FtTabComplete());
 
         //Updatecheck
         updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
 
-        if (updateChecker.updateFound()){
-            io.sendConsole(io.translate("Plugin.Update").replace("%old", this.getDescription().getVersion())
+        if (updateChecker.updateFound()) {
+            io.sendConsole(io.translate("Plugin.Update.Console").replace("%old", this.getDescription().getVersion())
                     .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
             needUpdate = true;
             newVersion = updateChecker.getLink();
@@ -132,6 +145,9 @@ public class FastTravel extends JavaPlugin {
     public void setupConfig(){
         File confFile = new File(dataDir, "config.yml");
         try {
+            if (!confFile.exists()) {
+                confFile.createNewFile();
+            }
             getConfig().load(confFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();

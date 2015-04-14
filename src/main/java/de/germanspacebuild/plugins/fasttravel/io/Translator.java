@@ -67,7 +67,7 @@ public class Translator {
             if (loadedFiles.indexOf(langFiles[i]) == -1)  loadLanguageFile(langFiles[i]);
         }
         if (languages.get(language) == null) {
-            io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to 'en'!");
+            //io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to 'en'!");
             language = "en";
             config.set("IO.Language", "en");
         }

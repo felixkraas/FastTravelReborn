@@ -49,6 +49,9 @@ public class CheckPlayerTask implements Runnable {
         for (Player player : players) {
             List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
             for (FastTravelSign sign : signs) {
+                if (player.getWorld() != sign.getSignLocation().getWorld()) {
+                    return;
+                }
                 if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()){
                     plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
                 }

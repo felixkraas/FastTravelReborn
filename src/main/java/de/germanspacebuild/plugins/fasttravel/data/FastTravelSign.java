@@ -133,7 +133,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         return tpLoc;
     }
 
-    public void setTpLoc(Location tpLoc) {
+    public void setTPLocation(Location tpLoc) {
         this.tpLoc = tpLoc;
         FastTravelDB.save();
     }
@@ -142,7 +142,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         return signLoc;
     }
 
-    public void setSignLoc(Location signLoc) {
+    public void setSignLocation(Location signLoc) {
         this.signLoc = signLoc;
         FastTravelDB.save();
     }

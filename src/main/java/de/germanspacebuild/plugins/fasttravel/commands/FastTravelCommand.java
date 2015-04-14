@@ -27,7 +27,7 @@ public class FastTravelCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player) || !sender.hasPermission(FastTravel.PERMS_BASE + "command.travel")) {
+        if (!(sender instanceof Player) || !sender.hasPermission(FastTravel.PERMS_BASE + "travel")) {
             plugin.getIOManger().sendTranslation(sender, "Perms.Not");
             return false;
         }

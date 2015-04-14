@@ -63,12 +63,17 @@ public class en extends Language {
             lang.load(langFile);
 
             //Plugin
-            set("Plugin.Update", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
+            set("Plugin.Update.Player", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
                     " Get it here: &3%link");
+            set("Plugin.Update.Console", "You are using v%old of FastTravelSigns. Latest version is v%new." +
+                    " Get it here: %link");
             set("Plugin.InvalidDB", "Database you set in config is invalid. Falling back to YAML-File.");
 
             //Permissions
             set("Perms.Not", "&4You don't have permission to do that. Contact an admin if you think this is an error.");
+
+            //Player
+            set("Player.Removed", "You have been removed from&b %sign&f.");
 
             //Sign
             set("Sign.PlaceAbove", "You can't place blocks above FastTravelSigns.");
@@ -80,16 +85,33 @@ public class en extends Language {
             set("Sign.InvalidName", "You may not use anything but letters in sign names.");
             set("Sign.Exists", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
+            set("Sign.ExistsNot", "Sign&b %sign &fdoes not exist.");
 
             //Economy
+            set("Econ.Disabled", "Economy support is disabled in the config.");
             set("Econ.MoneyLess", "You don't have the money to travel. It would cost &2%cost&f.");
             set("Econ.Charged", "You have been charged &2%cost&f.");
             set("Econ.Error", "Something is broken with economy. Please contact admin or plugin author." +
-                    " You might travel anyway");
+                    " You might travel anyway.");
 
             //Travel
             set("Travel.Success", "You traveled to &b%sign&f.");
 
+            //Commands
+            set("Command.Player", "This command has to be executed by a player.");
+            set("Command.NoSign", "You need to specify a sign.");
+            set("Command.InvalidArgs", "Invalid arguments.");
+
+            set("Command.Auto.On", "Sign&b %sign&f is now available for all players.");
+            set("Command.Auto.Off", "Sign&b %sign&f is no longer available for all players.");
+
+            set("Command.Price.No", "You must provide a price (0 to charge nothing).");
+            set("Command.Price.Invalid", "Invalid price given; expecting a number.");
+            set("Command.Price.Set", "Traveling to&b %sign&f now costs&a %price&f.");
+
+            set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
+
+            save();
 
 
         } catch (IOException e) {
