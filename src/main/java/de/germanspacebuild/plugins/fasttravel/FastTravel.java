@@ -24,12 +24,8 @@
 
 package de.germanspacebuild.plugins.fasttravel;
 
-import de.germanspacebuild.plugins.fasttravel.Listener.FTBlockListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTEntityListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTPlayerListener;
-import de.germanspacebuild.plugins.fasttravel.Listener.FTSignListener;
-import de.germanspacebuild.plugins.fasttravel.commands.FastTravelCommand;
-import de.germanspacebuild.plugins.fasttravel.commands.ListCommand;
+import de.germanspacebuild.plugins.fasttravel.Listener.*;
+import de.germanspacebuild.plugins.fasttravel.commands.*;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
@@ -99,10 +95,17 @@ public class FastTravel extends JavaPlugin {
         pm.registerEvents(new FTBlockListener(this), this);
         pm.registerEvents(new FTSignListener(this), this);
         pm.registerEvents(new FTEntityListener(), this);
+        pm.registerEvents(new FTInventoryListener(this), this);
 
         //Commands
         getCommand("ft").setExecutor(new FastTravelCommand(this));
         getCommand("ftlist").setExecutor(new ListCommand(this));
+        getCommand("ftclear").setExecutor(new ClearCommand(this));
+        getCommand("ftauto").setExecutor(new AutoCommand(this));
+        getCommand("ftdelete").setExecutor(new DeleteCommand(this));
+        getCommand("ftmenu").setExecutor(new MenuCommand(this));
+        getCommand("ftprice").setExecutor(new PriceCommand(this));
+        getCommand("ftrange").setExecutor(new SetRangeCommand(this));
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());

@@ -88,6 +88,7 @@ public class en extends Language {
             set("Sign.ExistsNot", "Sign&b %sign &fdoes not exist.");
 
             //Economy
+            set("Econ.Disabled", "Economy support is disabled in the config.");
             set("Econ.MoneyLess", "You don't have the money to travel. It would cost &2%cost&f.");
             set("Econ.Charged", "You have been charged &2%cost&f.");
             set("Econ.Error", "Something is broken with economy. Please contact admin or plugin author." +
@@ -99,8 +100,16 @@ public class en extends Language {
             //Commands
             set("Command.Player", "This command has to be executed by a player.");
             set("Command.NoSign", "You need to specify a sign.");
+            set("Command.InvalidArgs", "Invalid arguments.");
+
             set("Command.Auto.On", "Sign&b %sign&f is now available for all players.");
             set("Command.Auto.Off", "Sign&b %sign&f is no longer available for all players.");
+
+            set("Command.Price.No", "You must provide a price (0 to charge nothing).");
+            set("Command.Price.Invalid", "Invalid price given; expecting a number.");
+            set("Command.Price.Set", "Traveling to&b %sign&f now costs&a %price&f.");
+
+            set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
 
             save();
 
