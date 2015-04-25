@@ -74,6 +74,7 @@ public class en extends Language {
 
             //Player
             set("Player.Removed", "You have been removed from&b %sign&f.");
+            set("Player.NotFound", "Could not find player&b %player &f.");
 
             //Sign
             set("Sign.PlaceAbove", "You can't place blocks above FastTravelSigns.");

@@ -45,8 +45,6 @@ public class FastTravelDB {
         FastTravelDB.plugin = plugin;
         FastTravelDB.saveFile = new File(plugin.getDataDir(), saveFile);
 
-        signs = new HashMap<>();
-
         if (load)
             load();
     }
@@ -54,13 +52,13 @@ public class FastTravelDB {
     public static void init(FastTravel plugin, boolean load){
         FastTravelDB.plugin = plugin;
 
-        signs = new HashMap<>();
-
         if (load)
             load();
     }
 
     public static void load(){
+
+        signs = new HashMap<>();
 
         if (plugin.getDBHandler() == DBType.File){
             FileDBHandler.load(saveFile);

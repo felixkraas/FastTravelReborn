@@ -106,6 +106,10 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftmenu").setExecutor(new MenuCommand(this));
         getCommand("ftprice").setExecutor(new PriceCommand(this));
         getCommand("ftrange").setExecutor(new SetRangeCommand(this));
+        getCommand("ftremove").setExecutor(new RemoveCommand(this));
+        getCommand("ftreload").setExecutor(new ReloadCommand(this));
+        getCommand("ftsave").setExecutor(new SaveCommand(this));
+        getCommand("ftsetpoint").setExecutor(new SetpointCommand(this));
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());
