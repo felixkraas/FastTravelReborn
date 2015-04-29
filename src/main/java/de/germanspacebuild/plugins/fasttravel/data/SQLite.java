@@ -22,54 +22,30 @@
  * SOFTWARE.
  */
 
-package de.germanspacebuild.plugins.fasttravel.events;
+package de.germanspacebuild.plugins.fasttravel.data;
 
-import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
+import de.germanspacebuild.plugins.fasttravel.FastTravel;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- * Created by oneill011990 on 04.03.2015.
+ * Created by oneill011990 on 29.04.2015.
  */
-public class FastTravelFoundEvent extends Event implements Cancellable {
-
-    private static final HandlerList handlers = new HandlerList();
-    private boolean canceled;
-
-    private Player player;
-    private FastTravelSign sign;
-
-    public FastTravelFoundEvent(Player player, FastTravelSign sign){
-        this.player = player;
-        this.sign = sign;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public FastTravelSign getSign() {
-        return sign;
-    }
+public class SQLite extends Database {
 
     @Override
-    public boolean isCancelled() {
-        return canceled;
-    }
-
-    @Override
-    public void setCancelled(boolean b) {
-        this.canceled = b;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public HandlerList getHandlerList(){
-        return handlers;
+    protected void connect() throws ClassNotFoundException, SQLException {
+        File dbFile = new File(FastTravel.getDataDir() + "/signs.db");
+        Class.forName("org.sqlite.JDBC");
+        if (!dbFile.exists())
+            try {
+                dbFile.getAbsoluteFile().createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
     }
 }
