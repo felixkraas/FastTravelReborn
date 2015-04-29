@@ -49,15 +49,15 @@ public class FastTravel extends JavaPlugin {
 
     public static final String PERMS_BASE = "fasttravelsigns.";
 
-    static FastTravel instance;
-    Configuration config;
-    File dataDir;
-    static File langDir;
-    Metrics metrics;
-    Economy economy;
-    UpdateChecker updateChecker;
-    IOManager io;
-    DBType dbHandler;
+    private static FastTravel instance;
+    private Configuration config;
+    private static File dataDir;
+    private static File langDir;
+    private Metrics metrics;
+    private Economy economy;
+    private UpdateChecker updateChecker;
+    private IOManager io;
+    private DBType dbHandler;
 
     public boolean needUpdate;
     public String newVersion;
@@ -91,11 +91,14 @@ public class FastTravel extends JavaPlugin {
 
         PluginManager pm = getServer().getPluginManager();
 
+        //Listener
         pm.registerEvents(new FTPlayerListener(this), this);
         pm.registerEvents(new FTBlockListener(this), this);
         pm.registerEvents(new FTSignListener(this), this);
         pm.registerEvents(new FTEntityListener(), this);
         pm.registerEvents(new FTInventoryListener(this), this);
+        //pm.registerEvents(new FTFoundListener(this), this);
+        pm.registerEvents(new FTTravelListener(this), this);
 
         //Commands
         getCommand("ft").setExecutor(new FastTravelCommand(this));
@@ -124,7 +127,7 @@ public class FastTravel extends JavaPlugin {
             newVersion = updateChecker.getLink();
         }
 
-
+        //config
         if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
             this.dbHandler = DBType.File;
             FastTravelDB.init(this, "signs.yml", true);
@@ -224,7 +227,7 @@ public class FastTravel extends JavaPlugin {
         return io;
     }
 
-    public File getDataDir(){
+    public static File getDataDir(){
         return dataDir;
     }
 
