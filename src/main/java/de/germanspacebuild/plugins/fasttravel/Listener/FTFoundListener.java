@@ -41,7 +41,7 @@ public class FTFoundListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onSignFound(FastTravelFoundEvent event) {
         event.getSign().addPlayer(event.getPlayer().getUniqueId());
         plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found".replaceAll("%sign",

@@ -44,7 +44,7 @@ public class FTBlockListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (FastTravelUtil.isFTSign(event.getBlock().getWorld().getBlockAt(event.getBlock().getX(),
                 event.getBlock().getY() - 1, event.getBlock().getZ()))) {
@@ -53,7 +53,7 @@ public class FTBlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         if (FastTravelUtil.isFTSign(event.getBlock()) && event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
             event.setCancelled(true);
@@ -66,7 +66,7 @@ public class FTBlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockPhysics(BlockPhysicsEvent event) {
         Block block = event.getBlock();
         if (FastTravelUtil.isFTSign(block)) {

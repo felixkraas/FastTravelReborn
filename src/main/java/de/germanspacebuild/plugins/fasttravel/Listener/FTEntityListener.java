@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class FTEntityListener implements Listener {
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEntityExplode(EntityExplodeEvent event){
         if (event.blockList().isEmpty()){
             return;
