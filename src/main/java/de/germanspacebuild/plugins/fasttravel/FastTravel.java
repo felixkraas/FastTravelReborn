@@ -97,7 +97,7 @@ public class FastTravel extends JavaPlugin {
         pm.registerEvents(new FTSignListener(this), this);
         pm.registerEvents(new FTEntityListener(), this);
         pm.registerEvents(new FTInventoryListener(this), this);
-        //pm.registerEvents(new FTFoundListener(this), this);
+        pm.registerEvents(new FTFoundListener(this), this);
         pm.registerEvents(new FTTravelListener(this), this);
 
         //Commands

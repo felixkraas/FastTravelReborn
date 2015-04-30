@@ -99,9 +99,9 @@ public class SignMenu {
         int signCount = signs.size();
         multisites = false;
 
+        //maximum of 44 signs per page
         if (signCount/44 > 1){
-            sites = (int) signCount/44;
-
+            sites = Math.floorDiv(signCount, 44);
             multisites = true;
         }
 
@@ -121,7 +121,7 @@ public class SignMenu {
         for (int i = 0; i < sites; i++){
             for (int j = 0; j < 44 && j < signs.size(); j++) {
                 if (multisites){
-                    inventories.get(i).setItem(j, items.get(j));
+                    inventories.get(i).setItem(j, items.get((i * 44) + j));
                 } else {
                     inventories.get(0).setItem(j, items.get(j));
                 }
