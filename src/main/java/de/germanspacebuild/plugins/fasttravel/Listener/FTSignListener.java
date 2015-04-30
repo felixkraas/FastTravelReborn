@@ -52,7 +52,7 @@ public class FTSignListener implements Listener{
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onSignChange(SignChangeEvent event){
 
         String lines[] = event.getLines();

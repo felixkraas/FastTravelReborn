@@ -50,7 +50,7 @@ public class FTTravelListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onFastTravel(FastTravelEvent event) {
 
         Player player = event.getPlayer();

@@ -49,7 +49,7 @@ public class FTPlayerListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (!Arrays.asList(BlockUtil.signBlocks).contains(event.getClickedBlock().getType())){
             return;

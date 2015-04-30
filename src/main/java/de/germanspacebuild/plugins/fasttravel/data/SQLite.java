@@ -22,49 +22,30 @@
  * SOFTWARE.
  */
 
-package de.germanspacebuild.plugins.fasttravel.commands;
+package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
-import de.germanspacebuild.plugins.fasttravel.io.IOManager;
-import de.germanspacebuild.plugins.fasttravel.menu.SignMenu;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- * Created by oneill011990 on 15.12.2014.
+ * Created by oneill011990 on 29.04.2015.
  */
-public class MenuCommand implements CommandExecutor {
-
-    FastTravel plugin;
-    IOManager io;
-
-    public MenuCommand(FastTravel plugin) {
-        this.plugin = plugin;
-        io = plugin.getIOManger();
-    }
+public class SQLite extends Database {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (!(sender instanceof Player) || !plugin.getConfig().getBoolean("enable menu")){
-            return false;
-        }
-
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "menu")){
-            io.sendTranslation(sender, "Perms.Not");
-            return false;
-        }
-
-        Player player = (Player) sender;
-
-        SignMenu menu = new SignMenu(player);
-
-        SignMenu.menus.add(menu);
-
-        menu.open(1);
-
-        return true;
+    protected void connect() throws ClassNotFoundException, SQLException {
+        File dbFile = new File(FastTravel.getDataDir() + "/signs.db");
+        Class.forName("org.sqlite.JDBC");
+        if (!dbFile.exists())
+            try {
+                dbFile.getAbsoluteFile().createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
     }
 }

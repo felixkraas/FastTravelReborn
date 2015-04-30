@@ -24,54 +24,52 @@
 
 package de.germanspacebuild.plugins.fasttravel.commands;
 
-
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
-import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class DeleteCommand implements CommandExecutor {
+/**
+ * Created by oneill011990 on 03.09.2014.
+ */
+public class RemoveCommand implements CommandExecutor {
 
-	FastTravel plugin;
-	IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
-	public DeleteCommand(FastTravel plugin) {
-		this.plugin = plugin;
-		this.io = plugin.getIOManger();
-	}
+    public RemoveCommand(FastTravel plugin){
+        this.plugin = plugin;
+        this.io = plugin.getIOManger();
+    }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "remove")){
+            io.sendTranslation(sender, "Perms.Not");
+        } else if (args.length == 0 || args[0] == null || args[1] == null) {
+            io.sendTranslation(sender, "Command.InvalidArgs");
+        } else {
+            String sign = args[0];
+            String player = args[1];
 
-		if (!(sender instanceof Player)) {
-			io.sendTranslation(sender, "Command.Player");
-			return false;
-		}
+            FastTravelSign signRaw = FastTravelDB.getSign(sign);
 
+            if (signRaw == null){
+                io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", sign));
+            } else if (plugin.getServer().getPlayer(player) == null) {
+                io.send(sender, io.translate("Player.NotFound").replaceAll("%player", player));
 
+            } else if (signRaw.isAutomatic() || !signRaw.foundBy(plugin.getServer().getPlayer(player).getUniqueId())){
+                io.send(sender, io.translate("Command.Remove.CanNot"));
+            }
 
-		if (args.length == 0) {
-			io.sendTranslation(sender, "Command.NoSign");
-		} else if (FastTravelDB.getSign(args[0]) == null) {
-			io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-		} else {
-			FastTravelSign sign = FastTravelDB.getSign(args[0]);
-			Block block = sign.getSignLocation().getBlock();
-			// Attempt to nuke the sign
-			if (FastTravelUtil.isFTSign(block)) {
-				block.setType(Material.AIR);
-			}
-			FastTravelDB.removeSign(args[0]);
-			io.send(sender, io.translate("Sign.Removed").replaceAll("%sign", sign.getName()));
-		}
+            io.send(sender, io.translate("Command.Remove").replaceAll("%sign", signRaw.getName()));
 
-		return true;
-	}
+            signRaw.removePlayer(plugin.getServer().getPlayer(player).getUniqueId());
+        }
 
+        return false;
+    }
 }

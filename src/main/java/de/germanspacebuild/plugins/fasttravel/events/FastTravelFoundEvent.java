@@ -38,8 +38,8 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean canceled;
 
-    Player player;
-    FastTravelSign sign;
+    private Player player;
+    private FastTravelSign sign;
 
     public FastTravelFoundEvent(Player player, FastTravelSign sign){
         this.player = player;
@@ -56,16 +56,20 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
 
     @Override
     public boolean isCancelled() {
-        return false;
+        return canceled;
     }
 
     @Override
     public void setCancelled(boolean b) {
-
+        this.canceled = b;
     }
 
     @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
+    }
+
+    public HandlerList getHandlerList(){
+        return handlers;
     }
 }
