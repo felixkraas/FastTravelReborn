@@ -35,12 +35,12 @@ import org.bukkit.event.HandlerList;
  */
 public class FastTravelEvent extends Event implements Cancellable {
 
-    private static final HandlerList handlers = new HandlerList();
+    private static final HandlerList HANDLER_LIST = new HandlerList();
     private boolean canceled;
 
-    Player player;
-    FastTravelSign sign;
-    int price;
+    private Player player;
+    private FastTravelSign sign;
+    private int price;
 
     public FastTravelEvent(Player player, FastTravelSign sign){
         this.player = player;
@@ -73,11 +73,11 @@ public class FastTravelEvent extends Event implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
+        return HANDLER_LIST;
     }
 
     public static HandlerList getHandlerList(){
-        return handlers;
+        return HANDLER_LIST;
     }
 
     public int getPrice() {

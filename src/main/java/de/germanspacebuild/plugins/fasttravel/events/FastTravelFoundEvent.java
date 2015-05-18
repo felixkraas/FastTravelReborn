@@ -35,7 +35,7 @@ import org.bukkit.event.HandlerList;
  */
 public class FastTravelFoundEvent extends Event implements Cancellable {
 
-    private static final HandlerList handlers = new HandlerList();
+    private static final HandlerList HANDLER_LIST = new HandlerList();
     private boolean canceled;
 
     private Player player;
@@ -66,10 +66,10 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
+        return HANDLER_LIST;
     }
 
     public HandlerList getHandlerList(){
-        return handlers;
+        return HANDLER_LIST;
     }
 }
