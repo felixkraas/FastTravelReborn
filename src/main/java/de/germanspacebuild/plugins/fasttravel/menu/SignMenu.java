@@ -101,7 +101,7 @@ public class SignMenu {
 
         //maximum of 44 signs per page
         if (signCount/44 > 1){
-            sites = Math.floorDiv(signCount, 44);
+            sites = floorDiv(signCount, 44);
             multisited = true;
         }
 
@@ -193,5 +193,14 @@ public class SignMenu {
 
     public static List<SignMenu> getMenus(){
         return menus;
+    }
+
+    private static int floorDiv(int x, int y) {
+        int r = x / y;
+        // if the signs are different and modulo not zero, round down
+        if ((x ^ y) < 0 && (r * y != x)) {
+            r--;
+        }
+        return r;
     }
 }
