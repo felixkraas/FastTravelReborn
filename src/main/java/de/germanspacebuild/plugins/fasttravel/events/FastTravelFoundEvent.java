@@ -69,7 +69,7 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
         return HANDLER_LIST;
     }
 
-    public HandlerList getHandlerList(){
+    public static HandlerList getHandlerList(){
         return HANDLER_LIST;
     }
 }
