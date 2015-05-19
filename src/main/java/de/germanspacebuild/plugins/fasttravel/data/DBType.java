@@ -22,16 +22,56 @@
  * SOFTWARE.
  */
 
-package de.germanspacebuild.plugins.fasttravel.util;
+package de.germanspacebuild.plugins.fasttravel.data;
+
+import java.io.File;
 
 /**
  * Created by oneill011990 on 03.03.2015.
  */
 public enum DBType {
+
     /*
      * 1 = SQLite
      * 2 = File
      * 3 = MySQL
      */
-    SQLite, File, MySQL
+    SQLite, File, MySQL;
+
+    private static DBType type;
+
+    public static void save() {
+        switch (type) {
+            case File:
+                FileDBHandler.save();
+                break;
+        }
+    }
+
+    public static void save(File saveFile) {
+        switch (type) {
+            case File:
+                FileDBHandler.save(saveFile);
+                break;
+        }
+    }
+
+    public static void load(){
+
+    }
+
+    public static void load(File saveFile) {
+        switch (type) {
+            case File:
+                FileDBHandler.load(saveFile);
+        }
+    }
+
+    public static DBType getDBType(){
+        return type;
+    }
+
+    public static void setDBType(DBType dbtype){
+        type = dbtype;
+    }
 }

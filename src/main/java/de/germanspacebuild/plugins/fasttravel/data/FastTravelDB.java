@@ -25,7 +25,6 @@
 package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
-import de.germanspacebuild.plugins.fasttravel.util.DBType;
 
 import java.io.File;
 import java.util.*;
@@ -60,25 +59,19 @@ public class FastTravelDB {
 
         signs = new HashMap<>();
 
-        if (plugin.getDBHandler() == DBType.File){
-            FileDBHandler.load(saveFile);
-        }
+        DBType.load(saveFile);
 
     }
 
     public static void save(){
-
-        if (plugin.getDBHandler() == DBType.File) {
-            FileDBHandler.save(saveFile);
-        }
-
+        DBType.save(saveFile);
     }
 
     public static void removeSign(String name) {
         if (signs.containsKey(name.toLowerCase()))
             signs.remove(name.toLowerCase());
 
-        if (plugin.getDBHandler() == DBType.File){
+        if (DBType.getDBType() == DBType.File){
             save();
         }
     }

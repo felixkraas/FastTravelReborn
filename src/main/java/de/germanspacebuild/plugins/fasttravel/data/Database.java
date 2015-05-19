@@ -24,8 +24,6 @@
 
 package de.germanspacebuild.plugins.fasttravel.data;
 
-import de.germanspacebuild.plugins.fasttravel.util.DBType;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
