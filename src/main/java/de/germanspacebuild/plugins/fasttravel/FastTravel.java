@@ -32,11 +32,15 @@ import de.germanspacebuild.plugins.fasttravel.io.language.Language;
 import de.germanspacebuild.plugins.fasttravel.io.language.en;
 import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
-import de.germanspacebuild.plugins.fasttravel.util.DBType;
+import de.germanspacebuild.plugins.fasttravel.data.DBType;
+import de.germanspacebuild.plugins.fasttravel.thirdparty.DynmapHook;
+import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,10 +48,17 @@ import org.mcstats.Metrics;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.BufferPoolMXBean;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FastTravel extends JavaPlugin {
 
     public static final String PERMS_BASE = "fasttravelsigns.";
+
+    private Map<String, PluginHook> hooks = new HashMap<>();
 
     private static FastTravel instance;
     private Configuration config;
@@ -57,7 +68,6 @@ public class FastTravel extends JavaPlugin {
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
-    private DBType dbHandler;
 
     public boolean needUpdate;
     public String newVersion;
@@ -129,15 +139,17 @@ public class FastTravel extends JavaPlugin {
 
         //config
         if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
-            this.dbHandler = DBType.File;
+            DBType.setDBType(DBType.File);
             FastTravelDB.init(this, "signs.yml", true);
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("MySQL")) {
-            this.dbHandler = DBType.MySQL;
+            DBType.setDBType(DBType.MySQL);
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {
-            this.dbHandler = DBType.SQLite;
+            DBType.setDBType(DBType.SQLite);
         } else {
             io.sendConsole(io.translate("Plugin.InvalidDB"));
         }
+
+        checkHooks();
 
         getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
 
@@ -170,11 +182,19 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
+        config.addDefault("Hooks.DynmapHook", false);
         config.options().copyDefaults(true);
         try {
             getConfig().save(confFile);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void checkHooks() {
+        PluginManager pm = this.getServer().getPluginManager();
+        if (config.getBoolean("Hooks.DynmapHook") && pm.isPluginEnabled("dynmap")) {
+            hooks.put("dynmap", new DynmapHook(this, pm.getPlugin("dynmap")));
         }
     }
 
@@ -239,8 +259,8 @@ public class FastTravel extends JavaPlugin {
         return economy;
     }
 
-    public DBType getDBHandler() {
-        return dbHandler;
+    public PluginHook getHook(String hook) {
+        return hooks.get(hook);
     }
 
 }

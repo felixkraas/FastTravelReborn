@@ -50,7 +50,7 @@ public class SignMenu {
     private List<ItemStack> items;
     private int sites;
     private List<Inventory> inventories;
-    private boolean multisites;
+    private boolean multisited;
     private int currentSite;
 
     public SignMenu(Player player) {
@@ -97,15 +97,15 @@ public class SignMenu {
     public void createInventories(){
 
         int signCount = signs.size();
-        multisites = false;
+        multisited = false;
 
         //maximum of 44 signs per page
         if (signCount/44 > 1){
             sites = Math.floorDiv(signCount, 44);
-            multisites = true;
+            multisited = true;
         }
 
-        if (multisites){
+        if (multisited){
             for (int i = 0; i < sites; i++){
                 inventories.add(Bukkit.getServer().createInventory(player, 54,  ChatColor.DARK_AQUA + "FastTravels " +
                         i + "/" + sites));
@@ -120,14 +120,14 @@ public class SignMenu {
     public void fillInventories(){
         for (int i = 0; i < sites; i++){
             for (int j = 0; j < 44 && j < signs.size(); j++) {
-                if (multisites){
+                if (multisited){
                     inventories.get(i).setItem(j, items.get((i * 44) + j));
                 } else {
                     inventories.get(0).setItem(j, items.get(j));
                 }
             }
 
-            if (multisites){
+            if (multisited){
 
                 ItemStack back = new ItemStack(Material.CARROT_ITEM, 1);
                 ItemMeta backMeta = back.getItemMeta();
@@ -151,8 +151,8 @@ public class SignMenu {
         return inventories;
     }
 
-    public boolean isMultisites() {
-        return multisites;
+    public boolean isMultisited() {
+        return multisited;
     }
 
     public int getSites() {

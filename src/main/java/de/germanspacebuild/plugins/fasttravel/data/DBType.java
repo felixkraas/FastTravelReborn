@@ -22,54 +22,56 @@
  * SOFTWARE.
  */
 
-package de.germanspacebuild.plugins.fasttravel.events;
+package de.germanspacebuild.plugins.fasttravel.data;
 
-import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
+import java.io.File;
 
 /**
- * Created by oneill011990 on 04.03.2015.
+ * Created by oneill011990 on 03.03.2015.
  */
-public class FastTravelFoundEvent extends Event implements Cancellable {
+public enum DBType {
 
-    private static final HandlerList HANDLER_LIST = new HandlerList();
-    private boolean canceled;
+    /*
+     * 1 = SQLite
+     * 2 = File
+     * 3 = MySQL
+     */
+    SQLite, File, MySQL;
 
-    private Player player;
-    private FastTravelSign sign;
+    private static DBType type;
 
-    public FastTravelFoundEvent(Player player, FastTravelSign sign){
-        this.player = player;
-        this.sign = sign;
+    public static void save() {
+        switch (type) {
+            case File:
+                FileDBHandler.save();
+                break;
+        }
     }
 
-    public Player getPlayer() {
-        return player;
+    public static void save(File saveFile) {
+        switch (type) {
+            case File:
+                FileDBHandler.save(saveFile);
+                break;
+        }
     }
 
-    public FastTravelSign getSign() {
-        return sign;
+    public static void load(){
+
     }
 
-    @Override
-    public boolean isCancelled() {
-        return canceled;
+    public static void load(File saveFile) {
+        switch (type) {
+            case File:
+                FileDBHandler.load(saveFile);
+        }
     }
 
-    @Override
-    public void setCancelled(boolean b) {
-        this.canceled = b;
+    public static DBType getDBType(){
+        return type;
     }
 
-    @Override
-    public HandlerList getHandlers() {
-        return HANDLER_LIST;
-    }
-
-    public static HandlerList getHandlerList(){
-        return HANDLER_LIST;
+    public static void setDBType(DBType dbtype){
+        type = dbtype;
     }
 }

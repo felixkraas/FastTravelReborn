@@ -22,16 +22,27 @@
  * SOFTWARE.
  */
 
-package de.germanspacebuild.plugins.fasttravel.util;
+package de.germanspacebuild.plugins.fasttravel.thirdparty;
+
+import de.germanspacebuild.plugins.fasttravel.FastTravel;
+import org.bukkit.plugin.Plugin;
 
 /**
- * Created by oneill011990 on 03.03.2015.
+ * Created by oneill011990 on 03.05.2015.
  */
-public enum DBType {
-    /*
-     * 1 = SQLite
-     * 2 = File
-     * 3 = MySQL
-     */
-    SQLite, File, MySQL
+public abstract class PluginHook {
+
+    FastTravel plugin;
+    Plugin hook;
+
+    public PluginHook(FastTravel plugin, Plugin hook) {
+        this.plugin = plugin;
+        this.hook = hook;
+    }
+
+    public abstract void init();
+
+    public Plugin getHook() {
+        return hook;
+    }
 }

@@ -38,6 +38,7 @@ public class ReloadCommand implements CommandExecutor {
 
 	public ReloadCommand(FastTravel plugin) {
 		this.plugin = plugin;
+		io = plugin.getIOManger();
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -50,7 +51,7 @@ public class ReloadCommand implements CommandExecutor {
 		}
 
 		io.sendTranslation(sender, "Command.Reload.Reloaded");
-        io.send(sender, "Command.Reload.Player");
+        io.send(sender, io.translate("Command.Reload.Player"));
 		plugin.setupConfig();
 
 		return true;
