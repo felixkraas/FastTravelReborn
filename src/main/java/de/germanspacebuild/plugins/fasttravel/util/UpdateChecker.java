@@ -67,7 +67,16 @@ public class UpdateChecker {
             this.version = children.item(1).getTextContent().replaceAll("[a-zA-Z ]", "");
             this.link = children.item(3).getTextContent();
 
-            if (plugin.getDescription().getVersion() != this.version){
+            int versionInt = Integer.parseInt(this.version.replaceAll("[a-zA-Z., ]", ""));
+            int oldInt = Integer.parseInt(plugin.getDescription().getVersion().replaceAll("[a-zA-Z., ]", ""));
+
+            if (this.version.replaceAll("[a-zA-Z., ]", "").length() < 3) {
+                versionInt = versionInt * 10;
+            } else if (plugin.getDescription().getVersion().replaceAll("[a-zA-Z., ]", "").length() < 3) {
+                oldInt = oldInt * 10;
+            }
+
+            if (oldInt < versionInt){
                 return true;
             }
 

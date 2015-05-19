@@ -65,8 +65,9 @@ public class en extends Language {
             //Plugin
             set("Plugin.Update.Player", "You are using &ev%old &fof FastTravelSigns. Latest version is &ev%new&f." +
                     " Get it here: &3%link");
-            set("Plugin.Update.Console", "You are using v%old of FastTravelSigns. Latest version is v%new." +
+            set("Plugin.Update.Console.Yes", "You are using v%old of FastTravelSigns. Latest version is v%new." +
                     " Get it here: %link");
+            set("Plugin.Update.Console.No", "You are using the latest version of FastTravelSigns.");
             set("Plugin.InvalidDB", "Database you set in config is invalid. Falling back to YAML-File.");
 
             //Permissions
