@@ -48,7 +48,8 @@ public class SetpointCommand implements CommandExecutor {
 		if (!(sender instanceof Player)) {
 			return false;
 		}
-		if (!(sender.hasPermission(FastTravel.PERMS_BASE + "setpoint"))) {
+		if (!sender.hasPermission(FastTravel.PERMS_BASE + "setpoint")) {
+			io.sendTranslation(sender, "Perms.Not");
 			return false;
 		}
 		if (args.length == 0) {

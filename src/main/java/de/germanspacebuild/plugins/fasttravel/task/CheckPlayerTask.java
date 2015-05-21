@@ -47,6 +47,9 @@ public class CheckPlayerTask implements Runnable {
         players.addAll(plugin.getServer().getOnlinePlayers());
 
         for (Player player : players) {
+            if (!player.hasPermission(FastTravel.PERMS_BASE + "use")) {
+                return;
+            }
             List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
             for (FastTravelSign sign : signs) {
                 if (player.getWorld() != sign.getSignLocation().getWorld()) {

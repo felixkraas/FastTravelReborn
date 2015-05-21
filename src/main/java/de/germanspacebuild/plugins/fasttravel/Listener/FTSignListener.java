@@ -30,6 +30,7 @@ import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.util.BlockUtil;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -60,16 +61,20 @@ public class FTSignListener implements Listener{
         if (!FastTravelUtil.isFTSign(lines))
             return;
 
-        if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "create")) {
+        if (!event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "create")) {
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Perms.Not");
-            event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            }
             return;
         }
 
         // Check for valid name
         Pattern an = Pattern.compile("^[a-zA-Z0-9_-]+$");
         if (!an.matcher(lines[1]).find()) {
-            event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            }
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.InvalidName");
             return;
         }
@@ -77,13 +82,17 @@ public class FTSignListener implements Listener{
         Block blockAbove = event.getBlock().getWorld().getBlockAt(event.getBlock().getX(), event.getBlock().getY() + 1,
                 event.getBlock().getZ());
         if (!Arrays.asList(BlockUtil.safeBlocks).contains(blockAbove)) {
-            event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            }
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.BlockAbove.Is");
             return;
         }
 
         if (FastTravelDB.getSign(lines[1]) != null){
-            event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
+            }
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Exists".replaceAll("%sign", lines[1]));
             return;
         }

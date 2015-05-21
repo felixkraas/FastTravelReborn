@@ -52,6 +52,9 @@ public class DeleteCommand implements CommandExecutor {
 		if (!(sender instanceof Player)) {
 			io.sendTranslation(sender, "Command.Player");
 			return false;
+		} else if (!sender.hasPermission(FastTravel.PERMS_BASE + "delete")) {
+			io.sendTranslation(sender, "Perms.Not");
+			return false;
 		}
 
 

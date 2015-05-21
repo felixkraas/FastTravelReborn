@@ -53,7 +53,7 @@ public class SetRangeCommand implements CommandExecutor {
         if (!(sender instanceof Player)){
             return false;
         } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "range")){
-
+            io.sendTranslation(sender, "Perms.Not");
             return false;
         } else if (args.length == 0){
             io.sendTranslation(sender, "Command.InvalidArgs");

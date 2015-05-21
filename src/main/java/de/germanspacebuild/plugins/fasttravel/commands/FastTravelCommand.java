@@ -73,7 +73,7 @@ public class FastTravelCommand implements CommandExecutor {
             FastTravelSign ftsign = FastTravelDB.getSign(args[0]);
 
             if (ftsign == null) {
-                plugin.getIOManger().sendTranslation(sender, "Sign.NotExists");
+                plugin.getIOManger().sendTranslation(sender, "Sign.ExistsNot");
                 return true;
             }
 

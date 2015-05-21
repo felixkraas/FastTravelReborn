@@ -50,7 +50,7 @@ public class AutoCommand implements CommandExecutor {
 			return false;
 		}
 
-        if (sender.hasPermission(FastTravel.PERMS_BASE + "auto")) {
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "auto")) {
             io.sendTranslation(sender, "Perms.Not");
         }
 

@@ -50,7 +50,7 @@ public class PriceCommand implements CommandExecutor {
 		if (!(sender instanceof Player)) {
 			return false;
 		}
-		if (!((Player) sender).hasPermission(FastTravel.PERMS_BASE + "price")) {
+		if (!sender.hasPermission(FastTravel.PERMS_BASE + "price")) {
 			io.sendTranslation(sender, "Perms.Not");
 			return false;
 		}

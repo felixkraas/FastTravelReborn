@@ -53,7 +53,7 @@ public class FTPlayerListener implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (!Arrays.asList(BlockUtil.signBlocks).contains(event.getClickedBlock().getType())){
             return;
-        } else if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "travel")) {
+        } else if (!event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "use")) {
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Perms.Not");
             return;
         } else if (event.getAction() != Action.RIGHT_CLICK_AIR || event.getAction() != Action.RIGHT_CLICK_BLOCK){

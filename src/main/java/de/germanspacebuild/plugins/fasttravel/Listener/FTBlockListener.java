@@ -55,7 +55,7 @@ public class FTBlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (FastTravelUtil.isFTSign(event.getBlock()) && event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
+        if (FastTravelUtil.isFTSign(event.getBlock()) && !event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
             event.setCancelled(true);
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Break");
         } else if (FastTravelUtil.isFTSign(event.getBlock()) && event.getPlayer().hasPermission(

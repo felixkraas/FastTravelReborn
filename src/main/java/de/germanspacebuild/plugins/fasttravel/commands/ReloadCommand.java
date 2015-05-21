@@ -45,7 +45,7 @@ public class ReloadCommand implements CommandExecutor {
 		if (!(sender instanceof Player)) {
 			io.sendTranslation(sender, "Command.Player");
 			return false;
-		} else if (!(sender.hasPermission(FastTravel.PERMS_BASE + "reload"))){
+		} else if (!sender.hasPermission(FastTravel.PERMS_BASE + "reload")){
 			io.sendTranslation(sender, "Perms.Not");
 			return false;
 		}
