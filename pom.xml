@@ -47,7 +47,7 @@
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
-            <version>3.0</version>
+            <version>3.3</version>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
@@ -57,12 +57,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.8.3-R0.1-SNAPSHOT</version>
+            <version>1.8.6-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.8.3-R0.1-SNAPSHOT</version>
+            <version>1.8.6-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
@@ -124,12 +124,17 @@
                     <artifactSet>
                         <includes>
                             <include>org.mcstats.*:*</include>
+                            <include>de.slikey:EffectLib:jar:*</include>
                         </includes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.mcstats</pattern>
-                            <shadedPattern>de.oneill011990.plugins.fasttravel</shadedPattern>
+                            <shadedPattern>de.oneill011990.plugins.fasttravel.others</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>de.slikey</pattern>
+                            <shadedPattern>de.oneill011990.plugins.fasttravel.others</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

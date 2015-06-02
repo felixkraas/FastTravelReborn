@@ -195,4 +195,10 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         this.marker = marker;
         FastTravelDB.save();
     }
+
+    @Override
+    public String toString(){
+        return getName();
+    }
+
 }

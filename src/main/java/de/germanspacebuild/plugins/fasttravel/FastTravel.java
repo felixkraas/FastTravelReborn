@@ -36,6 +36,7 @@ import de.germanspacebuild.plugins.fasttravel.data.DBType;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.DynmapHook;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
+import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
@@ -44,6 +45,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.mcstats.Metrics;
 
 import java.io.File;
@@ -68,6 +70,9 @@ public class FastTravel extends JavaPlugin {
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
+    //Create task to run timer for all players
+    private static ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+    private EffectManager effectManager;
 
     public boolean needUpdate;
     public String newVersion;
@@ -79,6 +84,7 @@ public class FastTravel extends JavaPlugin {
         config = this.getConfig();
         dataDir = this.getDataFolder();
         langDir = new File(getDataFolder(), "lang");
+        effectManager = new EffectManager(this);
 
         if (!dataDir.exists()) {
             dataDir.mkdir();
@@ -123,6 +129,7 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftreload").setExecutor(new ReloadCommand(this));
         getCommand("ftsave").setExecutor(new SaveCommand(this));
         getCommand("ftsetpoint").setExecutor(new SetpointCommand(this));
+        getCommand("ftshow").setExecutor(new ShowTPCommand(this));
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());
@@ -161,6 +168,7 @@ public class FastTravel extends JavaPlugin {
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
         FastTravelDB.save();
+        effectManager.dispose();
     }
 
     public void setupConfig(){
@@ -265,4 +273,7 @@ public class FastTravel extends JavaPlugin {
         return hooks.get(hook);
     }
 
+    public EffectManager getEffectManager() {
+        return effectManager;
+    }
 }

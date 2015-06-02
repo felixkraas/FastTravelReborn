@@ -65,6 +65,9 @@ permissions:
     fasttravelsigns.menu:
         description: Allows use of /ftmenu command.
         default: op
+    fasttravelsigns.show:
+        description: Allows use of /ftshow command.
+        default: op
 commands:
     ft:
         description: Obtain list of travel points and warp to them
@@ -127,3 +130,8 @@ commands:
         permission: fasttravelsigns.menu
         usage: |
             /ftmenu
+    ftshow:
+        description: Shows a line of particles where the tp location of the sign is
+        permission: fasttravelsigns.show
+        usage: |
+            /ftshow [travelpoint]

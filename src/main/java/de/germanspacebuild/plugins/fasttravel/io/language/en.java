@@ -98,7 +98,7 @@ public class en extends Language {
                     " You might travel anyway.");
 
             //Travel
-            set("Travel.Success", "You traveled to &b%sign&f.");
+            set("Travel.Success", "You traveled to&b %sign&f.");
 
             //Commands
             set("Command.Player", "This command has to be executed by a player.");

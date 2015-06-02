@@ -28,51 +28,58 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.slikey.effectlib.Effect;
+import de.slikey.effectlib.EffectManager;
+import de.slikey.effectlib.EffectType;
+import de.slikey.effectlib.effect.LineEffect;
+import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Created by oneill011990 on 03.09.2014.
+ * Created by oneill011990 on 03.06.2015.
  */
-public class RemoveCommand implements CommandExecutor {
+public class ShowTPCommand implements CommandExecutor {
 
     private FastTravel plugin;
     private IOManager io;
+    private EffectManager em;
 
-    public RemoveCommand(FastTravel plugin){
+    public ShowTPCommand(FastTravel plugin) {
         this.plugin = plugin;
         this.io = plugin.getIOManger();
+        this.em = plugin.getEffectManager();
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "remove")){
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "show")) {
             io.sendTranslation(sender, "Perms.Not");
-        } else if (args.length == 0 || args[0] == null || args[1] == null) {
-            io.sendTranslation(sender, "Command.InvalidArgs");
-        } else {
-            String sign = args[0];
-            String player = args[1];
-
-            FastTravelSign signRaw = FastTravelDB.getSign(sign);
-
-            if (signRaw == null){
-                io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", sign));
-                return false;
-            } else if (plugin.getServer().getPlayer(player) == null) {
-                io.send(sender, io.translate("Player.NotFound").replaceAll("%player", player));
-                return false;
-            } else if (signRaw.isAutomatic() || !signRaw.foundBy(plugin.getServer().getPlayer(player).getUniqueId())){
-                io.send(sender, io.translate("Command.Remove.CanNot"));
-                return true;
-            }
-
-            io.send(sender, io.translate("Command.Remove").replaceAll("%sign", signRaw.getName()));
-
-            signRaw.removePlayer(plugin.getServer().getPlayer(player).getUniqueId());
-            return true;
+            return false;
         }
 
-        return false;
+        FastTravelSign sign = FastTravelDB.getSign(args[0]);
+
+        if (sign == null) {
+            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+            return false;
+        }
+        Location tpLoc = sign.getTPLocation();
+        tpLoc.setY(0);
+        Location tpLocTop = sign.getTPLocation();
+        tpLocTop.setY(255);
+        Effect effect = new LineEffect(em);
+        effect.type = EffectType.INSTANT;
+        effect.color = Color.RED;
+        effect.setLocation(tpLoc);
+        effect.setTarget(tpLocTop);
+        effect.period = 5 * 20;
+        effect.delay = 1 * 20;
+        effect.start();
+        em.start(effect);
+
+        return true;
     }
 }

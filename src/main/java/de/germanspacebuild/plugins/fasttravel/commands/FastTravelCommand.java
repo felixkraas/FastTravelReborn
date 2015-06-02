@@ -28,6 +28,7 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.events.FastTravelEvent;
+import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -44,25 +45,27 @@ import java.util.List;
  */
 public class FastTravelCommand implements CommandExecutor {
     FastTravel plugin;
+    IOManager io;
 
     public FastTravelCommand(FastTravel plugin) {
         this.plugin = plugin;
+        this.io = plugin.getIOManger();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player) || !sender.hasPermission(FastTravel.PERMS_BASE + "travel")) {
-            plugin.getIOManger().sendTranslation(sender, "Perms.Not");
+            io.sendTranslation(sender, "Perms.Not");
             return false;
         }
 
         if (args.length == 0) {
 
             // Send a list
-            plugin.getIOManger().sendTranslation(sender, "Player.List");
+            io.sendTranslation(sender, "Player.List");
             List<FastTravelSign> usigns = FastTravelDB.getSignsFor(((Player) sender).getUniqueId());
             if (usigns == null || usigns.size() == 0) {
-                plugin.getIOManger().sendTranslation(sender, "Player.HasZero");
+                io.sendTranslation(sender, "Player.HasZero");
             } else
                 FastTravelUtil.sendFTSignList(sender, usigns, (plugin.getEconomy() != null));
         }
@@ -73,20 +76,20 @@ public class FastTravelCommand implements CommandExecutor {
             FastTravelSign ftsign = FastTravelDB.getSign(args[0]);
 
             if (ftsign == null) {
-                plugin.getIOManger().sendTranslation(sender, "Sign.ExistsNot");
+                io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
                 return true;
             }
 
             boolean allPoints = sender.hasPermission("fasttravelsigns.overrides.allpoints");
             if (!(ftsign.isAutomatic() || ftsign.foundBy(((Player) sender).getUniqueId())) && !allPoints) {
-                plugin.getIOManger().sendTranslation(sender, "Sign.NotFound");
+                io.sendTranslation(sender, "Sign.NotFound");
                 return true;
             }
             // Check if world exists
             World targworld = ftsign.getTPLocation().getWorld();
             if (!allPoints && !targworld.equals(((Player) sender).getWorld())
                     && !sender.hasPermission("fasttravelsigns.multiworld")) {
-                plugin.getIOManger().sendTranslation(sender, "Perms.Not.Multiworld");
+                io.sendTranslation(sender, "Perms.Not.Multiworld");
                 return true;
             }
 

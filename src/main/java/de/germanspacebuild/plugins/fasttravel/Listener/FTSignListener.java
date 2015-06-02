@@ -81,11 +81,11 @@ public class FTSignListener implements Listener{
 
         Block blockAbove = event.getBlock().getWorld().getBlockAt(event.getBlock().getX(), event.getBlock().getY() + 1,
                 event.getBlock().getZ());
-        if (!Arrays.asList(BlockUtil.safeBlocks).contains(blockAbove)) {
+        if (!Arrays.asList(BlockUtil.safeBlocks).contains(blockAbove.getType())) {
             if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                 event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
             }
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.BlockAbove.Is");
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.PlaceAbove.Is");
             return;
         }
 
