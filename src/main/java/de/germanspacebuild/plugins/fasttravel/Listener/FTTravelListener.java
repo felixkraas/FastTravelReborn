@@ -63,8 +63,8 @@ public class FTTravelListener implements Listener {
 
             if (cooldown > 0){
                 if ((curTime - cooldowns.get(player.getUniqueId())) < (cooldown * 1000)) {
-                    plugin.getIOManger().sendTranslation(player, "Travel.Cooldown".replaceAll("%time",
-                            String.valueOf(plugin.getConfig().getInt("Travel.Cooldown"))));
+                    plugin.getIOManger().sendTranslation(player, plugin.getIOManger().translate("Travel.Cooldown")
+                            .replaceAll("%time", String.valueOf(plugin.getConfig().getInt("Travel.Cooldown"))));
                     return;
                 }
             }

@@ -56,7 +56,6 @@ public class FastTravelCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player) || !sender.hasPermission(FastTravel.PERMS_BASE + "travel")) {
             io.sendTranslation(sender, "Perms.Not");
-            return false;
         }
 
         if (args.length == 0) {
@@ -82,7 +81,7 @@ public class FastTravelCommand implements CommandExecutor {
 
             boolean allPoints = sender.hasPermission("fasttravelsigns.overrides.allpoints");
             if (!(ftsign.isAutomatic() || ftsign.foundBy(((Player) sender).getUniqueId())) && !allPoints) {
-                io.sendTranslation(sender, "Sign.NotFound");
+                io.send(sender, io.translate("Sign.Found.Not").replaceAll("%sign", args[0]));
                 return true;
             }
             // Check if world exists

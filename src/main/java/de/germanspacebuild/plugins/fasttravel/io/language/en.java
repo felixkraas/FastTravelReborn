@@ -84,7 +84,8 @@ public class en extends Language {
             set("Sign.Break", "You can't break FastTravelSigns.");
             set("Sign.Removed", "You have removed point &b%sign&f.");
             set("Sign.Found", "You found &b%sign&f. now you can travel here.");
-            set("Sign.FoundAlready", "You already found &b%sign&f.");
+            set("Sign.Found.Already", "You already found &b%sign&f.");
+            set("Sign.Found.Not", "You have not found &b%sign &fyet.");
             set("Sign.InvalidName", "You may not use anything but letters in sign names.");
             set("Sign.Exists", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
@@ -98,7 +99,7 @@ public class en extends Language {
                     " You might travel anyway.");
 
             //Travel
-            set("Travel.Success", "You traveled to&b %sign&f.");
+            set("Travel.Success", "You traveled to&b %sign &f.");
 
             //Commands
             set("Command.Player", "This command has to be executed by a player.");
@@ -113,6 +114,8 @@ public class en extends Language {
             set("Command.Price.Set", "Traveling to&b %sign&f now costs&a %price&f.");
 
             set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
+
+            set("Command.Save.Saved", "You have saved the DB.");
 
             save();
 

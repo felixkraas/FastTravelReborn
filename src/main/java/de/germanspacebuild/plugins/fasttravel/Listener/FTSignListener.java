@@ -93,7 +93,8 @@ public class FTSignListener implements Listener{
             if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                 event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
             }
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Exists".replaceAll("%sign", lines[1]));
+            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists")
+                    .replaceAll("%sign", lines[1]));
             return;
         }
 
@@ -110,8 +111,8 @@ public class FTSignListener implements Listener{
 
             FastTravelDB.addSign(newFTSign);
 
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Created".replaceAll("%sign",
-                    newFTSign.getName()));
+            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Created")
+                    .replaceAll("%sign", newFTSign.getName()));
 
             newFTSign.addPlayer(event.getPlayer().getUniqueId());
 

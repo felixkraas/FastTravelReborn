@@ -57,6 +57,11 @@ public class CheckPlayerTask implements Runnable {
                 }
                 if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()){
                     plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
+                    try {
+                        wait((long) 1000.0);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
