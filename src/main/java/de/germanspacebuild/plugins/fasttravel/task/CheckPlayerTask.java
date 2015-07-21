@@ -33,7 +33,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckPlayerTask implements Runnable {
+public class CheckPlayerTask extends Thread {
 
     private FastTravel plugin;
 
@@ -43,6 +43,7 @@ public class CheckPlayerTask implements Runnable {
 
     @Override
     public void run() {
+        long timestamp = System.currentTimeMillis();
         List<Player> players = new ArrayList<>();
         players.addAll(plugin.getServer().getOnlinePlayers());
 
@@ -56,11 +57,9 @@ public class CheckPlayerTask implements Runnable {
                     return;
                 }
                 if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()){
-                    plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
-                    try {
-                        wait((long) 1000.0);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    while (!((System.currentTimeMillis() - timestamp) < 1000L)) {
+                        plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
+                        timestamp = System.currentTimeMillis();
                     }
                 }
             }

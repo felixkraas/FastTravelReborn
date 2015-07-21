@@ -28,6 +28,7 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.util.BlockUtil;
 import org.bukkit.*;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.UUID;
 
@@ -108,7 +109,7 @@ public class TravelTask implements Runnable {
         plugin.getServer().getPlayer(player).getWorld().playEffect(plugin.getServer().getPlayer(player).getLocation(),
                 Effect.SMOKE, 1);
 
-        plugin.getServer().getPlayer(player).teleport(targ);
+        plugin.getServer().getPlayer(player).teleport(targ, PlayerTeleportEvent.TeleportCause.PLUGIN);
         plugin.getIOManger().sendTranslation(plugin.getServer().getPlayer(player),
                 "Travel.Success".replaceAll("%sign", sign.getName()));
 

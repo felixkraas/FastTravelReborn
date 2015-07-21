@@ -117,6 +117,9 @@ public class en extends Language {
 
             set("Command.Save.Saved", "You have saved the DB.");
 
+            //Warmup
+            set("Warmup.Objective", "Warumup");
+
             save();
 
 

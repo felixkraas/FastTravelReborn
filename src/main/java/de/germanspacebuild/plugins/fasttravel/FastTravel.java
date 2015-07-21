@@ -39,12 +39,14 @@ import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.mcstats.Metrics;
 
@@ -57,6 +59,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FastTravel extends JavaPlugin {
+
+    public static final boolean BETA = true;
 
     public static final String PERMS_BASE = "fasttravelsigns.";
 
@@ -160,7 +164,12 @@ public class FastTravel extends JavaPlugin {
 
         checkHooks();
 
-        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
+        getServer().getScheduler().runTaskTimerAsynchronously(this, new CheckPlayerTask(this), 5*20, 1*20);
+
+        if (BETA){
+            io.sendConsole(ChatColor.RED + "This is a beta release of FastTravelSigns. Please report any bug to the" +
+                    " author.");
+        }
 
     }
 
@@ -276,4 +285,6 @@ public class FastTravel extends JavaPlugin {
     public EffectManager getEffectManager() {
         return effectManager;
     }
+
+    public ScoreboardManager getScoreboardManager() { return scoreboardManager; }
 }

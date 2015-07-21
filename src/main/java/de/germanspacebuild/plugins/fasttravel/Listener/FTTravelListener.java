@@ -28,6 +28,9 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.events.FastTravelEvent;
 import de.germanspacebuild.plugins.fasttravel.task.TravelTask;
+import de.germanspacebuild.plugins.fasttravel.task.WarmupPlayerTask;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -63,7 +66,7 @@ public class FTTravelListener implements Listener {
 
             if (cooldown > 0){
                 if ((curTime - cooldowns.get(player.getUniqueId())) < (cooldown * 1000)) {
-                    plugin.getIOManger().sendTranslation(player, plugin.getIOManger().translate("Travel.Cooldown")
+                    plugin.getIOManger().send(player, plugin.getIOManger().translate("Travel.Cooldown")
                             .replaceAll("%time", String.valueOf(plugin.getConfig().getInt("Travel.Cooldown"))));
                     return;
                 }
@@ -77,6 +80,8 @@ public class FTTravelListener implements Listener {
         } else {
             plugin.getIOManger().sendTranslation(player, "Travel.WarmingUp".replaceAll("%time",
                     String.valueOf(plugin.getConfig().getLong("Travel.Warmup"))));
+            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new WarmupPlayerTask(plugin,
+                    event.getPlayer().getUniqueId(), plugin.getConfig().getLong("Travel.Warmup")));
             plugin.getServer().getScheduler().runTaskLater(plugin, new TravelTask(plugin, player.getUniqueId(), sign),
                     plugin.getConfig().getLong("Travel.Warmup") * 20);
             cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
