@@ -80,7 +80,7 @@ public class FTTravelListener implements Listener {
         } else {
             plugin.getIOManger().sendTranslation(player, "Travel.WarmingUp".replaceAll("%time",
                     String.valueOf(plugin.getConfig().getLong("Travel.Warmup"))));
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new WarmupPlayerTask(plugin,
+            plugin.getServer().getScheduler().runTask(plugin, new WarmupPlayerTask(plugin,
                     event.getPlayer().getUniqueId(), plugin.getConfig().getLong("Travel.Warmup")));
             plugin.getServer().getScheduler().runTaskLater(plugin, new TravelTask(plugin, player.getUniqueId(), sign),
                     plugin.getConfig().getLong("Travel.Warmup") * 20);

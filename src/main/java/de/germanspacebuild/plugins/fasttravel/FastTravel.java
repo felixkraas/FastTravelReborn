@@ -164,7 +164,7 @@ public class FastTravel extends JavaPlugin {
 
         checkHooks();
 
-        getServer().getScheduler().runTaskTimerAsynchronously(this, new CheckPlayerTask(this), 5*20, 1*20);
+        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
 
         if (BETA){
             io.sendConsole(ChatColor.RED + "This is a beta release of FastTravelSigns. Please report any bug to the" +
