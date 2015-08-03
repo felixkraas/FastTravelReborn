@@ -67,12 +67,16 @@ public class UpdateChecker {
             this.version = children.item(1).getTextContent().replaceAll("[a-zA-Z ]", "");
             this.link = children.item(3).getTextContent();
 
-            int versionInt = Integer.parseInt(this.version.replaceAll("[a-zA-Z., ]-", ""));
+            if (version.contains("beta")) {
+                return false;
+            }
+
+            int versionInt = Integer.parseInt(this.version.replaceAll("[a-zA-Z., ]", "").replace("-", ""));
             int oldInt = Integer.parseInt(plugin.getDescription().getVersion().replaceAll("[a-zA-Z., ]", ""));
 
             if (this.version.replaceAll("[a-zA-Z., ]", "").length() < 3) {
                 versionInt = versionInt * 10;
-            } else if (plugin.getDescription().getVersion().replaceAll("[a-zA-Z., ]-", "").length() < 3) {
+            } else if (plugin.getDescription().getVersion().replaceAll("[a-zA-Z., ]", "").replace("-", "").length() < 3) {
                 oldInt = oldInt * 10;
             }
 

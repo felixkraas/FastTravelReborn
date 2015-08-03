@@ -150,7 +150,7 @@ public class FastTravel extends JavaPlugin {
             io.sendConsole(io.translate("Plugin.Update.Console.No"));
         }
 
-        //config
+        //Database
         if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
             DBType.setDBType(DBType.File);
             FastTravelDB.init(this, "signs.yml", true);
