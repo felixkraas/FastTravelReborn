@@ -38,6 +38,7 @@ import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_8_R3.PacketListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
@@ -89,6 +90,9 @@ public class FastTravel extends JavaPlugin {
         dataDir = this.getDataFolder();
         langDir = new File(getDataFolder(), "lang");
         effectManager = new EffectManager(this);
+
+        //Just for testing
+        PacketListener pl;
 
         if (!dataDir.exists()) {
             dataDir.mkdir();
