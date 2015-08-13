@@ -91,9 +91,6 @@ public class FastTravel extends JavaPlugin {
         langDir = new File(getDataFolder(), "lang");
         effectManager = new EffectManager(this);
 
-        //Just for testing
-        PacketListener pl;
-
         if (!dataDir.exists()) {
             dataDir.mkdir();
         }
@@ -218,6 +215,7 @@ public class FastTravel extends JavaPlugin {
         PluginManager pm = this.getServer().getPluginManager();
         if (config.getBoolean("Hooks.DynmapHook") && pm.isPluginEnabled("dynmap")) {
             hooks.put("dynmap", new DynmapHook(this, pm.getPlugin("dynmap")));
+            io.sendConsole(io.translate(""));
         }
     }
 

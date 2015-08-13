@@ -25,12 +25,23 @@
 package de.germanspacebuild.plugins.fasttravel.thirdparty;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
+import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
+import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
+import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
+import org.dynmap.DynmapAPI;
+import org.dynmap.markers.MarkerIcon;
+import org.dynmap.markers.MarkerSet;
+
+import java.util.List;
 
 /**
  * Created by oneill011990 on 03.05.2015.
  */
 public class DynmapHook extends PluginHook {
+
+    DynmapAPI api;
+    MarkerSet markers;
 
     public DynmapHook(FastTravel plugin, Plugin hook) {
         super(plugin, hook);
@@ -38,6 +49,19 @@ public class DynmapHook extends PluginHook {
 
     @Override
     public void init() {
+        api = (DynmapAPI) hook;
+        markers = api.getMarkerAPI().createMarkerSet("fasttravel", "FastTravelSigns", null, false);
+    }
+
+    public void processSigns() {
+        List<FastTravelSign> signs = FastTravelDB.getAllSigns();
+
+        for (FastTravelSign sign : signs) {
+            Location signLoc = sign.getSignLocation();
+            markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
+                    signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(MarkerIcon.SIGN),
+                    false);
+        }
 
     }
 }

@@ -120,6 +120,9 @@ public class en extends Language {
             //Warmup
             set("Warmup.Objective", "Warumup");
 
+            //Hooks
+            set("Hooks.Dynmap", "Dynmap found hooking into it.");
+
             save();
 
 

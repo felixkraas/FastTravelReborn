@@ -1,6 +1,7 @@
 name: FastTravelSigns
 main: de.germanspacebuild.plugins.fasttravel.FastTravel
 version: ${project.version}
+softdepend: [vault, dynmap]
 permissions:
     fasttravelsigns.use:
         description: Allows users to find travel points and use them with /ft.
