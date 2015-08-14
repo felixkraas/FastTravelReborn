@@ -70,6 +70,7 @@ public class FileDBHandler {
         }
 
         for (String signName : signYAML.getKeys(false)) {
+            int id = signYAML.getInt(signName + ".id");
             UUID creator = UUID.fromString(signYAML.getString(signName + ".creator"));
             int range = signYAML.getInt(signName + ".range");
             World locWorld = plugin.getServer().getWorld(
@@ -96,7 +97,7 @@ public class FileDBHandler {
                 continue;
             }
 
-            FastTravelDB.addSign(new FastTravelSign(signName, creator, price, location, tploc,
+            FastTravelDB.addSign(new FastTravelSign(id ,signName, creator, price, location, tploc,
                     automatic, range, UUIDUtil.stringToUUID(filePlayers)));
             filePlayers.clear();
         }
@@ -110,6 +111,7 @@ public class FileDBHandler {
         for (String signName : FastTravelDB.getSignMap().keySet()) {
             FastTravelSign sign = FastTravelDB.getSignMap().get(signName);
             signName = sign.getName();
+            signYAML.set(signName + ".id", sign.getId());
             signYAML.set(signName + ".creator", sign.getCreator().toString());
 
             signYAML.set(signName + ".signloc.world", sign.getSignLocation().getWorld().getName());
@@ -144,6 +146,7 @@ public class FileDBHandler {
         for (String signName : FastTravelDB.getSignMap().keySet()) {
             FastTravelSign sign = FastTravelDB.getSignMap().get(signName);
             signName = sign.getName();
+            signYAML.set(signName + ".id", sign.getId());
             signYAML.set(signName + ".creator", sign.getCreator().toString());
 
             signYAML.set(signName + ".signloc.world", sign.getSignLocation().getWorld().getName());

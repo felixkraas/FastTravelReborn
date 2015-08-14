@@ -29,6 +29,8 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.material.Sign;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,6 +40,7 @@ import java.util.UUID;
  */
 public class FastTravelSign implements Comparable<FastTravelSign> {
 
+    private int id;
     private String name;
     private Location tpLoc;
     private Location signLoc;
@@ -56,6 +59,13 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
      * @param block   Location of sign.
      */
     public FastTravelSign(String name, UUID creator, Block block) {
+
+        if (FastTravelDB.getAllSigns().size() == 0) {
+            this.id = FastTravelDB.getAllSigns().size();
+        } else {
+            this.id = FastTravelDB.getAllSigns().size() + 1;
+        }
+
         this.name = name;
         this.creator = creator;
 
@@ -81,8 +91,9 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
      * @param automatic Accessible for all players?
      * @param players   Players that can use this sign.
      */
-    public FastTravelSign(String name, UUID creator, double price, Location location, Location tpLoc,
+    public FastTravelSign(int id, String name, UUID creator, double price, Location location, Location tpLoc,
                           boolean automatic, int range, List<UUID> players) {
+        this.id = id;
         this.name = name;
         this.creator = creator;
         this.price = price;
@@ -194,6 +205,14 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     public void setMarker(Boolean marker) {
         this.marker = marker;
         FastTravelDB.save();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
