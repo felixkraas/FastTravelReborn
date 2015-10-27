@@ -102,7 +102,7 @@ public class SQLiteDBHandler {
 
                 FastTravelSign sign = null;
 
-                sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
+                sign = new FastTravelSign(1, name, creator, price, signLoc, tpLoc, automatic, range, players);
 
                 if (plugin.getConfig().getBoolean("DevMode")){
                     plugin.getLogger().info("Loaded sign: " + sign.getName());

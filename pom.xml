@@ -56,7 +56,7 @@
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
-            <version>3.3</version>
+            <version>3.6</version>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
@@ -95,12 +95,6 @@
             <groupId>us.dynmap</groupId>
             <artifactId>DynmapCoreAPI</artifactId>
             <version>2.2-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache</groupId>
-            <artifactId>openjpa</artifactId>
-            <version>2.4.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

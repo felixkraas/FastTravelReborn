@@ -32,6 +32,7 @@ import de.slikey.effectlib.Effect;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.EffectType;
 import de.slikey.effectlib.effect.LineEffect;
+import de.slikey.effectlib.util.DynamicLocation;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -51,6 +52,7 @@ public class ShowTPCommand implements CommandExecutor {
         this.plugin = plugin;
         this.io = plugin.getIOManger();
         this.em = plugin.getEffectManager();
+        Math.floorMod(1 ,2);
     }
 
     @Override
@@ -73,8 +75,8 @@ public class ShowTPCommand implements CommandExecutor {
         Effect effect = new LineEffect(em);
         effect.type = EffectType.INSTANT;
         effect.color = Color.RED;
-        effect.setLocation(tpLoc);
-        effect.setTarget(tpLocTop);
+        effect.setDynamicOrigin(new DynamicLocation(tpLoc));
+        effect.setDynamicTarget(new DynamicLocation(tpLocTop));
         effect.period = 5 * 20;
         effect.delay = 1 * 20;
         effect.start();
