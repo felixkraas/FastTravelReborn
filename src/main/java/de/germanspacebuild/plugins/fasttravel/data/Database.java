@@ -54,7 +54,7 @@ public abstract class Database {
         createTable("FastTravelSigns", "name TEXT, creator TEXT, signloc_World TEXT, signloc_X INTEGER," +
                 " signloc_Y INTEGER, signloc_Z INTEGER, signloc_Yaw REAL, " +
                 "tploc_World TEXT, tploc_X INTEGER, tploc_Y INTEGER, tploc_Z INTEGER, tploc_Yaw REAL," +
-                "automatic SMALLINT, price REAL, range INTEGER, players BLOB");
+                "automatic BOOLEAN, price REAL, range INTEGER, players LONGBLOB");
     }
 
     public void init() {

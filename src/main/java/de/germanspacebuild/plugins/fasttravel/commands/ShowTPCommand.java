@@ -52,7 +52,6 @@ public class ShowTPCommand implements CommandExecutor {
         this.plugin = plugin;
         this.io = plugin.getIOManger();
         this.em = plugin.getEffectManager();
-        Math.floorMod(1 ,2);
     }
 
     @Override
@@ -77,8 +76,8 @@ public class ShowTPCommand implements CommandExecutor {
         effect.color = Color.RED;
         effect.setDynamicOrigin(new DynamicLocation(tpLoc));
         effect.setDynamicTarget(new DynamicLocation(tpLocTop));
-        effect.period = 5 * 20;
-        effect.delay = 1 * 20;
+        effect.period = 1 * 20;
+        effect.iterations = 5;
         effect.start();
         em.start(effect);
 

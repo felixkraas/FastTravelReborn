@@ -83,6 +83,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     /**
      * Constructor for sign with price.
      *
+     * @param id        Unique ID of the sign in the database.
      * @param name      Name of sign.
      * @param creator   Name of creator.
      * @param price     Price for travel.

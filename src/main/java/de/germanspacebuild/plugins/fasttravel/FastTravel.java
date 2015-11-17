@@ -26,13 +26,12 @@ package de.germanspacebuild.plugins.fasttravel;
 
 import de.germanspacebuild.plugins.fasttravel.Listener.*;
 import de.germanspacebuild.plugins.fasttravel.commands.*;
-import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
+import de.germanspacebuild.plugins.fasttravel.data.*;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
 import de.germanspacebuild.plugins.fasttravel.io.language.en;
 import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
-import de.germanspacebuild.plugins.fasttravel.data.DBType;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.DynmapHook;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
@@ -106,6 +105,8 @@ public class FastTravel extends JavaPlugin {
 
         metricsInit();
 
+        initDB();
+
         //Init language
         initLanguages();
         io = new IOManager(this);
@@ -159,6 +160,7 @@ public class FastTravel extends JavaPlugin {
             DBType.setDBType(DBType.MySQL);
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {
             DBType.setDBType(DBType.SQLite);
+            SQLiteDBHandler.load();
         } else {
             io.sendConsole(io.translate("Plugin.InvalidDB"));
         }
@@ -258,6 +260,10 @@ public class FastTravel extends JavaPlugin {
     private void initLanguages() {
         Language en = new en(this);
         Language.addLanguage(en);
+    }
+
+    private void initDB() {
+        Database.registerDatabaseSystem(DBType.SQLite, new SQLite());
     }
 
     public static FastTravel getInstance() {

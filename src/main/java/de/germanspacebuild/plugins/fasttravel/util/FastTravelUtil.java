@@ -70,7 +70,7 @@ public class FastTravelUtil {
     /**
      * Checks if lines belong to a FastTravelSign
      * @param lines Line to check
-     * @return Belong to FAstTravelSign or not
+     * @return Belong to FastTravelSign or not
      */
     public static boolean isFTSign(String[] lines) {
         String line1 = ChatColor.stripColor(lines[0]);

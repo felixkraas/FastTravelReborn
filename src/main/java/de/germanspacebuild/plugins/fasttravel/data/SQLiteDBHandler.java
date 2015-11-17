@@ -25,10 +25,14 @@
 package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
+import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,14 +59,14 @@ public class SQLiteDBHandler {
         db.init();
 
         try {
-            entries = db.query("COUNT (*) FROM FastTravelSigns;").getInt(1);
+           /* entries = db.query("COUNT (*) FROM FastTravelSigns;").getInt(1);
 
             if (entries == 0){
                 plugin.getLogger().info("No signs found in the database");
                 return;
             } else {
                 plugin.getLogger().info(entries + " FastTravelSigns found in the database. Starting to load them.");
-            }
+            }*/
 
             ResultSet rs = db.query("SELECT * From FastTravelSigns");
 
@@ -122,11 +126,39 @@ public class SQLiteDBHandler {
         }
     }
 
-    public static void save() {
+    public static void save() throws SQLException {
         for (String signName : FastTravelDB.getSignMap().keySet()) {
 
             FastTravelSign sign = FastTravelDB.getSign(signName);
-            if (!db.tableContains("name", signName));
+            if (!db.tableContains("name", signName)){
+                PreparedStatement preparedStatement = db.dbConn.prepareStatement(
+                        "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                );
+
+                //Basic information
+                preparedStatement.setString(1, sign.getName());
+                preparedStatement.setString(2, sign.getCreator().toString());
+                //Sign location
+                preparedStatement.setString(3, sign.getSignLocation().getWorld().getName());
+                preparedStatement.setInt(4, sign.getSignLocation().getBlockX());
+                preparedStatement.setInt(5, sign.getSignLocation().getBlockY());
+                preparedStatement.setInt(6, sign.getSignLocation().getBlockZ());
+                preparedStatement.setFloat(7, sign.getSignLocation().getYaw());
+                //TP location
+                preparedStatement.setString(8, sign.getTPLocation().getWorld().getName());
+                preparedStatement.setInt(9, sign.getTPLocation().getBlockX());
+                preparedStatement.setInt(10, sign.getTPLocation().getBlockY());
+                preparedStatement.setInt(11, sign.getTPLocation().getBlockZ());
+                preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
+                //more information
+                preparedStatement.setBoolean(13, sign.isAutomatic());
+                preparedStatement.setDouble(14, sign.getPrice());
+                preparedStatement.setInt(15, sign.getRange());
+                preparedStatement.setBlob(16, new SerialBlob(db.updateList(sign.getPlayers())));
+
+                preparedStatement.execute();
+
+            }
 
         }
     }
