@@ -156,7 +156,7 @@ public class SQLiteDBHandler {
                 preparedStatement.setInt(15, sign.getRange());
                 preparedStatement.setBlob(16, new SerialBlob(db.updateList(sign.getPlayers())));
 
-                preparedStatement.execute();
+                preparedStatement.executeUpdate();
 
             }
 
