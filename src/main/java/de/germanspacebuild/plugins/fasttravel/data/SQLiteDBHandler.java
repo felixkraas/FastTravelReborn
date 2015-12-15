@@ -135,22 +135,22 @@ public class SQLiteDBHandler {
                         "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
                 );
 
-                //Basic information
+                //Basic Information
                 preparedStatement.setString(1, sign.getName());
                 preparedStatement.setString(2, sign.getCreator().toString());
-                //Sign location
+                //Sign Location
                 preparedStatement.setString(3, sign.getSignLocation().getWorld().getName());
                 preparedStatement.setInt(4, sign.getSignLocation().getBlockX());
                 preparedStatement.setInt(5, sign.getSignLocation().getBlockY());
                 preparedStatement.setInt(6, sign.getSignLocation().getBlockZ());
                 preparedStatement.setFloat(7, sign.getSignLocation().getYaw());
-                //TP location
+                //TP Location
                 preparedStatement.setString(8, sign.getTPLocation().getWorld().getName());
                 preparedStatement.setInt(9, sign.getTPLocation().getBlockX());
                 preparedStatement.setInt(10, sign.getTPLocation().getBlockY());
                 preparedStatement.setInt(11, sign.getTPLocation().getBlockZ());
                 preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
-                //more information
+                //more Information
                 preparedStatement.setBoolean(13, sign.isAutomatic());
                 preparedStatement.setDouble(14, sign.getPrice());
                 preparedStatement.setInt(15, sign.getRange());
