@@ -19,14 +19,20 @@
       </profile>
       <profile default="false" name="Annotation profile for fasttravel-reborn" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="fasttravel-reborn" />
+      </profile>
+      <profile default="false" name="Annotation profile for FastTravelReborn" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="fasttravel-reborn" target="1.7" />
+      <module name="fasttravel-reborn" target="1.8" />
+      <module name="FastTravelReborn" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
