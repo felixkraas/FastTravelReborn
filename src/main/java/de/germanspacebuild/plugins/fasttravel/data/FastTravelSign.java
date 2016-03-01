@@ -29,8 +29,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.material.Sign;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

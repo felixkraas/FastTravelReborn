@@ -37,25 +37,19 @@ import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_8_R3.PacketListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.mcstats.Metrics;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.management.BufferPoolMXBean;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FastTravel extends JavaPlugin {

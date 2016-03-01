@@ -105,7 +105,7 @@ public class TravelTask implements Runnable {
 
 
         plugin.getServer().getPlayer(player).getWorld().playSound(plugin.getServer().getPlayer(player).getLocation(),
-                Sound.CHICKEN_EGG_POP, 15, 1);
+                Sound.ENTITY_CHICKEN_EGG, 15, 1);
         plugin.getServer().getPlayer(player).getWorld().playEffect(plugin.getServer().getPlayer(player).getLocation(),
                 Effect.SMOKE, 1);
 

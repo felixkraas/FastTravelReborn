@@ -25,8 +25,6 @@
 package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
-import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
