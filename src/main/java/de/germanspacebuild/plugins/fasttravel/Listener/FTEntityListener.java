@@ -42,21 +42,21 @@ import java.util.List;
 public class FTEntityListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onEntityExplode(EntityExplodeEvent event){
-        if (event.blockList().isEmpty()){
+    public void onEntityExplode(EntityExplodeEvent event) {
+        if (event.blockList().isEmpty()) {
             return;
         }
 
-        for (FastTravelSign sign : FastTravelDB.getAllSigns()){
-            if (event.blockList().contains(sign.getSignLocation().getBlock())){
+        for (FastTravelSign sign : FastTravelDB.getAllSigns()) {
+            if (event.blockList().contains(sign.getSignLocation().getBlock())) {
                 List<Block> signBlocks = new ArrayList<>();
 
-                Location  blockBelow = sign.getSignLocation().getWorld().getBlockAt(sign.getSignLocation().getBlockX() - 1,
+                Location blockBelow = sign.getSignLocation().getWorld().getBlockAt(sign.getSignLocation().getBlockX() - 1,
                         sign.getSignLocation().getBlockY() - 1, sign.getSignLocation().getBlockZ() - 1).getLocation();
 
-                for (int i = 0; i <= 2; i++){
-                    for (int j = 0; j <= 2; j++){
-                        for (int k = 0; k <= 2; k++){
+                for (int i = 0; i <= 2; i++) {
+                    for (int j = 0; j <= 2; j++) {
+                        for (int k = 0; k <= 2; k++) {
                             signBlocks.add(sign.getSignLocation().getWorld().getBlockAt(blockBelow.getBlockX() + i,
                                     blockBelow.getBlockY() + j, blockBelow.getBlockZ() + k));
                         }

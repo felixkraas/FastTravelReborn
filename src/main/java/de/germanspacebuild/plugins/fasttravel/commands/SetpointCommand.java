@@ -36,41 +36,41 @@ import org.bukkit.entity.Player;
 public class SetpointCommand implements CommandExecutor {
 
     private FastTravel plugin;
-	private IOManager io;
+    private IOManager io;
 
     public SetpointCommand(FastTravel plugin) {
         this.plugin = plugin;
-		this.io = plugin.getIOManger();
+        this.io = plugin.getIOManger();
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!(sender instanceof Player)) {
-			return false;
-		}
-		if (!sender.hasPermission(FastTravel.PERMS_BASE + "setpoint")) {
-			io.sendTranslation(sender, "Perms.Not");
-			return false;
-		}
-		if (args.length == 0) {
-			io.sendTranslation(sender, "Command.NoSign");
-			return true;
-		}
+        if (!(sender instanceof Player)) {
+            return false;
+        }
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "setpoint")) {
+            io.sendTranslation(sender, "Perms.Not");
+            return false;
+        }
+        if (args.length == 0) {
+            io.sendTranslation(sender, "Command.NoSign");
+            return true;
+        }
 
-		FastTravelSign sign = FastTravelDB.getSign(args[0]);
-		if (sign == null) {
-			io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-		} else if (args.length == 1) {
-			sign.setTPLocation(((Player) sender).getLocation());
-			io.send(sender, io.translate("Command.SetPoint.Set").replaceAll("%sign", sign.getName()));
-		} else if (args.length == 2 && args[1].equals("clear")) {
-			sign.setTPLocation(sign.getSignLocation().clone());
-			io.send(sender, io.translate("Command.SetPoint.Cleared"));
-		}
+        FastTravelSign sign = FastTravelDB.getSign(args[0]);
+        if (sign == null) {
+            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+        } else if (args.length == 1) {
+            sign.setTPLocation(((Player) sender).getLocation());
+            io.send(sender, io.translate("Command.SetPoint.Set").replaceAll("%sign", sign.getName()));
+        } else if (args.length == 2 && args[1].equals("clear")) {
+            sign.setTPLocation(sign.getSignLocation().clone());
+            io.send(sender, io.translate("Command.SetPoint.Cleared"));
+        }
 
         FastTravelDB.save();
 
-		return true;
-	}
+        return true;
+    }
 
 }

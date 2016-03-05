@@ -38,7 +38,6 @@ import java.util.UUID;
  */
 public class FastTravelSign implements Comparable<FastTravelSign> {
 
-    private int id;
     private String name;
     private Location tpLoc;
     private Location signLoc;
@@ -58,12 +57,6 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
      */
     public FastTravelSign(String name, UUID creator, Block block) {
 
-        if (FastTravelDB.getAllSigns().size() == 0) {
-            this.id = FastTravelDB.getAllSigns().size();
-        } else {
-            this.id = FastTravelDB.getAllSigns().size() + 1;
-        }
-
         this.name = name;
         this.creator = creator;
 
@@ -81,7 +74,6 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     /**
      * Constructor for sign with price.
      *
-     * @param id        Unique ID of the sign in the database.
      * @param name      Name of sign.
      * @param creator   Name of creator.
      * @param price     Price for travel.
@@ -90,9 +82,8 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
      * @param automatic Accessible for all players?
      * @param players   Players that can use this sign.
      */
-    public FastTravelSign(int id, String name, UUID creator, double price, Location location, Location tpLoc,
+    public FastTravelSign(String name, UUID creator, double price, Location location, Location tpLoc,
                           boolean automatic, int range, List<UUID> players) {
-        this.id = id;
         this.name = name;
         this.creator = creator;
         this.price = price;
@@ -104,19 +95,17 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     }
 
 
-
-
-    public void addPlayer(UUID player){
+    public void addPlayer(UUID player) {
         players.add(player);
         FastTravelDB.save();
     }
 
-    public void clearPlayers(){
+    public void clearPlayers() {
         players.clear();
         FastTravelDB.save();
     }
 
-    public void removePlayer(UUID player){
+    public void removePlayer(UUID player) {
         players.remove(player);
         FastTravelDB.save();
     }
@@ -206,16 +195,8 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         FastTravelDB.save();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
-    public String toString(){
+    public String toString() {
         return getName();
     }
 

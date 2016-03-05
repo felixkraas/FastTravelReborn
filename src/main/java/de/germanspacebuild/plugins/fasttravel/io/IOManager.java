@@ -67,7 +67,7 @@ public class IOManager {
         sender.sendMessage(parseColor(prefix + msg));
     }
 
-    public void send(Player player, String msg){
+    public void send(Player player, String msg) {
         player.sendMessage(parseColor(prefix + msg));
     }
 
@@ -75,7 +75,7 @@ public class IOManager {
         sender.sendMessage(parseColor(prefix + translate(key)));
     }
 
-    public void sendTranslation(Player player, String key){
+    public void sendTranslation(Player player, String key) {
         player.sendMessage(prefix + parseColor(translate(key)));
     }
 

@@ -51,20 +51,20 @@ public class ClearCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!sender.hasPermission("fasttravelsigns.clear")){
+        if (!sender.hasPermission("fasttravelsigns.clear")) {
             io.sendTranslation(sender, "Perms.Not");
             return false;
         }
-        if (args.length == 0){
+        if (args.length == 0) {
             io.sendTranslation(sender, "Command.NoSign");
-        } else if (FastTravelDB.getSign(args[0]) == null){
+        } else if (FastTravelDB.getSign(args[0]) == null) {
             io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
         } else {
             FastTravelSign sign = FastTravelDB.getSign(args[0]);
             List<UUID> players = sign.getPlayers();
             for (UUID player : players) {
-                    io.send(Bukkit.getServer().getPlayer(player), io.translate("Player.Removed").replaceAll("%sign",
-                            sign.getName()));
+                io.send(Bukkit.getServer().getPlayer(player), io.translate("Player.Removed").replaceAll("%sign",
+                        sign.getName()));
             }
             sign.clearPlayers();
             return true;

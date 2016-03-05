@@ -38,60 +38,60 @@ import org.bukkit.entity.Player;
 
 public class PriceCommand implements CommandExecutor {
 
-	private FastTravel plugin;
-	private IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
-	public PriceCommand(FastTravel plugin) {
-		this.plugin = plugin;
-		io = plugin.getIOManger();
-	}
+    public PriceCommand(FastTravel plugin) {
+        this.plugin = plugin;
+        io = plugin.getIOManger();
+    }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (!(sender instanceof Player)) {
-			return false;
-		}
-		if (!sender.hasPermission(FastTravel.PERMS_BASE + "price")) {
-			io.sendTranslation(sender, "Perms.Not");
-			return false;
-		}
-		if (plugin.getEconomy() == null) {
-			io.sendTranslation(sender, "Econ.Disabled");
-			return true;
-		}
-		if (args.length == 0) {
-			io.send(sender, io.translate("Command.NoSign"));
-			return true;
-		}
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            return false;
+        }
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "price")) {
+            io.sendTranslation(sender, "Perms.Not");
+            return false;
+        }
+        if (plugin.getEconomy() == null) {
+            io.sendTranslation(sender, "Econ.Disabled");
+            return true;
+        }
+        if (args.length == 0) {
+            io.send(sender, io.translate("Command.NoSign"));
+            return true;
+        }
 
-		FastTravelSign sign = FastTravelDB.getSign(args[0]);
-		if (sign == null) {
-			io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-		} else if (args.length == 1) {
-			io.sendTranslation(sender, "Command.Price.No");
-		} else if (args.length == 2) {
-			float newPrice;
-			try {
-				newPrice = Float.parseFloat(args[1]);
-			} catch (NumberFormatException e) {
-				io.sendTranslation(sender, "Command.Price.Invalid");
-				return true;
-			}
-			sign.setPrice(newPrice);
-			io.send(sender, io.translate("Command.Price.Set").replaceAll("%sign", sign.getName()).replaceAll("%price",
-					plugin.getEconomy().format(newPrice)));
+        FastTravelSign sign = FastTravelDB.getSign(args[0]);
+        if (sign == null) {
+            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+        } else if (args.length == 1) {
+            io.sendTranslation(sender, "Command.Price.No");
+        } else if (args.length == 2) {
+            float newPrice;
+            try {
+                newPrice = Float.parseFloat(args[1]);
+            } catch (NumberFormatException e) {
+                io.sendTranslation(sender, "Command.Price.Invalid");
+                return true;
+            }
+            sign.setPrice(newPrice);
+            io.send(sender, io.translate("Command.Price.Set").replaceAll("%sign", sign.getName()).replaceAll("%price",
+                    plugin.getEconomy().format(newPrice)));
 
-			// Try to set the price on the actual sign if possible
-			Block block = sign.getSignLocation().getBlock();
-			if (FastTravelUtil.isFTSign(block)) {
-				Sign realSign = (Sign) block.getState();
-				if (newPrice > 0)
-					realSign.setLine(2, "Price: " + newPrice);
-				else
-					realSign.setLine(2, "");
-				realSign.update();
-			}
-		}
-		return true;
-	}
+            // Try to set the price on the actual sign if possible
+            Block block = sign.getSignLocation().getBlock();
+            if (FastTravelUtil.isFTSign(block)) {
+                Sign realSign = (Sign) block.getState();
+                if (newPrice > 0)
+                    realSign.setLine(2, "Price: " + newPrice);
+                else
+                    realSign.setLine(2, "");
+                realSign.update();
+            }
+        }
+        return true;
+    }
 
 }

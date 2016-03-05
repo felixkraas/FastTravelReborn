@@ -31,10 +31,11 @@ import java.util.UUID;
 public class UUIDUtil {
     /**
      * Converts a list of strings to UUIDs.
+     *
      * @param strings String to convert.
      * @return List of UUIDs.
      */
-    public static List<UUID> stringToUUID(List<String> strings){
+    public static List<UUID> stringToUUID(List<String> strings) {
         List<UUID> ids = new ArrayList<UUID>();
         for (String string : strings) {
             ids.add(UUID.fromString(string));
@@ -44,10 +45,11 @@ public class UUIDUtil {
 
     /**
      * Convert a list of UUIDs into strings.
+     *
      * @param ids UUIDs to convert.
      * @return Converted UUIDs.
      */
-    public static List<String> uuidToString(List<UUID> ids){
+    public static List<String> uuidToString(List<UUID> ids) {
         List<String> strings = new ArrayList<>();
         for (UUID id : ids) {
             strings.add(id.toString());

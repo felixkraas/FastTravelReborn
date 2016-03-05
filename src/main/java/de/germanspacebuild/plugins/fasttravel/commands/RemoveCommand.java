@@ -40,13 +40,13 @@ public class RemoveCommand implements CommandExecutor {
     private FastTravel plugin;
     private IOManager io;
 
-    public RemoveCommand(FastTravel plugin){
+    public RemoveCommand(FastTravel plugin) {
         this.plugin = plugin;
         this.io = plugin.getIOManger();
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "remove")){
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "remove")) {
             io.sendTranslation(sender, "Perms.Not");
         } else if (args.length == 0 || args[0] == null || args[1] == null) {
             io.sendTranslation(sender, "Command.InvalidArgs");
@@ -56,13 +56,13 @@ public class RemoveCommand implements CommandExecutor {
 
             FastTravelSign signRaw = FastTravelDB.getSign(sign);
 
-            if (signRaw == null){
+            if (signRaw == null) {
                 io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", sign));
                 return false;
             } else if (plugin.getServer().getPlayer(player) == null) {
                 io.send(sender, io.translate("Player.NotFound").replaceAll("%player", player));
                 return false;
-            } else if (signRaw.isAutomatic() || !signRaw.foundBy(plugin.getServer().getPlayer(player).getUniqueId())){
+            } else if (signRaw.isAutomatic() || !signRaw.foundBy(plugin.getServer().getPlayer(player).getUniqueId())) {
                 io.send(sender, io.translate("Command.Remove.CanNot"));
                 return true;
             }

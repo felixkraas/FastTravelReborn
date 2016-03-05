@@ -40,7 +40,7 @@ public class ListCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "list")){
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "list")) {
             plugin.getIOManger().sendTranslation(sender, "Perms.Not");
             return false;
         }

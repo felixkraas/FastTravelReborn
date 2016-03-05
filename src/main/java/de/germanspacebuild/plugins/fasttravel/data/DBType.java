@@ -56,7 +56,7 @@ public enum DBType {
         }
     }
 
-    public static void load(){
+    public static void load() {
 
     }
 
@@ -67,11 +67,11 @@ public enum DBType {
         }
     }
 
-    public static DBType getDBType(){
+    public static DBType getDBType() {
         return type;
     }
 
-    public static void setDBType(DBType dbtype){
+    public static void setDBType(DBType dbtype) {
         type = dbtype;
     }
 }

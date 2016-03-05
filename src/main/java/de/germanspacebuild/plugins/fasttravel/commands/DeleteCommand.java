@@ -39,42 +39,41 @@ import org.bukkit.entity.Player;
 
 public class DeleteCommand implements CommandExecutor {
 
-	FastTravel plugin;
-	IOManager io;
+    FastTravel plugin;
+    IOManager io;
 
-	public DeleteCommand(FastTravel plugin) {
-		this.plugin = plugin;
-		this.io = plugin.getIOManger();
-	}
+    public DeleteCommand(FastTravel plugin) {
+        this.plugin = plugin;
+        this.io = plugin.getIOManger();
+    }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!(sender instanceof Player)) {
-			io.sendTranslation(sender, "Command.Player");
-			return false;
-		} else if (!sender.hasPermission(FastTravel.PERMS_BASE + "delete")) {
-			io.sendTranslation(sender, "Perms.Not");
-			return false;
-		}
+        if (!(sender instanceof Player)) {
+            io.sendTranslation(sender, "Command.Player");
+            return false;
+        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "delete")) {
+            io.sendTranslation(sender, "Perms.Not");
+            return false;
+        }
 
 
+        if (args.length == 0) {
+            io.sendTranslation(sender, "Command.NoSign");
+        } else if (FastTravelDB.getSign(args[0]) == null) {
+            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+        } else {
+            FastTravelSign sign = FastTravelDB.getSign(args[0]);
+            Block block = sign.getSignLocation().getBlock();
+            // Attempt to nuke the sign
+            if (FastTravelUtil.isFTSign(block)) {
+                block.setType(Material.AIR);
+            }
+            FastTravelDB.removeSign(args[0]);
+            io.send(sender, io.translate("Sign.Removed").replaceAll("%sign", sign.getName()));
+        }
 
-		if (args.length == 0) {
-			io.sendTranslation(sender, "Command.NoSign");
-		} else if (FastTravelDB.getSign(args[0]) == null) {
-			io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-		} else {
-			FastTravelSign sign = FastTravelDB.getSign(args[0]);
-			Block block = sign.getSignLocation().getBlock();
-			// Attempt to nuke the sign
-			if (FastTravelUtil.isFTSign(block)) {
-				block.setType(Material.AIR);
-			}
-			FastTravelDB.removeSign(args[0]);
-			io.send(sender, io.translate("Sign.Removed").replaceAll("%sign", sign.getName()));
-		}
-
-		return true;
-	}
+        return true;
+    }
 
 }

@@ -67,9 +67,7 @@ public class FastTravelCommand implements CommandExecutor {
                 io.sendTranslation(sender, "Player.HasZero");
             } else
                 FastTravelUtil.sendFTSignList(sender, usigns, (plugin.getEconomy() != null));
-        }
-
-        else if (args.length == 1) {
+        } else if (args.length == 1) {
 
             // Time to travel. Check if the requested sign exists.
             FastTravelSign ftsign = FastTravelDB.getSign(args[0]);
@@ -92,7 +90,7 @@ public class FastTravelCommand implements CommandExecutor {
                 return true;
             }
 
-            if (plugin.getEconomy() == null  || !plugin.getConfig().getBoolean("economy.enabled")) {
+            if (plugin.getEconomy() == null || !plugin.getConfig().getBoolean("economy.enabled")) {
                 plugin.getServer().getPluginManager().callEvent(new FastTravelEvent((Player) sender, ftsign));
                 return true;
             }

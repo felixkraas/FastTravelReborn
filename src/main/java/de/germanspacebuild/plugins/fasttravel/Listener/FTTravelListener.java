@@ -58,11 +58,11 @@ public class FTTravelListener implements Listener {
         FastTravelSign sign = event.getSign();
 
         if (cooldowns.containsKey(player.getUniqueId()) && !player.hasPermission(FastTravel.PERMS_BASE +
-                "overrides.cooldown")){
+                "overrides.cooldown")) {
             long curTime = System.currentTimeMillis();
             int cooldown = plugin.getConfig().getInt("Travel.Cooldown");
 
-            if (cooldown > 0){
+            if (cooldown > 0) {
                 if ((curTime - cooldowns.get(player.getUniqueId())) < (cooldown * 1000)) {
                     plugin.getIOManger().send(player, plugin.getIOManger().translate("Travel.Cooldown")
                             .replaceAll("%time", String.valueOf(plugin.getConfig().getInt("Travel.Cooldown"))));

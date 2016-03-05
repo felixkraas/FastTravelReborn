@@ -71,7 +71,7 @@ public class SignMenu {
 
     }
 
-    public void createItemStacks(){
+    public void createItemStacks() {
         for (FastTravelSign sign : signs) {
             ItemStack item = new ItemStack(Material.BEACON, 1);
             ItemMeta meta = item.getItemMeta();
@@ -80,9 +80,9 @@ public class SignMenu {
 
             List<String> lore = new ArrayList<String>();
 
-            if (sign.getPrice() != 0.0){
+            if (sign.getPrice() != 0.0) {
                 lore.add("Price: " + sign.getPrice());
-            } else if (sign.getRange() > 0){
+            } else if (sign.getRange() > 0) {
                 lore.add("Range: " + sign.getRange());
             }
 
@@ -94,20 +94,20 @@ public class SignMenu {
         }
     }
 
-    public void createInventories(){
+    public void createInventories() {
 
         int signCount = signs.size();
         multisited = false;
 
         //maximum of 44 signs per page
-        if (signCount/44 > 1){
+        if (signCount / 44 > 1) {
             sites = floorDiv(signCount, 44);
             multisited = true;
         }
 
-        if (multisited){
-            for (int i = 0; i < sites; i++){
-                inventories.add(Bukkit.getServer().createInventory(player, 54,  ChatColor.DARK_AQUA + "FastTravels " +
+        if (multisited) {
+            for (int i = 0; i < sites; i++) {
+                inventories.add(Bukkit.getServer().createInventory(player, 54, ChatColor.DARK_AQUA + "FastTravels " +
                         i + "/" + sites));
             }
         } else {
@@ -117,17 +117,17 @@ public class SignMenu {
     }
 
 
-    public void fillInventories(){
-        for (int i = 0; i < sites; i++){
+    public void fillInventories() {
+        for (int i = 0; i < sites; i++) {
             for (int j = 0; j < 44 && j < signs.size(); j++) {
-                if (multisited){
+                if (multisited) {
                     inventories.get(i).setItem(j, items.get((i * 44) + j));
                 } else {
                     inventories.get(0).setItem(j, items.get(j));
                 }
             }
 
-            if (multisited){
+            if (multisited) {
 
                 ItemStack back = new ItemStack(Material.CARROT_ITEM, 1);
                 ItemMeta backMeta = back.getItemMeta();
@@ -160,30 +160,30 @@ public class SignMenu {
     }
 
     public void open(int page) {
-        player.openInventory(inventories.get(page-1));
+        player.openInventory(inventories.get(page - 1));
         currentSite = 1;
     }
 
-    public void goNext(){
-        if (currentSite < sites){
-            player.openInventory(inventories.get(currentSite+1));
+    public void goNext() {
+        if (currentSite < sites) {
+            player.openInventory(inventories.get(currentSite + 1));
             currentSite++;
         }
     }
 
-    public void goBack(){
-        if (currentSite > sites){
-            player.openInventory(inventories.get(currentSite-1));
+    public void goBack() {
+        if (currentSite > sites) {
+            player.openInventory(inventories.get(currentSite - 1));
             currentSite--;
         }
     }
 
-    public int getCurrentSite(){
+    public int getCurrentSite() {
         return currentSite;
     }
 
     public void travel(String displayName) {
-        if (FastTravelDB.getSign(displayName.substring(2)) == null){
+        if (FastTravelDB.getSign(displayName.substring(2)) == null) {
             return;
         }
         player.closeInventory();
@@ -191,7 +191,7 @@ public class SignMenu {
                 FastTravelDB.getSign(displayName.substring(2))));
     }
 
-    public static List<SignMenu> getMenus(){
+    public static List<SignMenu> getMenus() {
         return menus;
     }
 

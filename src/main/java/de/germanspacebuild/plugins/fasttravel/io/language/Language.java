@@ -108,7 +108,7 @@ public abstract class Language {
         }
     }
 
-    public static void addLanguage(Language lang){
+    public static void addLanguage(Language lang) {
         languages.add(lang);
     }
 }

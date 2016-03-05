@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 /**
  * Created by oneill011990 on 04.03.2015.
  */
-public class FTSignListener implements Listener{
+public class FTSignListener implements Listener {
 
     private FastTravel plugin;
 
@@ -54,7 +54,7 @@ public class FTSignListener implements Listener{
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onSignChange(SignChangeEvent event){
+    public void onSignChange(SignChangeEvent event) {
 
         String lines[] = event.getLines();
 
@@ -89,16 +89,14 @@ public class FTSignListener implements Listener{
             return;
         }
 
-        if (FastTravelDB.getSign(lines[1]) != null){
+        if (FastTravelDB.getSign(lines[1]) != null) {
             if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                 event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
             }
             plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists")
                     .replaceAll("%sign", lines[1]));
             return;
-        }
-
-        else {
+        } else {
             FastTravelSign newFTSign = new FastTravelSign(lines[1], event.getPlayer().getUniqueId(), event.getBlock());
 
             // Economy support - set default price

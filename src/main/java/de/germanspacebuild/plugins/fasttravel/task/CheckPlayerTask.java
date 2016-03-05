@@ -37,7 +37,7 @@ public class CheckPlayerTask extends Thread {
 
     private FastTravel plugin;
 
-    public CheckPlayerTask(FastTravel plugin){
+    public CheckPlayerTask(FastTravel plugin) {
         this.plugin = plugin;
     }
 
@@ -56,7 +56,7 @@ public class CheckPlayerTask extends Thread {
                 if (player.getWorld() != sign.getSignLocation().getWorld()) {
                     return;
                 }
-                if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()){
+                if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()) {
                     while (!((System.currentTimeMillis() - timestamp) < 1000L)) {
                         plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(player, sign));
                         timestamp = System.currentTimeMillis();

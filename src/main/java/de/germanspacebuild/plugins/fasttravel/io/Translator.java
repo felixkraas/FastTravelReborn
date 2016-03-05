@@ -64,7 +64,7 @@ public class Translator {
         }
         File[] langFiles = plugin.getLangDir().listFiles();
         for (int i = 0; i < langFiles.length; i++) {
-            if (loadedFiles.indexOf(langFiles[i]) == -1)  loadLanguageFile(langFiles[i]);
+            if (loadedFiles.indexOf(langFiles[i]) == -1) loadLanguageFile(langFiles[i]);
         }
         if (languages.get(language) == null) {
             //io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to 'en'!");

@@ -33,27 +33,27 @@ import org.bukkit.entity.Player;
 
 public class ReloadCommand implements CommandExecutor {
 
-	private FastTravel plugin;
-	private IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
-	public ReloadCommand(FastTravel plugin) {
-		this.plugin = plugin;
-		io = plugin.getIOManger();
-	}
+    public ReloadCommand(FastTravel plugin) {
+        this.plugin = plugin;
+        io = plugin.getIOManger();
+    }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (!(sender instanceof Player)) {
-			io.sendTranslation(sender, "Command.Player");
-			return false;
-		} else if (!sender.hasPermission(FastTravel.PERMS_BASE + "reload")){
-			io.sendTranslation(sender, "Perms.Not");
-			return false;
-		}
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            io.sendTranslation(sender, "Command.Player");
+            return false;
+        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "reload")) {
+            io.sendTranslation(sender, "Perms.Not");
+            return false;
+        }
 
-		io.sendTranslation(sender, "Command.Reload.Reloaded");
+        io.sendTranslation(sender, "Command.Reload.Reloaded");
         io.send(sender, io.translate("Command.Reload.Player"));
-		plugin.setupConfig();
+        plugin.setupConfig();
 
-		return true;
-	}
+        return true;
+    }
 }

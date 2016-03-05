@@ -48,14 +48,14 @@ public class FastTravelDB {
             load();
     }
 
-    public static void init(FastTravel plugin, boolean load){
+    public static void init(FastTravel plugin, boolean load) {
         FastTravelDB.plugin = plugin;
 
         if (load)
             load();
     }
 
-    public static void load(){
+    public static void load() {
 
         signs = new HashMap<>();
 
@@ -63,7 +63,7 @@ public class FastTravelDB {
 
     }
 
-    public static void save(){
+    public static void save() {
         DBType.save(saveFile);
     }
 
@@ -71,7 +71,7 @@ public class FastTravelDB {
         if (signs.containsKey(name.toLowerCase()))
             signs.remove(name.toLowerCase());
 
-        if (DBType.getDBType() == DBType.File){
+        if (DBType.getDBType() == DBType.File) {
             save();
         }
     }
@@ -100,7 +100,7 @@ public class FastTravelDB {
         return allSigns;
     }
 
-    public static Map<String, FastTravelSign> getSignMap(){
+    public static Map<String, FastTravelSign> getSignMap() {
         return signs;
     }
 

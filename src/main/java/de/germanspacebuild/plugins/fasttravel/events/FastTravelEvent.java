@@ -42,7 +42,7 @@ public class FastTravelEvent extends Event implements Cancellable {
     private FastTravelSign sign;
     private int price;
 
-    public FastTravelEvent(Player player, FastTravelSign sign){
+    public FastTravelEvent(Player player, FastTravelSign sign) {
         this.player = player;
         this.sign = sign;
     }
@@ -53,12 +53,12 @@ public class FastTravelEvent extends Event implements Cancellable {
         this.price = price;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
 
-    public FastTravelSign getSign(){
-        return  sign;
+    public FastTravelSign getSign() {
+        return sign;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class FastTravelEvent extends Event implements Cancellable {
         return HANDLER_LIST;
     }
 
-    public static HandlerList getHandlerList(){
+    public static HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
 

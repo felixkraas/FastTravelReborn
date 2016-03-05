@@ -57,7 +57,7 @@ public class SQLiteDBHandler {
         db.init();
 
         try {
-           /* entries = db.query("COUNT (*) FROM FastTravelSigns;").getInt(1);
+            /*entries = db.query("COUNT (*) FROM FastTravelSigns;").getInt(1);
 
             if (entries == 0){
                 plugin.getLogger().info("No signs found in the database");
@@ -66,7 +66,7 @@ public class SQLiteDBHandler {
                 plugin.getLogger().info(entries + " FastTravelSigns found in the database. Starting to load them.");
             }*/
 
-            ResultSet rs = db.query("SELECT * From FastTravelSigns");
+            ResultSet rs = db.query("SELECT * FROM FastTravelSigns");
 
             while (rs.next()) {
                 String name = rs.getString(1);
@@ -89,7 +89,7 @@ public class SQLiteDBHandler {
 
                 players = db.getList(rs.getBytes(16));
 
-                if (!players.contains(creator)){
+                if (!players.contains(creator)) {
                     players.add(creator);
                 }
 
@@ -104,9 +104,9 @@ public class SQLiteDBHandler {
 
                 FastTravelSign sign = null;
 
-                sign = new FastTravelSign(1, name, creator, price, signLoc, tpLoc, automatic, range, players);
+                sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
 
-                if (plugin.getConfig().getBoolean("DevMode")){
+                if (plugin.getConfig().getBoolean("DevMode")) {
                     plugin.getLogger().info("Loaded sign: " + sign.getName());
                 }
 
@@ -128,7 +128,7 @@ public class SQLiteDBHandler {
         for (String signName : FastTravelDB.getSignMap().keySet()) {
 
             FastTravelSign sign = FastTravelDB.getSign(signName);
-            if (!db.tableContains("name", signName)){
+            if (!db.tableContains("name", signName)) {
                 PreparedStatement preparedStatement = db.dbConn.prepareStatement(
                         "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
                 );

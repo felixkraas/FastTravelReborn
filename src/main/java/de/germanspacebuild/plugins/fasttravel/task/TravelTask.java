@@ -56,7 +56,7 @@ public class TravelTask implements Runnable {
 
         if (plugin.getConfig().getBoolean("Plugin.Economy") || plugin.getEconomy() != null) {
 
-            if (!plugin.getServer().getPlayer(player).hasPermission(FastTravel.PERMS_BASE + "price")){
+            if (!plugin.getServer().getPlayer(player).hasPermission(FastTravel.PERMS_BASE + "price")) {
                 if (!plugin.getEconomy().has(plugin.getServer().getPlayer(player), sign.getPrice())) {
 
                     plugin.getIOManger().sendTranslation(plugin.getServer().getPlayer(player),
@@ -67,7 +67,7 @@ public class TravelTask implements Runnable {
                     // Charge player
                     boolean success = plugin.getEconomy().withdrawPlayer(plugin.getServer().getPlayer(player),
                             sign.getPrice()).transactionSuccess();
-                    if (success){
+                    if (success) {
 
                         plugin.getIOManger().sendTranslation(plugin.getServer().getPlayer(player),
                                 "Econ.Charged".replaceAll("%cost", plugin.getEconomy().format(sign.getPrice())));

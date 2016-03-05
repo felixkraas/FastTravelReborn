@@ -41,7 +41,7 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
     private Player player;
     private FastTravelSign sign;
 
-    public FastTravelFoundEvent(Player player, FastTravelSign sign){
+    public FastTravelFoundEvent(Player player, FastTravelSign sign) {
         this.player = player;
         this.sign = sign;
     }
@@ -69,7 +69,7 @@ public class FastTravelFoundEvent extends Event implements Cancellable {
         return HANDLER_LIST;
     }
 
-    public static HandlerList getHandlerList(){
+    public static HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
 }

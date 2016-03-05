@@ -51,6 +51,7 @@ public class FastTravelUtil {
 
     /**
      * Checks if block is a FasTravelSign
+     *
      * @param block Block to check
      * @return Is FastTravelSign or not
      */
@@ -69,6 +70,7 @@ public class FastTravelUtil {
 
     /**
      * Checks if lines belong to a FastTravelSign
+     *
      * @param lines Line to check
      * @return Belong to FastTravelSign or not
      */
@@ -81,9 +83,10 @@ public class FastTravelUtil {
 
     /**
      * Prints a list of signs to a player.
+     *
      * @param sender Player the message will be sent to.
-     * @param signs Signs to sent.
-     * @param econ Is economy enabled?
+     * @param signs  Signs to sent.
+     * @param econ   Is economy enabled?
      */
     public static void sendFTSignList(CommandSender sender, List<FastTravelSign> signs, boolean econ) {
         int counter = 0;
@@ -120,7 +123,7 @@ public class FastTravelUtil {
         return names;
     }
 
-    public static void formatSign(Sign sign, String name){
+    public static void formatSign(Sign sign, String name) {
         // Colorize sign
         sign.setLine(0, ChatColor.DARK_PURPLE + "[FastTravel]");
         sign.setLine(1, ChatColor.DARK_BLUE + name);

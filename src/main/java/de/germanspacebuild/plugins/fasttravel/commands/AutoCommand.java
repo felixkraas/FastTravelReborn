@@ -35,44 +35,43 @@ import org.bukkit.entity.Player;
 
 public class AutoCommand implements CommandExecutor {
 
-	FastTravel plugin;
-	IOManager io;
+    FastTravel plugin;
+    IOManager io;
 
-	public AutoCommand(FastTravel plugin) {
-		this.plugin = plugin;
+    public AutoCommand(FastTravel plugin) {
+        this.plugin = plugin;
         io = plugin.getIOManger();
-	}
+    }
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
-		if (!(sender instanceof Player)) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (!(sender instanceof Player)) {
             io.sendTranslation(sender, "Command.Player");
-			return false;
-		}
+            return false;
+        }
 
         if (!sender.hasPermission(FastTravel.PERMS_BASE + "auto")) {
             io.sendTranslation(sender, "Perms.Not");
         }
 
-		if (args.length == 0) {
+        if (args.length == 0) {
             io.sendTranslation(sender, "Command.NoSign");
-		} else if (FastTravelDB.getSign(args[0]) == null) {
-			io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-		} else {
-			FastTravelSign sign = FastTravelDB.getSign(args[0]);
-			
-			if (!sign.isAutomatic()) {
-				sign.setAutomatic(true);
+        } else if (FastTravelDB.getSign(args[0]) == null) {
+            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+        } else {
+            FastTravelSign sign = FastTravelDB.getSign(args[0]);
+
+            if (!sign.isAutomatic()) {
+                sign.setAutomatic(true);
                 io.send(sender, io.translate("Command.Auto.On").replaceAll("%sign", sign.getName()));
-			}
-			else {
-				sign.setAutomatic(false);
+            } else {
+                sign.setAutomatic(false);
                 io.send(sender, io.translate("Command.Auto.Off").replaceAll("%sign", sign.getName()));
-			}
-		}
-		
-		return true;
-		
-	}
+            }
+        }
+
+        return true;
+
+    }
 
 }

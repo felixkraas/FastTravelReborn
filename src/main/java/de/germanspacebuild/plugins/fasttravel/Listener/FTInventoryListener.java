@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * Created by oneill011990 on 14.04.2015.
  */
-public class FTInventoryListener  implements Listener {
+public class FTInventoryListener implements Listener {
 
     private FastTravel plugin;
     private SignMenu menu;
@@ -50,7 +50,7 @@ public class FTInventoryListener  implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onInventoryClick(InventoryClickEvent event){
+    public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory inv = event.getInventory();
         int slot = event.getRawSlot();
@@ -61,7 +61,7 @@ public class FTInventoryListener  implements Listener {
 
         for (SignMenu m : menus) {
             inventories.addAll(m.getInventories());
-            if (inventories.contains(event.getInventory())){
+            if (inventories.contains(event.getInventory())) {
                 isTravelInv = true;
                 menu = m;
                 inventories.clear();
@@ -71,11 +71,11 @@ public class FTInventoryListener  implements Listener {
             inventories.clear();
         }
 
-        if (isTravelInv && slot <= 44 && event.getCurrentItem().getType() == Material.BEACON){
+        if (isTravelInv && slot <= 44 && event.getCurrentItem().getType() == Material.BEACON) {
             menu.travel(event.getCurrentItem().getItemMeta().getDisplayName());
-        } else if (slot == 45){
+        } else if (slot == 45) {
             menu.goBack();
-        } else if (slot == 53){
+        } else if (slot == 53) {
             menu.goNext();
         }
 

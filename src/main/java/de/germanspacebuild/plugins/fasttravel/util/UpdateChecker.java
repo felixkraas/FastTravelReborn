@@ -56,7 +56,7 @@ public class UpdateChecker {
 
     }
 
-    public boolean updateFound(){
+    public boolean updateFound() {
         try {
             InputStream instream = this.url.openConnection().getInputStream();
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(instream);
@@ -80,7 +80,7 @@ public class UpdateChecker {
                 oldInt = oldInt * 10;
             }
 
-            if (oldInt < versionInt){
+            if (oldInt < versionInt) {
                 return true;
             }
 

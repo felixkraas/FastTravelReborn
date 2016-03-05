@@ -137,9 +137,9 @@ public abstract class Database {
         ByteArrayInputStream bin = new ByteArrayInputStream(playersRaw);
         DataInputStream din = new DataInputStream(bin);
         StringBuffer inputLine = new StringBuffer();
-        for (int j = 0; j < uuids-36; j += 36){
-            players.add(UUID.fromString(tmpRaw.substring(j, j+36)));
-            System.out.println(tmpRaw.substring(j, j+36));
+        for (int j = 0; j < uuids - 36; j += 36) {
+            players.add(UUID.fromString(tmpRaw.substring(j, j + 36)));
+            System.out.println(tmpRaw.substring(j, j + 36));
         }
         return players;
     }
@@ -167,12 +167,12 @@ public abstract class Database {
         return dbSystems.get(systemName);
     }
 
-    public  int parseBoolean(boolean bool) {
+    public int parseBoolean(boolean bool) {
         if (bool) return 1;
         else return 0;
     }
 
-    public  boolean parseBoolean(int bool){
+    public boolean parseBoolean(int bool) {
         if (bool == 1)
             return true;
         else

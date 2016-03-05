@@ -50,12 +50,12 @@ public class SetRangeCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if (!(sender instanceof Player)){
+        if (!(sender instanceof Player)) {
             return false;
-        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "range")){
+        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "range")) {
             io.sendTranslation(sender, "Perms.Not");
             return false;
-        } else if (args.length == 0){
+        } else if (args.length == 0) {
             io.sendTranslation(sender, "Command.InvalidArgs");
             return false;
         }
@@ -63,10 +63,10 @@ public class SetRangeCommand implements CommandExecutor {
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
         if (sign == null) {
             io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
-        } else if (args.length == 2){
+        } else if (args.length == 2) {
             try {
                 range = Integer.parseInt(args[1]);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
             sign.setRange(range);

@@ -48,11 +48,11 @@ public class MenuCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if (!(sender instanceof Player) || !plugin.getConfig().getBoolean("enable menu")){
+        if (!(sender instanceof Player) || !plugin.getConfig().getBoolean("enable menu")) {
             return false;
         }
 
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "menu")){
+        if (!sender.hasPermission(FastTravel.PERMS_BASE + "menu")) {
             io.sendTranslation(sender, "Perms.Not");
             return false;
         }

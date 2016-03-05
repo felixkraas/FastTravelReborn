@@ -75,7 +75,7 @@ public class FastTravel extends JavaPlugin {
 
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         instance = this;
         config = this.getConfig();
         dataDir = this.getDataFolder();
@@ -159,9 +159,9 @@ public class FastTravel extends JavaPlugin {
 
         checkHooks();
 
-        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5*20, 1*20);
+        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5 * 20, 1 * 20);
 
-        if (BETA){
+        if (BETA) {
             io.sendConsole(ChatColor.RED + "This is a beta release of FastTravelSigns. Please report any bug to the" +
                     " author.");
         }
@@ -175,7 +175,7 @@ public class FastTravel extends JavaPlugin {
         effectManager.dispose();
     }
 
-    public void setupConfig(){
+    public void setupConfig() {
         File confFile = new File(dataDir, "config.yml");
         try {
             if (!confFile.exists()) {
@@ -262,11 +262,11 @@ public class FastTravel extends JavaPlugin {
         return instance;
     }
 
-    public IOManager getIOManger(){
+    public IOManager getIOManger() {
         return io;
     }
 
-    public static File getDataDir(){
+    public static File getDataDir() {
         return dataDir;
     }
 
@@ -274,7 +274,7 @@ public class FastTravel extends JavaPlugin {
         return langDir;
     }
 
-    public Economy getEconomy(){
+    public Economy getEconomy() {
         return economy;
     }
 
@@ -286,5 +286,7 @@ public class FastTravel extends JavaPlugin {
         return effectManager;
     }
 
-    public ScoreboardManager getScoreboardManager() { return scoreboardManager; }
+    public ScoreboardManager getScoreboardManager() {
+        return scoreboardManager;
+    }
 }

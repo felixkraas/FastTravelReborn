@@ -47,6 +47,7 @@ public class BlockUtil {
 
     /**
      * Checks if location is safe.
+     *
      * @param loc Location to check.
      * @return Is the location safe?
      */
@@ -67,6 +68,7 @@ public class BlockUtil {
 
     /**
      * Gets yaw for a blockface.
+     *
      * @param face Face to get yaw from.
      * @return Yaw of the face.
      */
