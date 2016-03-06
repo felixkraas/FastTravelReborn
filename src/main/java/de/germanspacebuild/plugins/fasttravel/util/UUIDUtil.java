@@ -31,7 +31,7 @@ import java.util.UUID;
 
 public class UUIDUtil {
     /**
-     * Converts a list of strings to UUIDs.
+     * Converts a list of strings to a list of UUIDs.
      *
      * @param strings String to convert.
      * @return List of UUIDs.
@@ -45,7 +45,7 @@ public class UUIDUtil {
     }
 
     /**
-     * Convert a list of UUIDs into strings.
+     * Convert a list of UUIDs into a list of strings.
      *
      * @param ids UUIDs to convert.
      * @return Converted UUIDs.
@@ -58,6 +58,13 @@ public class UUIDUtil {
         return strings;
     }
 
+    /**
+     * Formats a list of UUIDs to a single String.
+     * UUID:UUID:UUID and so on.
+     *
+     * @param uuids List of UUIDs to convert.
+     * @return Formatted String.
+     */
     public static String uuidListToString(List<UUID> uuids) {
         String str = "";
         for (UUID uuid : uuids) {
@@ -66,6 +73,12 @@ public class UUIDUtil {
         return str;
     }
 
+    /**
+     * Converts a string of the following format to a list of UUIDs
+     * UUID:UUID:UUID and so on.
+     * @param str String to convert.
+     * @return List of UUIDs.
+     */
     public static List<UUID> stringtoUUIDList(String str) {
         String[] strings = str.split("[:]");
         List<UUID> ids = new ArrayList<>();

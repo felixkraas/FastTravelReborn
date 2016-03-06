@@ -58,14 +58,14 @@ public class SQLiteDBHandler {
         db.init();
 
         try {
-            /*entries = db.query("COUNT (*) FROM FastTravelSigns;").getInt(1);
+            entries = db.query("SELECT COUNT (*) FROM FastTravelSigns;").getInt(1);
 
             if (entries == 0){
                 plugin.getLogger().info("No signs found in the database");
                 return;
             } else {
                 plugin.getLogger().info(entries + " FastTravelSigns found in the database. Starting to load them.");
-            }*/
+            }
 
             ResultSet rs = db.query("SELECT * FROM FastTravelSigns");
 
@@ -88,7 +88,7 @@ public class SQLiteDBHandler {
 
                 List<UUID> players = null;
 
-                players = db.getList(rs.getBytes(16));
+                players = UUIDUtil.stringtoUUIDList(rs.getString(16));
 
                 if (!players.contains(creator)) {
                     players.add(creator);
@@ -120,8 +120,6 @@ public class SQLiteDBHandler {
                     " database.");
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -132,6 +130,51 @@ public class SQLiteDBHandler {
             if (!db.tableContains("name", signName)) {
                 addNew(sign);
             }
+
+            PreparedStatement preparedStatement = db.dbConn.prepareStatement(
+                    "UPDATE FastTravelSigns SET " +
+                    "name = ?," +
+                    "creator = ?, " +
+                    "signloc_World = ?, " +
+                    "signloc_X = ?, " +
+                    "signloc_Y = ?, " +
+                    "signloc_Z = ?, " +
+                    "signloc_Yaw = ?," +
+                    "tploc_World = ?," +
+                    " tploc_X = ?," +
+                    " tploc_Y = ?," +
+                    " tploc_Z = ?," +
+                    " tploc_Yaw = ?," +
+                    " automatic = ?," +
+                    " price = ?," +
+                    " range = ?," +
+                    " players = ? " +
+                    "WHERE name = ?;"
+            );
+
+            //Basic Information
+            preparedStatement.setString(1, sign.getName());
+            preparedStatement.setString(2, sign.getCreator().toString());
+            //Sign Location
+            preparedStatement.setString(3, sign.getSignLocation().getWorld().getName());
+            preparedStatement.setInt(4, sign.getSignLocation().getBlockX());
+            preparedStatement.setInt(5, sign.getSignLocation().getBlockY());
+            preparedStatement.setInt(6, sign.getSignLocation().getBlockZ());
+            preparedStatement.setFloat(7, sign.getSignLocation().getYaw());
+            //TP Location
+            preparedStatement.setString(8, sign.getTPLocation().getWorld().getName());
+            preparedStatement.setInt(9, sign.getTPLocation().getBlockX());
+            preparedStatement.setInt(10, sign.getTPLocation().getBlockY());
+            preparedStatement.setInt(11, sign.getTPLocation().getBlockZ());
+            preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
+            //more Information
+            preparedStatement.setBoolean(13, sign.isAutomatic());
+            preparedStatement.setDouble(14, sign.getPrice());
+            preparedStatement.setInt(15, sign.getRange());
+            preparedStatement.setString(16, UUIDUtil.uuidListToString(sign.getPlayers()));
+            preparedStatement.setString(17, sign.getName());
+
+            preparedStatement.executeUpdate();
 
         }
     }
