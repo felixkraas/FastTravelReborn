@@ -25,6 +25,7 @@
 package de.germanspacebuild.plugins.fasttravel.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,4 +57,22 @@ public class UUIDUtil {
         }
         return strings;
     }
+
+    public static String uuidListToString(List<UUID> uuids) {
+        String str = "";
+        for (UUID uuid : uuids) {
+            str = str + ":" + uuid.toString();
+        }
+        return str;
+    }
+
+    public static List<UUID> stringtoUUIDList(String str) {
+        String[] strings = str.split("[:]");
+        List<UUID> ids = new ArrayList<>();
+        for (String string : strings) {
+            ids.add(UUID.fromString(string));
+        }
+        return ids;
+    }
+
 }

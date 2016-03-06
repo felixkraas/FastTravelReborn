@@ -70,27 +70,35 @@ public class FileDBHandler {
         }
 
         for (String signName : signYAML.getKeys(false)) {
-            int id = signYAML.getInt(signName + ".id");
+            //Creator
             UUID creator = UUID.fromString(signYAML.getString(signName + ".creator"));
+            //Range
             int range = signYAML.getInt(signName + ".range");
+            //Sign World
             World locWorld = plugin.getServer().getWorld(
                     signYAML.getString(signName + ".signloc.world"));
+            //Destination World
             World tpLocWorld = plugin.getServer().getWorld(
                     signYAML.getString(signName + ".tploc.world"));
+            //Player UUDIs
             filePlayers = signYAML.getStringList(signName + ".players");
 
+            //Price
             double price = signYAML.getDouble(signName + ".price", 0.0);
 
+            //Sign Location
             Location location = new Location(locWorld, signYAML.getDouble(signName + ".signloc.x"),
                     signYAML.getDouble(signName + ".signloc.y"), signYAML.getDouble(signName
                     + ".signloc.z"));
             location.setYaw((float) signYAML.getDouble(signName + ".signloc.yaw"));
 
+            //Destination Location
             Location tploc = new Location(tpLocWorld, signYAML.getDouble(signName + ".tploc.x"),
                     signYAML.getDouble(signName + ".tploc.y"), signYAML.getDouble(signName
                     + ".tploc.z"));
             tploc.setYaw((float) signYAML.getDouble(signName + ".tploc.yaw"));
 
+            //Automatic
             boolean automatic = signYAML.getBoolean(signName + ".automatic", false);
 
             if (!checkMissing(signName, creator, locWorld, tpLocWorld)) {

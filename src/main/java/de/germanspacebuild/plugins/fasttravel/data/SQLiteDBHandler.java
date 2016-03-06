@@ -25,6 +25,7 @@
 package de.germanspacebuild.plugins.fasttravel.data;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
+import de.germanspacebuild.plugins.fasttravel.util.UUIDUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -129,36 +130,39 @@ public class SQLiteDBHandler {
 
             FastTravelSign sign = FastTravelDB.getSign(signName);
             if (!db.tableContains("name", signName)) {
-                PreparedStatement preparedStatement = db.dbConn.prepareStatement(
-                        "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-                );
-
-                //Basic Information
-                preparedStatement.setString(1, sign.getName());
-                preparedStatement.setString(2, sign.getCreator().toString());
-                //Sign Location
-                preparedStatement.setString(3, sign.getSignLocation().getWorld().getName());
-                preparedStatement.setInt(4, sign.getSignLocation().getBlockX());
-                preparedStatement.setInt(5, sign.getSignLocation().getBlockY());
-                preparedStatement.setInt(6, sign.getSignLocation().getBlockZ());
-                preparedStatement.setFloat(7, sign.getSignLocation().getYaw());
-                //TP Location
-                preparedStatement.setString(8, sign.getTPLocation().getWorld().getName());
-                preparedStatement.setInt(9, sign.getTPLocation().getBlockX());
-                preparedStatement.setInt(10, sign.getTPLocation().getBlockY());
-                preparedStatement.setInt(11, sign.getTPLocation().getBlockZ());
-                preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
-                //more Information
-                preparedStatement.setBoolean(13, sign.isAutomatic());
-                preparedStatement.setDouble(14, sign.getPrice());
-                preparedStatement.setInt(15, sign.getRange());
-                preparedStatement.setBlob(16, new SerialBlob(db.updateList(sign.getPlayers())));
-
-                preparedStatement.executeUpdate();
-
+                addNew(sign);
             }
 
         }
+    }
+
+    private static void addNew(FastTravelSign sign) throws SQLException {
+        PreparedStatement preparedStatement = db.dbConn.prepareStatement(
+                "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        );
+
+        //Basic Information
+        preparedStatement.setString(1, sign.getName());
+        preparedStatement.setString(2, sign.getCreator().toString());
+        //Sign Location
+        preparedStatement.setString(3, sign.getSignLocation().getWorld().getName());
+        preparedStatement.setInt(4, sign.getSignLocation().getBlockX());
+        preparedStatement.setInt(5, sign.getSignLocation().getBlockY());
+        preparedStatement.setInt(6, sign.getSignLocation().getBlockZ());
+        preparedStatement.setFloat(7, sign.getSignLocation().getYaw());
+        //TP Location
+        preparedStatement.setString(8, sign.getTPLocation().getWorld().getName());
+        preparedStatement.setInt(9, sign.getTPLocation().getBlockX());
+        preparedStatement.setInt(10, sign.getTPLocation().getBlockY());
+        preparedStatement.setInt(11, sign.getTPLocation().getBlockZ());
+        preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
+        //more Information
+        preparedStatement.setBoolean(13, sign.isAutomatic());
+        preparedStatement.setDouble(14, sign.getPrice());
+        preparedStatement.setInt(15, sign.getRange());
+        preparedStatement.setString(16, UUIDUtil.uuidListToString(sign.getPlayers()));
+
+        preparedStatement.executeUpdate();
     }
 
 }
