@@ -28,8 +28,9 @@ import de.germanspacebuild.plugins.fasttravel.Listener.*;
 import de.germanspacebuild.plugins.fasttravel.commands.*;
 import de.germanspacebuild.plugins.fasttravel.data.*;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.germanspacebuild.plugins.fasttravel.io.language.LangDE;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
-import de.germanspacebuild.plugins.fasttravel.io.language.en;
+import de.germanspacebuild.plugins.fasttravel.io.language.LangEN;
 import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
 import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.DynmapHook;
@@ -195,7 +196,7 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Warmup", 0);
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
-        config.addDefault("IO.Language", "en");
+        config.addDefault("IO.Language", "LangEN");
         config.addDefault("Hooks.DynmapHook", false);
         config.options().copyDefaults(true);
         try {
@@ -250,8 +251,10 @@ public class FastTravel extends JavaPlugin {
     }*/
 
     private void initLanguages() {
-        Language en = new en(this);
+        Language en = new LangEN(this);
+        Language de = new LangDE(this);
         Language.addLanguage(en);
+        Language.addLanguage(de);
     }
 
     private void initDB() {

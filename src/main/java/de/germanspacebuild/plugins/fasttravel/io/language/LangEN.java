@@ -34,18 +34,18 @@ import java.io.IOException;
 /**
  * Created by oneill011990 on 04.03.2015.
  */
-public class en extends Language {
+public class LangEN extends Language {
 
     private FastTravel plugin;
 
-    public en(FastTravel plugin) {
+    public LangEN(FastTravel plugin) {
         super(plugin.getConfig(), plugin);
         this.plugin = plugin;
     }
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(FastTravel.getLangDir(), "en.lang");
+        langFile = new File(FastTravel.getLangDir(), "LangEN.lang");
         if (!langFile.exists()) {
             try {
                 langFile.createNewFile();

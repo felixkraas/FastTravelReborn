@@ -1,5 +1,5 @@
 name: FastTravelSigns
-main: de.germanspacebuild.plugins.fasttravel.FastTravel
+main: LangDE.germanspacebuild.plugins.fasttravel.FastTravel
 version: ${project.version}
 softdepend: [vault, dynmap]
 permissions:
