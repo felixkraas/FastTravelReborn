@@ -186,7 +186,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         return players;
     }
 
-    public Boolean hasMarker() {
+    public Boolean isMarked() {
         return marker;
     }
 

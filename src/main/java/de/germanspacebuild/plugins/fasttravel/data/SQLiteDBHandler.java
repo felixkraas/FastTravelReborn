@@ -208,4 +208,14 @@ public class SQLiteDBHandler {
         preparedStatement.executeUpdate();
     }
 
+    public static void deleteSign(FastTravelSign sign) throws SQLException {
+        PreparedStatement preparedStatement = db.dbConn.prepareStatement(
+                "DELETE FROM FastTravelSigns WHERE name = ?;"
+        );
+
+        preparedStatement.setString(1, sign.getName());
+        preparedStatement.executeUpdate();
+
+    }
+
 }

@@ -27,6 +27,7 @@ package de.germanspacebuild.plugins.fasttravel.data;
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -73,6 +74,12 @@ public class FastTravelDB {
 
         if (DBType.getDBType() == DBType.File) {
             save();
+        } if (DBType.getDBType() == DBType.SQLite) {
+            try {
+                SQLiteDBHandler.deleteSign(getSign(name));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
