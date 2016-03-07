@@ -188,6 +188,7 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Plugin.Debug.Log", false);
         config.addDefault("Plugin.Metrics", true);
         config.addDefault("Plugin.Economy", false);
+        config.addDefault("Plugin.Menus", true);
         config.addDefault("Plugin.Database", "FILE");
         config.addDefault("Travel.Cooldown", 0);
         config.addDefault("Travel.Warmup", 0);

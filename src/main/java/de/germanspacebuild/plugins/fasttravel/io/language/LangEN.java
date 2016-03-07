@@ -117,6 +117,8 @@ public class LangEN extends Language {
 
             set("Command.Save.Saved", "You have saved the DB.");
 
+            set("Command.Menu.Disabled", "Inventory menus are disabled.");
+
             //Warmup
             set("Warmup.Objective", "Warumup");
 
