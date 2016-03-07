@@ -72,7 +72,8 @@ public class FastTravelDB {
 
         if (DBType.getDBType() == DBType.File) {
             save();
-        } if (DBType.getDBType() == DBType.SQLite) {
+        }
+        if (DBType.getDBType() == DBType.SQLite) {
             try {
                 SQLiteDBHandler.deleteSign(getSign(name));
             } catch (SQLException e) {

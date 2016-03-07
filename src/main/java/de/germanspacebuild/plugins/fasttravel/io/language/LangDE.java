@@ -15,7 +15,6 @@ import java.io.IOException;
 public class LangDE extends Language {
 
 
-
     private FastTravel plugin;
 
     public LangDE(FastTravel plugin) {
@@ -33,6 +32,11 @@ public class LangDE extends Language {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "LangDE";
     }
 
     @Override

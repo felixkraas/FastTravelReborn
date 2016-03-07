@@ -25,6 +25,7 @@
 package de.germanspacebuild.plugins.fasttravel.data;
 
 import java.io.File;
+import java.sql.SQLException;
 
 /**
  * Created by oneill011990 on 03.03.2015.
@@ -53,6 +54,12 @@ public enum DBType {
             case File:
                 FileDBHandler.save(saveFile);
                 break;
+            case SQLite:
+                try {
+                    SQLiteDBHandler.save();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
@@ -64,6 +71,9 @@ public enum DBType {
         switch (type) {
             case File:
                 FileDBHandler.load(saveFile);
+                break;
+            case SQLite:
+                SQLiteDBHandler.load();
         }
     }
 

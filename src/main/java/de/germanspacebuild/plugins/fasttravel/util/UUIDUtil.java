@@ -25,7 +25,6 @@
 package de.germanspacebuild.plugins.fasttravel.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,9 +65,14 @@ public class UUIDUtil {
      * @return Formatted String.
      */
     public static String uuidListToString(List<UUID> uuids) {
-        String str = "";
+        String str = "NOID";
         for (UUID uuid : uuids) {
-            str = str + ":" + uuid.toString();
+            if (str == "NOID") {
+                str = uuid.toString();
+            } else {
+                str = str + ":" + uuid.toString();
+            }
+
         }
         return str;
     }
@@ -76,6 +80,7 @@ public class UUIDUtil {
     /**
      * Converts a string of the following format to a list of UUIDs
      * UUID:UUID:UUID and so on.
+     *
      * @param str String to convert.
      * @return List of UUIDs.
      */

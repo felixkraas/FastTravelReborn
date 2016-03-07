@@ -29,8 +29,6 @@ import de.germanspacebuild.plugins.fasttravel.util.UUIDUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import javax.sql.rowset.serial.SerialBlob;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +58,7 @@ public class SQLiteDBHandler {
         try {
             entries = db.query("SELECT COUNT (*) FROM FastTravelSigns;").getInt(1);
 
-            if (entries == 0){
+            if (entries == 0) {
                 plugin.getLogger().info("No signs found in the database");
                 return;
             } else {
@@ -133,23 +131,23 @@ public class SQLiteDBHandler {
 
             PreparedStatement preparedStatement = db.dbConn.prepareStatement(
                     "UPDATE FastTravelSigns SET " +
-                    "name = ?," +
-                    "creator = ?, " +
-                    "signloc_World = ?, " +
-                    "signloc_X = ?, " +
-                    "signloc_Y = ?, " +
-                    "signloc_Z = ?, " +
-                    "signloc_Yaw = ?," +
-                    "tploc_World = ?," +
-                    " tploc_X = ?," +
-                    " tploc_Y = ?," +
-                    " tploc_Z = ?," +
-                    " tploc_Yaw = ?," +
-                    " automatic = ?," +
-                    " price = ?," +
-                    " range = ?," +
-                    " players = ? " +
-                    "WHERE name = ?;"
+                            "name = ?," +
+                            "creator = ?, " +
+                            "signloc_World = ?, " +
+                            "signloc_X = ?, " +
+                            "signloc_Y = ?, " +
+                            "signloc_Z = ?, " +
+                            "signloc_Yaw = ?," +
+                            "tploc_World = ?," +
+                            " tploc_X = ?," +
+                            " tploc_Y = ?," +
+                            " tploc_Z = ?," +
+                            " tploc_Yaw = ?," +
+                            " automatic = ?," +
+                            " price = ?," +
+                            " range = ?," +
+                            " players = ? " +
+                            "WHERE name = ?;"
             );
 
             //Basic Information

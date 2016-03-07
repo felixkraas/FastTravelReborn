@@ -56,6 +56,11 @@ public class LangEN extends Language {
     }
 
     @Override
+    public String getName() {
+        return "LangEN";
+    }
+
+    @Override
     public void updateLanguage() {
 
         lang = new YamlConfiguration();

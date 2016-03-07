@@ -65,9 +65,7 @@ public abstract class Language {
         return lang;
     }
 
-    public String getName() {
-        return "LangEN";
-    }
+    public abstract String getName();
 
     public void set(String key, String value) {
         if (lang.get(key) == null) lang.set(key, value);
