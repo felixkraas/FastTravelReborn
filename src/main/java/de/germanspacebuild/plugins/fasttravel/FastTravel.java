@@ -69,7 +69,6 @@ public class FastTravel extends JavaPlugin {
     private UpdateChecker updateChecker;
     private IOManager io;
     private static ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-    private EffectManager effectManager;
 
     public boolean needUpdate;
     public String newVersion;
@@ -81,7 +80,6 @@ public class FastTravel extends JavaPlugin {
         config = this.getConfig();
         dataDir = this.getDataFolder();
         langDir = new File(getDataFolder(), "lang");
-        effectManager = new EffectManager(this);
 
         if (!dataDir.exists()) {
             dataDir.mkdir();
@@ -173,7 +171,6 @@ public class FastTravel extends JavaPlugin {
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
         FastTravelDB.save();
-        effectManager.dispose();
     }
 
     public void setupConfig() {
@@ -283,10 +280,6 @@ public class FastTravel extends JavaPlugin {
 
     public PluginHook getHook(String hook) {
         return hooks.get(hook);
-    }
-
-    public EffectManager getEffectManager() {
-        return effectManager;
     }
 
     public ScoreboardManager getScoreboardManager() {

@@ -12,7 +12,11 @@ targetCompatibility = 1.8
 
 
 repositories {
-    mavenCentral();
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
     maven {
         name 'Spigot'
         url "https://hub.spigotmc.org/nexus/content/groups/public/"
@@ -32,6 +36,7 @@ repositories {
         url "http://maven.elmakers.com/repository/"
     }
 }
+
 dependencies {
     compile group: 'de.slikey', name: 'EffectLib', version: '3.8'
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT'

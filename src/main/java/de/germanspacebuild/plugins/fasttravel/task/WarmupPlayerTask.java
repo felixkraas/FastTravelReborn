@@ -59,7 +59,7 @@ public class WarmupPlayerTask extends Thread {
         team.setDisplayName(ChatColor.DARK_PURPLE + plugin.getName());
         //TODO get the whole team shit to work!
         Player playerRaw = plugin.getServer().getPlayer(player);
-        team.addPlayer(playerRaw);
+        team.addEntry(playerRaw.getDisplayName());
 
         Objective timer = board.registerNewObjective("timer", "dummy");
         timer.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -76,7 +76,7 @@ public class WarmupPlayerTask extends Thread {
         }
 
         board.clearSlot(DisplaySlot.SIDEBAR);
-        team.removePlayer(playerRaw);
+        team.removeEntry(playerRaw.getDisplayName());
 
 
     }

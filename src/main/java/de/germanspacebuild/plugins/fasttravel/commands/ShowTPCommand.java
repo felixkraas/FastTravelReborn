@@ -35,6 +35,7 @@ import de.slikey.effectlib.effect.LineEffect;
 import de.slikey.effectlib.util.DynamicLocation;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -46,12 +47,10 @@ public class ShowTPCommand implements CommandExecutor {
 
     private FastTravel plugin;
     private IOManager io;
-    private EffectManager em;
 
     public ShowTPCommand(FastTravel plugin) {
         this.plugin = plugin;
         this.io = plugin.getIOManger();
-        this.em = plugin.getEffectManager();
     }
 
     @Override
@@ -71,15 +70,7 @@ public class ShowTPCommand implements CommandExecutor {
         tpLoc.setY(0);
         Location tpLocTop = sign.getTPLocation();
         tpLocTop.setY(255);
-        Effect effect = new LineEffect(em);
-        effect.type = EffectType.INSTANT;
-        effect.color = Color.RED;
-        effect.setDynamicOrigin(new DynamicLocation(tpLoc));
-        effect.setDynamicTarget(new DynamicLocation(tpLocTop));
-        effect.period = 1 * 20;
-        effect.iterations = 5;
-        effect.start();
-        em.start(effect);
+        tpLoc.getWorld().spawnParticle(Particle.REDSTONE, tpLoc, 25);
 
         return true;
     }

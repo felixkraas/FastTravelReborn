@@ -37,7 +37,7 @@ public class FastTravelDB {
 
     private static FastTravel plugin;
 
-    private static Map<String, FastTravelSign> signs;
+    private static Map<String, FastTravelSign> signs = new HashMap<>();
 
     private static File saveFile;
 
@@ -57,8 +57,6 @@ public class FastTravelDB {
     }
 
     public static void load() {
-
-        signs = new HashMap<>();
 
         DBType.load(saveFile);
 
@@ -92,9 +90,11 @@ public class FastTravelDB {
 
     public static List<FastTravelSign> getSignsFor(UUID player) {
         List<FastTravelSign> playerSigns = new ArrayList<>();
-        for (FastTravelSign sign : signs.values()) {
-            if (sign.isAutomatic() || sign.foundBy(player))
-                playerSigns.add(sign);
+        if (!signs.isEmpty()) {
+            for (FastTravelSign sign : signs.values()) {
+                if (!sign.isAutomatic() || !sign.foundBy(player))
+                    playerSigns.add(sign);
+            }
         }
         Collections.sort(playerSigns);
         return playerSigns;

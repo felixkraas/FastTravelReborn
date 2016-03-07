@@ -52,9 +52,12 @@ public class CheckPlayerTask extends Thread {
                 return;
             }
             List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
+            if (signs.isEmpty()) {
+                continue;
+            }
             for (FastTravelSign sign : signs) {
                 if (player.getWorld() != sign.getSignLocation().getWorld()) {
-                    return;
+                    continue;
                 }
                 if (sign.getSignLocation().distance(player.getLocation()) <= sign.getRange()) {
                     while (!((System.currentTimeMillis() - timestamp) < 1000L)) {
