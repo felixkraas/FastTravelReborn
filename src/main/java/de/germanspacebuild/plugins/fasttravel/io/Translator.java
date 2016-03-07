@@ -53,7 +53,7 @@ public class Translator {
         config = plugin.getConfig();
         io = plugin.getIOManger();
         languages = new HashMap<String, YamlConfiguration>();
-        language = config.getString("IO.Language", "LangEN");
+        language = config.getString("IO.Language", "en");
         List<Language> langs = Language.getLanguages();
         List<File> loadedFiles = new ArrayList<File>();
         for (int i = 0; i < langs.size(); i++) {
@@ -67,9 +67,8 @@ public class Translator {
             if (loadedFiles.indexOf(langFiles[i]) == -1) loadLanguageFile(langFiles[i]);
         }
         if (languages.get(language) == null) {
-            //io.sendConsole("Language " + language + " doesn't seem to exist. Forcing to 'LangEN'!");
-            language = "LangEN";
-            config.set("IO.Language", "LangEN");
+            language = "en";
+            config.set("IO.Language", "en");
         }
     }
 

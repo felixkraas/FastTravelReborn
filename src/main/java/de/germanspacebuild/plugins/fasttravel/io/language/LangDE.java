@@ -24,7 +24,7 @@ public class LangDE extends Language {
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(FastTravel.getLangDir(), "LangDE.lang");
+        langFile = new File(FastTravel.getLangDir(), "de.lang");
         if (!langFile.exists()) {
             try {
                 langFile.createNewFile();
