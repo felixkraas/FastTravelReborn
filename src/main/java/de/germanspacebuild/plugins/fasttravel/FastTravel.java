@@ -131,15 +131,17 @@ public class FastTravel extends JavaPlugin {
         getCommand("ft").setTabCompleter(new FtTabComplete());
 
         //Updatecheck
-        updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
+        if (!BETA) {
+            updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
 
-        if (updateChecker.updateFound()) {
-            io.sendConsole(io.translate("Plugin.Update.Console.Yes").replace("%old", this.getDescription().getVersion())
-                    .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
-            needUpdate = true;
-            newVersion = updateChecker.getLink();
-        } else {
-            io.sendConsole(io.translate("Plugin.Update.Console.No"));
+            if (updateChecker.updateFound()) {
+                io.sendConsole(io.translate("Plugin.Update.Console.Yes").replace("%old", this.getDescription().getVersion())
+                        .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
+                needUpdate = true;
+                newVersion = updateChecker.getLink();
+            } else {
+                io.sendConsole(io.translate("Plugin.Update.Console.No"));
+            }
         }
 
         //Database

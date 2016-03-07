@@ -84,6 +84,8 @@ public class SignMenu {
                 lore.add("Price: " + sign.getPrice());
             } else if (sign.getRange() > 0) {
                 lore.add("Range: " + sign.getRange());
+            } else if (sign.isAutomatic()) {
+                lore.add("Automatic");
             }
 
             meta.setLore(lore);
@@ -101,7 +103,7 @@ public class SignMenu {
 
         //maximum of 44 signs per page
         if (signCount / 44 > 1) {
-            sites = floorDiv(signCount, 44);
+            sites = Math.floorDiv(signCount, 44);
             multisited = true;
         }
 
@@ -166,14 +168,14 @@ public class SignMenu {
 
     public void goNext() {
         if (currentSite < sites) {
-            player.openInventory(inventories.get(currentSite + 1));
+            player.openInventory(inventories.get(this.getCurrentSite() + 1));
             currentSite++;
         }
     }
 
     public void goBack() {
         if (currentSite > sites) {
-            player.openInventory(inventories.get(currentSite - 1));
+            player.openInventory(inventories.get(this.getCurrentSite() - 1));
             currentSite--;
         }
     }
@@ -195,12 +197,4 @@ public class SignMenu {
         return menus;
     }
 
-    private static int floorDiv(int x, int y) {
-        int r = x / y;
-        // if the signs are different and modulo not zero, round down
-        if ((x ^ y) < 0 && (r * y != x)) {
-            r--;
-        }
-        return r;
-    }
 }

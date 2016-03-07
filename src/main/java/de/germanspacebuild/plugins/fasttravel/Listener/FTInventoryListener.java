@@ -65,7 +65,6 @@ public class FTInventoryListener implements Listener {
                 isTravelInv = true;
                 menu = m;
                 inventories.clear();
-                event.setCancelled(true);
                 break;
             }
             inventories.clear();
