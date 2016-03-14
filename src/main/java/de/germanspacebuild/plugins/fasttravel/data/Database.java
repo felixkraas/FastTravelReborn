@@ -24,16 +24,11 @@
 
 package de.germanspacebuild.plugins.fasttravel.data;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by oneill011990 on 29.04.2015.
@@ -109,19 +104,10 @@ public abstract class Database {
         } else return false;
     }
 
-    public ResultSet query(String sql) {
-        try {
-            ResultSet rs = dbStatement.executeQuery(sql);
-            return rs;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public boolean tableContains(String column, String value) {
         try {
-            ResultSet rs = query("SELECT COUNT(" + column + ") AS " + column + "Count FROM FastTravelSigns WHERE " + column + "='" + value + "'");
+            ResultSet rs = dbStatement.executeQuery("SELECT COUNT(" + column + ") AS " + column +
+                    "Count FROM FastTravelSigns WHERE " + column + "='" + value + "'");
             if (rs == null) return false;
             if (rs.isAfterLast()) return false;
             if (rs.isBeforeFirst()) rs.next();
