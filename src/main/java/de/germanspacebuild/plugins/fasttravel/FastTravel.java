@@ -195,7 +195,7 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Warmup", 0);
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
-        config.addDefault("IO.Language", "LangEN");
+        config.addDefault("IO.Language", "en");
         config.addDefault("Hooks.DynmapHook", false);
         config.options().copyDefaults(true);
         try {

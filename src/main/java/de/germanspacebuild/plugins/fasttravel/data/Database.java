@@ -45,7 +45,7 @@ public abstract class Database {
     private static final HashMap<DBType, Database> dbSystems;
 
     static {
-        dbSystems = new HashMap<DBType, Database>();
+        dbSystems = new HashMap<>();
     }
 
     protected abstract void connect() throws ClassNotFoundException, SQLException;
@@ -119,50 +119,6 @@ public abstract class Database {
         }
     }
 
-    public int update(String sql) {
-        try {
-            return dbStatement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public byte[] updateList(List<UUID> players) {
-        ByteArrayOutputStream bout = new ByteArrayOutputStream();
-        DataOutputStream dout = new DataOutputStream(bout);
-        for (UUID player : players) {
-            try {
-                dout.writeBytes(player.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            dout.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bout.toByteArray();
-    }
-
-    public List<UUID> getList(byte[] playersRaw) throws SQLException, IOException {
-
-        String tmpRaw = new String(playersRaw, StandardCharsets.UTF_8);
-
-        int uuids = tmpRaw.length() / 36;
-
-        List<UUID> players = new ArrayList<>();
-        ByteArrayInputStream bin = new ByteArrayInputStream(playersRaw);
-        DataInputStream din = new DataInputStream(bin);
-        StringBuffer inputLine = new StringBuffer();
-        for (int j = 0; j < uuids - 36; j += 36) {
-            players.add(UUID.fromString(tmpRaw.substring(j, j + 36)));
-            System.out.println(tmpRaw.substring(j, j + 36));
-        }
-        return players;
-    }
-
     public boolean tableContains(String column, String value) {
         try {
             ResultSet rs = query("SELECT COUNT(" + column + ") AS " + column + "Count FROM FastTravelSigns WHERE " + column + "='" + value + "'");
@@ -184,11 +140,6 @@ public abstract class Database {
 
     public static Database getDatabaseBySystem(DBType systemName) {
         return dbSystems.get(systemName);
-    }
-
-    public int parseBoolean(boolean bool) {
-        if (bool) return 1;
-        else return 0;
     }
 
     public boolean parseBoolean(int bool) {

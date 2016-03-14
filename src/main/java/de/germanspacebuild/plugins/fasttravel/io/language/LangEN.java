@@ -57,7 +57,7 @@ public class LangEN extends Language {
 
     @Override
     public String getName() {
-        return "LangEN";
+        return "en";
     }
 
     @Override

@@ -43,13 +43,13 @@ public class SQLiteDBHandler {
 
     private static Database db;
     private static FastTravel plugin;
-    private static List<String> filePlayers;
     private static int entries;
+    private static List<String> signNames;
 
     static {
         db = Database.getDatabaseBySystem(DBType.SQLite);
         plugin = FastTravel.getInstance();
-        filePlayers = new ArrayList<>();
+        signNames = new ArrayList<>();
     }
 
     public static void load() {
@@ -65,60 +65,77 @@ public class SQLiteDBHandler {
                 plugin.getLogger().info(entries + " FastTravelSigns found in the database. Starting to load them.");
             }
 
-            ResultSet rs = db.query("SELECT * FROM FastTravelSigns");
+            ResultSet namesRs = db.query("SELECT name FROM FastTravelSigns");
 
-            while (rs.next()) {
-                String name = rs.getString(1);
-                UUID creator = UUID.fromString(rs.getString(2));
-                World signloc_World = plugin.getServer().getWorld(rs.getString(3));
-                int signloc_X = rs.getInt(4);
-                int signloc_Y = rs.getInt(5);
-                int signloc_Z = rs.getInt(6);
-                float signloc_Yaw = rs.getFloat(7);
-                World tploc_World = plugin.getServer().getWorld(rs.getString(8));
-                int tploc_X = rs.getInt(9);
-                int tploc_Y = rs.getInt(10);
-                int tploc_Z = rs.getInt(11);
-                float tploc_Yaw = rs.getFloat(12);
-                boolean automatic = db.parseBoolean(rs.getInt(13));
-                float price = rs.getFloat(14);
-                int range = rs.getInt(15);
-
-                List<UUID> players = null;
-
-                players = UUIDUtil.stringtoUUIDList(rs.getString(16));
-
-                if (!players.contains(creator)) {
-                    players.add(creator);
-                }
-
-                Location tpLoc = null;
-                Location signLoc = null;
-
-                signLoc = new Location(signloc_World, signloc_X, signloc_Y, signloc_Z);
-                signLoc.setYaw(signloc_Yaw);
-
-                tpLoc = new Location(tploc_World, tploc_X, tploc_Y, tploc_Z);
-                tpLoc.setYaw(tploc_Yaw);
-
-                FastTravelSign sign = null;
-
-                sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
-
-                if (plugin.getConfig().getBoolean("DevMode")) {
-                    plugin.getLogger().info("Loaded sign: " + sign.getName());
-                }
-
-                FastTravelDB.addSign(sign);
-
+            while (namesRs.next()) {
+                signNames.add(namesRs.getString(1));
             }
 
-            rs.close();
+            for (String signName : signNames) {
+                ResultSet rs = db.query("SELECT * FROM FastTravelSigns WHERE name = " + signName);
+
+                if (rs == null || rs.wasNull()){
+                    return;
+                }
+
+                while (rs.next()) {
+                    String name = rs.getString(1);
+                    UUID creator = UUID.fromString(rs.getString(2));
+                    World signloc_World = plugin.getServer().getWorld(rs.getString(3));
+                    int signloc_X = rs.getInt(4);
+                    int signloc_Y = rs.getInt(5);
+                    int signloc_Z = rs.getInt(6);
+                    float signloc_Yaw = rs.getFloat(7);
+                    World tploc_World = plugin.getServer().getWorld(rs.getString(8));
+                    int tploc_X = rs.getInt(9);
+                    int tploc_Y = rs.getInt(10);
+                    int tploc_Z = rs.getInt(11);
+                    float tploc_Yaw = rs.getFloat(12);
+                    boolean automatic = db.parseBoolean(rs.getInt(13));
+                    float price = rs.getFloat(14);
+                    int range = rs.getInt(15);
+
+                    List<UUID> players = null;
+
+                    players = UUIDUtil.stringtoUUIDList(rs.getString(16));
+
+                    if (!players.contains(creator)) {
+                        players.add(creator);
+                    }
+
+                    Location tpLoc = null;
+                    Location signLoc = null;
+
+                    signLoc = new Location(signloc_World, signloc_X, signloc_Y, signloc_Z);
+                    signLoc.setYaw(signloc_Yaw);
+
+                    tpLoc = new Location(tploc_World, tploc_X, tploc_Y, tploc_Z);
+                    tpLoc.setYaw(tploc_Yaw);
+
+                    FastTravelSign sign = null;
+
+                    sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
+
+                    if (plugin.getConfig().getBoolean("DevMode")) {
+                        plugin.getLogger().info("Loaded sign: " + sign.getName());
+                    }
+
+                    FastTravelDB.addSign(sign);
+
+                }
+
+                rs.close();
+            }
+
             plugin.getLogger().info("Loaded " + FastTravelDB.getAllSigns().size() + " FastTravelSigns from SQLite" +
                     " database.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void shutdown() {
+        db.shutdown();
     }
 
     public static void save() throws SQLException {
