@@ -111,7 +111,7 @@ public class TravelTask implements Runnable {
 
         plugin.getServer().getPlayer(player).teleport(targ, PlayerTeleportEvent.TeleportCause.PLUGIN);
         plugin.getIOManger().send(plugin.getServer().getPlayer(player),
-                plugin.getIOManger().translate("Travel.Success").replaceAll("sign", sign.getName()));
+                plugin.getIOManger().translate("Travel.Success").replaceAll("%sign", sign.getName()));
 
     }
 
