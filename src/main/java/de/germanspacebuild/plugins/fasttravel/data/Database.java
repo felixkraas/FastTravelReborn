@@ -54,6 +54,7 @@ public abstract class Database {
 
     public void init() {
         try {
+            dbConn = null;
             connect();
             dbStatement = dbConn.createStatement();
             setupTables();

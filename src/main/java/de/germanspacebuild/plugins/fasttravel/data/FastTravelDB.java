@@ -108,6 +108,10 @@ public class FastTravelDB {
         return allSigns;
     }
 
+    public static int getSignCount() {
+        return signs.size();
+    }
+
     public static Map<String, FastTravelSign> getSignMap() {
         return signs;
     }

@@ -63,10 +63,11 @@ public class SQLiteDBHandler {
             }
 
             if (entries == 0) {
-                plugin.getLogger().info("No signs found in the database");
+                plugin.getIOManger().sendConsole(plugin.getIOManger().translate("DB.Empty"));
                 return;
             } else {
-                plugin.getLogger().info(entries + " FastTravelSigns found in the database. Starting to load them.");
+                plugin.getIOManger().sendConsole(
+                        plugin.getIOManger().translate("DB.EntryCount").replaceAll("%count", String.valueOf(entries)));
             }
 
             PreparedStatement preparedStatement = db.dbConn.prepareStatement("SELECT * FROM FastTravelSigns;");
@@ -126,8 +127,8 @@ public class SQLiteDBHandler {
 
             rs.close();
 
-            plugin.getLogger().info("Loaded " + FastTravelDB.getAllSigns().size() + " FastTravelSigns from SQLite" +
-                    " database.");
+            plugin.getIOManger().sendConsole(plugin.getIOManger().translate("DB.LoadedSigns").replaceAll("%count",
+                    String.valueOf(FastTravelDB.getSignCount())));
         } catch (SQLException e) {
             e.printStackTrace();
         }

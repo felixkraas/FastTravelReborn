@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
 
 public class FastTravel extends JavaPlugin {
 
@@ -171,7 +172,12 @@ public class FastTravel extends JavaPlugin {
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
+        io.sendConsole(io.translate("DB.Saving"));
         FastTravelDB.save();
+        if (DBType.getDBType() == DBType.SQLite) {
+            SQLiteDBHandler.shutdown();
+        }
+        io.sendConsole(io.translate("DB.Saved"));
     }
 
     public void setupConfig() {
