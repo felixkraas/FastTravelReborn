@@ -79,21 +79,22 @@ public abstract class Database {
             try {
                 dbStatement.executeUpdate(
                         "CREATE TABLE IF NOT EXISTS  FastTravelSigns (" +
-                                "name TEXT," +
-                                "creator TEXT," +
-                                "signloc_World TEXT," +
+                                "name TEXT, " +
+                                "creator TEXT, " +
+                                "signloc_World TEXT, " +
                                 "signloc_X INTEGER," +
                                 "signloc_Y INTEGER, " +
                                 "signloc_Z INTEGER, " +
                                 "signloc_Yaw REAL, " +
-                                "tploc_World TEXT," +
+                                "tploc_World TEXT, " +
                                 "tploc_X INTEGER, " +
                                 "tploc_Y INTEGER, " +
                                 "tploc_Z INTEGER, " +
-                                "tploc_Yaw REAL," +
-                                "automatic BOOLEAN," +
+                                "tploc_Yaw REAL, " +
+                                "automatic BOOLEAN, " +
+                                "marker BOOLEAN, " +
                                 "price REAL, " +
-                                "range INTEGER," +
+                                "range INTEGER, " +
                                 "players TEXT" +
                                 ");"
                 );

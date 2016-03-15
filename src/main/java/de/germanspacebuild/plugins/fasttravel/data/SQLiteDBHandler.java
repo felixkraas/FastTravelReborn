@@ -93,8 +93,9 @@ public class SQLiteDBHandler {
                 int tploc_Z = rs.getInt(11);
                 float tploc_Yaw = rs.getFloat(12);
                 boolean automatic = db.parseBoolean(rs.getInt(13));
-                float price = rs.getFloat(14);
-                int range = rs.getInt(15);
+                boolean marked = rs.getBoolean(14);
+                float price = rs.getFloat(15);
+                int range = rs.getInt(16);
 
                 List<UUID> players = null;
 
@@ -116,8 +117,9 @@ public class SQLiteDBHandler {
                 FastTravelSign sign = null;
 
                 sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
+                sign.setMarker(marked);
 
-                if (plugin.getConfig().getBoolean("DevMode")) {
+                if (plugin.getConfig().getBoolean("Plugin.Debug.Enabled")) {
                     plugin.getLogger().info("Loaded sign: " + sign.getName());
                 }
 
@@ -149,21 +151,22 @@ public class SQLiteDBHandler {
             PreparedStatement preparedStatement = db.dbConn.prepareStatement(
                     "UPDATE FastTravelSigns SET " +
                             "name = ?," +
-                            "creator = ?, " +
-                            "signloc_World = ?, " +
-                            "signloc_X = ?, " +
-                            "signloc_Y = ?, " +
-                            "signloc_Z = ?, " +
+                            "creator = ?," +
+                            "signloc_World = ?," +
+                            "signloc_X = ?," +
+                            "signloc_Y = ?," +
+                            "signloc_Z = ?," +
                             "signloc_Yaw = ?," +
                             "tploc_World = ?," +
-                            " tploc_X = ?," +
-                            " tploc_Y = ?," +
-                            " tploc_Z = ?," +
-                            " tploc_Yaw = ?," +
-                            " automatic = ?," +
-                            " price = ?," +
-                            " range = ?," +
-                            " players = ? " +
+                            "tploc_X = ?," +
+                            "tploc_Y = ?," +
+                            "tploc_Z = ?," +
+                            "tploc_Yaw = ?," +
+                            "automatic = ?," +
+                            "marker = ?," +
+                            "price = ?," +
+                            "range = ?," +
+                            "players = ? " +
                             "WHERE name = ?;"
             );
 
@@ -184,10 +187,11 @@ public class SQLiteDBHandler {
             preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
             //more Information
             preparedStatement.setBoolean(13, sign.isAutomatic());
-            preparedStatement.setDouble(14, sign.getPrice());
-            preparedStatement.setInt(15, sign.getRange());
-            preparedStatement.setString(16, UUIDUtil.uuidListToString(sign.getPlayers()));
-            preparedStatement.setString(17, sign.getName());
+            preparedStatement.setBoolean(14, sign.hasMarker());
+            preparedStatement.setDouble(15, sign.getPrice());
+            preparedStatement.setInt(16, sign.getRange());
+            preparedStatement.setString(17, UUIDUtil.uuidListToString(sign.getPlayers()));
+            preparedStatement.setString(18, sign.getName());
 
             preparedStatement.executeUpdate();
 
@@ -196,7 +200,7 @@ public class SQLiteDBHandler {
 
     private static void addNew(FastTravelSign sign) throws SQLException {
         PreparedStatement preparedStatement = db.dbConn.prepareStatement(
-                "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                "INSERT INTO FastTravelSigns VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         );
 
         //Basic Information
@@ -216,9 +220,10 @@ public class SQLiteDBHandler {
         preparedStatement.setFloat(12, sign.getTPLocation().getYaw());
         //more Information
         preparedStatement.setBoolean(13, sign.isAutomatic());
-        preparedStatement.setDouble(14, sign.getPrice());
-        preparedStatement.setInt(15, sign.getRange());
-        preparedStatement.setString(16, UUIDUtil.uuidListToString(sign.getPlayers()));
+        preparedStatement.setBoolean(14, sign.hasMarker());
+        preparedStatement.setDouble(15, sign.getPrice());
+        preparedStatement.setInt(16, sign.getRange());
+        preparedStatement.setString(17, UUIDUtil.uuidListToString(sign.getPlayers()));
 
         preparedStatement.executeUpdate();
     }

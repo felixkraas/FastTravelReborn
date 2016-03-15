@@ -50,7 +50,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.SynchronousQueue;
 
 public class FastTravel extends JavaPlugin {
 
@@ -202,7 +201,7 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Price", 0);
         config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
-        config.addDefault("Hooks.DynmapHook", false);
+        config.addDefault("Hooks.Dynmap", false);
         config.options().copyDefaults(true);
         try {
             getConfig().save(confFile);
@@ -213,9 +212,9 @@ public class FastTravel extends JavaPlugin {
 
     private void checkHooks() {
         PluginManager pm = this.getServer().getPluginManager();
-        if (config.getBoolean("Hooks.DynmapHook") && pm.isPluginEnabled("dynmap")) {
+        if (config.getBoolean("Hooks.Dynmap") && pm.isPluginEnabled("dynmap")) {
             hooks.put("dynmap", new DynmapHook(this, pm.getPlugin("dynmap")));
-            io.sendConsole(io.translate(""));
+            io.sendConsole(io.translate("Hooks.Dynmap"));
         }
     }
 

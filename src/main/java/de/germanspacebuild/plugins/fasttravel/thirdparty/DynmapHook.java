@@ -57,11 +57,12 @@ public class DynmapHook extends PluginHook {
         List<FastTravelSign> signs = FastTravelDB.getAllSigns();
 
         for (FastTravelSign sign : signs) {
-            Location signLoc = sign.getSignLocation();
-            markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
-                    signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(MarkerIcon.SIGN),
-                    false);
+            if (sign.hasMarker()) {
+                Location signLoc = sign.getSignLocation();
+                markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
+                        signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(MarkerIcon.SIGN),
+                        false);
+            }
         }
-
     }
 }

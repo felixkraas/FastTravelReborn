@@ -46,7 +46,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     private int range;
     private UUID creator;
     private List<UUID> players;
-    private Boolean marker;
+    private Boolean marker = false;
 
     /**
      * Constructor for sign without price.
@@ -186,7 +186,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         return players;
     }
 
-    public Boolean isMarked() {
+    public Boolean hasMarker() {
         return marker;
     }
 

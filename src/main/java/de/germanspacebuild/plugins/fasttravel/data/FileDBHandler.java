@@ -100,6 +100,7 @@ public class FileDBHandler {
 
             //Automatic
             boolean automatic = signYAML.getBoolean(signName + ".automatic", false);
+            boolean marked = signYAML.getBoolean(signName + ".marked", false);
 
             if (!checkMissing(signName, creator, locWorld, tpLocWorld)) {
                 continue;
@@ -138,6 +139,7 @@ public class FileDBHandler {
             signYAML.set(signName + ".tploc.yaw", (double) sign.getTPLocation().getYaw());
 
             signYAML.set(signName + ".automatic", sign.isAutomatic());
+            signYAML.set(signName + "marked", sign.hasMarker());
 
             signYAML.set(signName + ".players", UUIDUtil.uuidToString(sign.getPlayers()));
 
