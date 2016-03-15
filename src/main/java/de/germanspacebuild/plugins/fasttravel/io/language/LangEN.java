@@ -95,12 +95,13 @@ public class LangEN extends Language {
             set("Sign.Exists", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
             set("Sign.ExistsNot", "Sign&b %sign &fdoes not exist.");
+            set("Sign.List", "You can travel to the following FastTravelSigns:");
 
             //Economy
             set("Econ.Disabled", "Economy support is disabled in the config.");
             set("Econ.MoneyLess", "You don't have the money to travel. It would cost &2%cost&f.");
             set("Econ.Charged", "You have been charged &2%cost&f.");
-            set("Econ.Error", "Something is broken with economy. Please contact admin or plugin author." +
+            set("Econ.Error", "Something is broken with economy. Please contact admin and/or plugin author." +
                     " You might travel anyway.");
 
             //Travel
@@ -129,6 +130,13 @@ public class LangEN extends Language {
 
             //Hooks
             set("Hooks.Dynmap", "Dynmap found hooking into it.");
+
+            //Database
+            set("DB.Empty", "No signs found in the database");
+            set("DB.EntryCount", "%count FastTravelSigns found in the database. Starting to load them.");
+            set("DB.LoadedSigns", "Loaded %count FastTravelSigns from SQLite database.");
+            set("DB.Saving", "Saving database.");
+            set("DB.Saved", "Database saved.");
 
             save();
 
