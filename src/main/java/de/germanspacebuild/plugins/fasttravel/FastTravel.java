@@ -45,6 +45,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.mcstats.Metrics;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class FastTravel extends JavaPlugin {
     private Configuration config;
     private static File dataDir;
     private static File langDir;
-    //private Metrics metrics;
+    private Metrics metrics;
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
@@ -242,7 +243,7 @@ public class FastTravel extends JavaPlugin {
         getLogger().info("Using " + economy.getName() + " for economy support.");
     }
 
-    /*public void metricsInit(){
+    public void metricsInit(){
         if (getConfig().getBoolean("Plugin.Metrics")){
             try {
                 metrics = new Metrics(this);
@@ -252,7 +253,7 @@ public class FastTravel extends JavaPlugin {
             }
 
         }
-    }*/
+    }
 
     private void initLanguages() {
         Language en = new LangEN(this);
