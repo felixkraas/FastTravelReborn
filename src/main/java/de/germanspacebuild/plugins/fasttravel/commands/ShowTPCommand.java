@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2011-2015 CraftyCreeper, minebot.net, oneill011990
+ * Copyright (c) 2011-2016 CraftyCreeper, minebot.net, oneill011990
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Created by oneill011990 on 03.06.2015.
+ * Created by oneill011990 on 03.06.2016.
  */
 public class ShowTPCommand implements CommandExecutor {
 

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2011-2015 CraftyCreeper, minebot.net, oneill011990
+ * Copyright (c) 2011-2016 CraftyCreeper, minebot.net, oneill011990
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * Created by oneill011990 on 04.03.2015.
+ * Created by oneill011990 on 04.03.2016.
  */
 public class FastTravelEvent extends Event implements Cancellable {
 
