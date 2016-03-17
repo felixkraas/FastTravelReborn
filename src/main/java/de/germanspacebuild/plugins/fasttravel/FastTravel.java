@@ -94,7 +94,7 @@ public class FastTravel extends JavaPlugin {
 
         setupEconomy();
 
-        //metricsInit();
+        metricsInit();
 
         initDB();
 
