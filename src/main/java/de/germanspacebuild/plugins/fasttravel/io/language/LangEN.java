@@ -86,7 +86,7 @@ public class LangEN extends Language {
             //Sign
             set("Sign.PlaceAbove", "You can't place blocks above FastTravelSigns.");
             set("Sign.PlaceAbove.Is", "You can't place FastTravelSigns directly below blocks.");
-            set("Sign.Break", "You can't break FastTravelSigns.");
+            set("Sign.CantBreak", "You can't break FastTravelSigns.");
             set("Sign.Removed", "You have removed point &b%sign&f.");
             set("Sign.Found", "You found &b%sign&f. now you can travel here.");
             set("Sign.Found.Already", "You already found &b%sign&f.");
@@ -129,7 +129,7 @@ public class LangEN extends Language {
             set("Warmup.Objective", "Warumup");
 
             //Hooks
-            set("Hooks.Dynmap", "Dynmap found hooking into it.");
+            set("Hooks.Dynmap", "Dynmap found, hooking into it.");
 
             //Database
             set("DB.Empty", "No signs found in the database");

@@ -57,7 +57,7 @@ public class FTBlockListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (FastTravelUtil.isFTSign(event.getBlock()) && !event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
             event.setCancelled(true);
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Break");
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.CantBreak");
         } else if (FastTravelUtil.isFTSign(event.getBlock()) && event.getPlayer().hasPermission(
                 FastTravel.PERMS_BASE + "break")) {
             FastTravelDB.removeSign(((Sign) event.getBlock().getState()).getLine(1));

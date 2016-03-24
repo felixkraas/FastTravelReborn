@@ -84,7 +84,7 @@ public class UUIDUtil {
      * @param str String to convert.
      * @return List of UUIDs.
      */
-    public static List<UUID> stringtoUUIDList(String str) {
+    public static List<UUID> stringToUUIDList(String str) {
         String[] strings = str.split("[:]");
         List<UUID> ids = new ArrayList<>();
         for (String string : strings) {

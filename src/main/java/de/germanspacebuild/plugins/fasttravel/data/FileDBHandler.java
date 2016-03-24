@@ -107,7 +107,7 @@ public class FileDBHandler {
             }
 
             FastTravelDB.addSign(new FastTravelSign(signName, creator, price, location, tploc,
-                    automatic, range, UUIDUtil.stringToUUID(filePlayers)));
+                    automatic, range, marked, UUIDUtil.stringToUUID(filePlayers)));
             filePlayers.clear();
         }
 
@@ -120,6 +120,9 @@ public class FileDBHandler {
     }
 
     public static void save(File saveFile) {
+        if (saveFile.exists()) {
+            saveFile.delete();
+        }
         YamlConfiguration signYAML = new YamlConfiguration();
         for (String signName : FastTravelDB.getSignMap().keySet()) {
             FastTravelSign sign = FastTravelDB.getSignMap().get(signName);
@@ -139,7 +142,7 @@ public class FileDBHandler {
             signYAML.set(signName + ".tploc.yaw", (double) sign.getTPLocation().getYaw());
 
             signYAML.set(signName + ".automatic", sign.isAutomatic());
-            signYAML.set(signName + "marked", sign.hasMarker());
+            signYAML.set(signName + ".marked", sign.hasMarker());
 
             signYAML.set(signName + ".players", UUIDUtil.uuidToString(sign.getPlayers()));
 

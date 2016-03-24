@@ -83,7 +83,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
      * @param players   Players that can use this sign.
      */
     public FastTravelSign(String name, UUID creator, double price, Location location, Location tpLoc,
-                          boolean automatic, int range, List<UUID> players) {
+                          boolean automatic, int range, boolean marker, List<UUID> players) {
         this.name = name;
         this.creator = creator;
         this.price = price;

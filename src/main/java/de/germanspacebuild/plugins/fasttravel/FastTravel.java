@@ -101,7 +101,6 @@ public class FastTravel extends JavaPlugin {
         //Init language
         initLanguages();
         io = new IOManager(this);
-
         PluginManager pm = getServer().getPluginManager();
 
         //Listener
@@ -213,9 +212,10 @@ public class FastTravel extends JavaPlugin {
 
     private void checkHooks() {
         PluginManager pm = this.getServer().getPluginManager();
-        if (config.getBoolean("Hooks.Dynmap") && pm.isPluginEnabled("dynmap")) {
+        if (config.getBoolean("Hooks.Dynmap") && pm.getPlugin("dynmap").isEnabled()) {
             hooks.put("dynmap", new DynmapHook(this, pm.getPlugin("dynmap")));
             io.sendConsole(io.translate("Hooks.Dynmap"));
+            hooks.get("dynmap").init();
         }
     }
 

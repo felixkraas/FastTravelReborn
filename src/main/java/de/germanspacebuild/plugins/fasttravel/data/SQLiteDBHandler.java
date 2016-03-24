@@ -99,7 +99,7 @@ public class SQLiteDBHandler {
 
                 List<UUID> players = null;
 
-                players = UUIDUtil.stringtoUUIDList(rs.getString(16));
+                players = UUIDUtil.stringToUUIDList(rs.getString(16));
 
                 if (!players.contains(creator)) {
                     players.add(creator);
@@ -116,8 +116,7 @@ public class SQLiteDBHandler {
 
                 FastTravelSign sign = null;
 
-                sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, players);
-                sign.setMarker(marked);
+                sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, marked, players);
 
                 if (plugin.getConfig().getBoolean("Plugin.Debug.Enabled")) {
                     plugin.getLogger().info("Loaded sign: " + sign.getName());

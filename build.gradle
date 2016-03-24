@@ -1,5 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'de.germanspacebuild.plugins'
 version = '1.0'
@@ -14,9 +16,7 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
+    mavenLocal()
     maven {
         name 'Spigot'
         url "https://hub.spigotmc.org/nexus/content/groups/public/"
@@ -33,10 +33,30 @@ repositories {
     }
 }
 
+shadowJar {
+    dependencies {
+        include(dependency('org.mcstats.bukkit:metrics:.*'))
+    }
+}
+
 dependencies {
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT'
     compile group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
     compile group: 'org.mcstats.bukkit', name: 'metrics', version:'R8-SNAPSHOT'
-    compile(group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5')
-    compile(group: 'us.dynmap', name: 'dynmap-api', version: '2.2-SNAPSHOT')
+    compile group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5'
+    compile group: 'us.dynmap', name: 'dynmap-api', version: '2.2-SNAPSHOT'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
 }

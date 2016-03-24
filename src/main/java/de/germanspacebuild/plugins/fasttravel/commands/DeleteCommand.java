@@ -67,7 +67,7 @@ public class DeleteCommand implements CommandExecutor {
             Block block = sign.getSignLocation().getBlock();
             // Attempt to nuke the sign
             if (FastTravelUtil.isFTSign(block)) {
-                block.setType(Material.AIR);
+                block.breakNaturally();
             }
             FastTravelDB.removeSign(args[0]);
             io.send(sender, io.translate("Sign.Removed").replaceAll("%sign", sign.getName()));
