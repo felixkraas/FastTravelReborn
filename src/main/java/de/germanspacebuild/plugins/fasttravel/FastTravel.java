@@ -243,8 +243,8 @@ public class FastTravel extends JavaPlugin {
         getLogger().info("Using " + economy.getName() + " for economy support.");
     }
 
-    public void metricsInit(){
-        if (getConfig().getBoolean("Plugin.Metrics")){
+    public void metricsInit() {
+        if (getConfig().getBoolean("Plugin.Metrics")) {
             try {
                 metrics = new Metrics(this);
                 metrics.start();
