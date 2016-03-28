@@ -65,7 +65,7 @@ public class SetpointCommand implements CommandExecutor {
             io.send(sender, io.translate("Command.SetPoint.Set").replaceAll("%sign", sign.getName()));
         } else if (args.length == 2 && args[1].equals("clear")) {
             sign.setTPLocation(sign.getSignLocation().clone());
-            io.send(sender, io.translate("Command.SetPoint.Cleared"));
+            io.send(sender, io.translate("Command.SetPoint.Cleared").replaceAll("[%sign]", sign.getName()));
         }
 
         FastTravelDB.save();

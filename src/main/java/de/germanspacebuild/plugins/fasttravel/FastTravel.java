@@ -36,6 +36,7 @@ import de.germanspacebuild.plugins.fasttravel.task.CheckPlayerTask;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.DynmapHook;
 import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
+import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -57,6 +58,8 @@ public class FastTravel extends JavaPlugin {
     public static final boolean BETA = true;
 
     public static final String PERMS_BASE = "fasttravelsigns.";
+
+    private static EffectManager em;
 
     private Map<String, PluginHook> hooks = new HashMap<>();
 
@@ -97,6 +100,8 @@ public class FastTravel extends JavaPlugin {
         metricsInit();
 
         initDB();
+
+        em = new EffectManager(getInstance());
 
         //Init language
         initLanguages();
@@ -177,6 +182,7 @@ public class FastTravel extends JavaPlugin {
             SQLiteDBHandler.shutdown();
         }
         io.sendConsole(io.translate("DB.Saved"));
+        em.dispose();
     }
 
     public void setupConfig() {
@@ -284,6 +290,10 @@ public class FastTravel extends JavaPlugin {
 
     public Economy getEconomy() {
         return economy;
+    }
+
+    public static EffectManager getEffectManager() {
+        return em;
     }
 
     public PluginHook getHook(String hook) {

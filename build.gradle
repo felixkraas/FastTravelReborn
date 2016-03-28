@@ -31,15 +31,20 @@ repositories {
     maven {
         url "http://repo.mikeprimm.com/"
     }
+    maven {
+        url "http://maven.elmakers.com/repository/"
+    }
 }
 
 shadowJar {
     dependencies {
         include(dependency('org.mcstats.bukkit:metrics:.*'))
+        include(dependency('de.slikey:EffectLib:.*'))
     }
 }
 
 dependencies {
+    compile group: 'de.slikey', name: 'EffectLib', version: '4.2'
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT'
     compile group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
     compile group: 'org.mcstats.bukkit', name: 'metrics', version:'R8-SNAPSHOT'

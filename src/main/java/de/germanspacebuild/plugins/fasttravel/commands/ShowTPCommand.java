@@ -28,8 +28,10 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.slikey.effectlib.Effect;
+import de.slikey.effectlib.EffectManager;
+import de.slikey.effectlib.effect.LineEffect;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -54,6 +56,11 @@ public class ShowTPCommand implements CommandExecutor {
             return false;
         }
 
+        if (args.length == 0) {
+            io.sendTranslation(sender, "Command.InvalidArgs");
+            return true;
+        }
+
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
 
         if (sign == null) {
@@ -64,7 +71,12 @@ public class ShowTPCommand implements CommandExecutor {
         tpLoc.setY(0);
         Location tpLocTop = sign.getTPLocation();
         tpLocTop.setY(255);
-        tpLoc.getWorld().spawnParticle(Particle.REDSTONE, tpLoc, 25);
+        EffectManager em = FastTravel.getEffectManager();
+        Effect effect = new LineEffect(em);
+        effect.setLocation(tpLoc);
+        effect.setTargetLocation(tpLocTop);
+        effect.iterations = 10 * 20;
+        effect.start();
 
         return true;
     }

@@ -121,6 +121,9 @@ public class LangEN extends Language {
 
             set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
 
+            set("Command.SetPoint.Set", "Set destination of %sign to you current location.");
+            set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");
+
             set("Command.Save.Saved", "You have saved the DB.");
 
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
