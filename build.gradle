@@ -2,9 +2,10 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.selesse.git.changelog'
 
 group = 'de.germanspacebuild.plugins'
-version = '1.0'
+version = '1.0.0-beta3'
 
 description = "FastTravel"
 
@@ -43,6 +44,12 @@ shadowJar {
     }
 }
 
+changelog {
+    title = "${project.name} - Changelog"
+    outputDirectory = file("${project.projectDir}")
+    since = 'last_tag'
+}
+
 dependencies {
     compile group: 'de.slikey', name: 'EffectLib', version: '4.2'
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT'
@@ -60,8 +67,14 @@ idea {
 }
 
 buildscript {
-    repositories { jcenter() }
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'gradle.plugin.com.selesse:gradle-git-changelog:0.2.0'
     }
 }
