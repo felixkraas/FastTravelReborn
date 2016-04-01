@@ -125,6 +125,7 @@ public class LangEN extends Language {
             set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");
 
             set("Command.Save.Saved", "You have saved the DB.");
+            set("Command.Save.Saved.Console", "DB was saved.");
 
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
 

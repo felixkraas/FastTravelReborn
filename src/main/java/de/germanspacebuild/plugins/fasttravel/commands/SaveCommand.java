@@ -59,6 +59,9 @@ public class SaveCommand implements CommandExecutor {
         } else if (sender.hasPermission(FastTravel.PERMS_BASE + "save")) {
             FastTravelDB.save();
             io.sendTranslation(sender, "Command.Save.Saved");
+            if (sender instanceof Player) {
+                io.sendConsole(io.translate("Command.Save.Saved.Console"));
+            }
             FastTravelDB.load();
             return true;
         }

@@ -99,7 +99,7 @@ public class SQLiteDBHandler {
 
                 List<UUID> players = null;
 
-                players = UUIDUtil.stringToUUIDList(rs.getString(16));
+                players = UUIDUtil.stringToUUIDList(rs.getString(17));
 
                 if (!players.contains(creator)) {
                     players.add(creator);
