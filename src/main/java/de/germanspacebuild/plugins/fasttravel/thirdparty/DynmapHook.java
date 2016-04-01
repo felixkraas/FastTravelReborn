@@ -51,12 +51,7 @@ public class DynmapHook extends PluginHook {
     public void init() {
         api = (DynmapAPI) hook;
         markers = api.getMarkerAPI().createMarkerSet("fasttravel", "FastTravelSigns", null, false);
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                processSigns();
-            }
-        }, 100L, 20L);
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> processSigns(), 100L, 20L);
     }
 
     public void processSigns() {

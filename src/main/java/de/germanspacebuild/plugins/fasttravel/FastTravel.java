@@ -79,6 +79,7 @@ public class FastTravel extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        //private variables
         instance = this;
         config = this.getConfig();
         dataDir = this.getDataFolder();
@@ -101,7 +102,7 @@ public class FastTravel extends JavaPlugin {
 
         initDB();
 
-        em = new EffectManager(getInstance());
+        em = new EffectManager(this);
 
         //Init language
         initLanguages();
