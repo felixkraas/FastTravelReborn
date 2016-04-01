@@ -37,6 +37,7 @@ public class ConvertDBCommand implements CommandExecutor {
             case "file":
                 DBType.setDBType(DBType.File);
                 io.send(sender, io.translate("Command.Convert.File"));
+                FastTravelDB.init(plugin, "signs.yml", false);
                 plugin.getConfig().set("Plugin.Database", "File");
                 break;
             case "sqlite":
@@ -47,6 +48,8 @@ public class ConvertDBCommand implements CommandExecutor {
             default:
                 io.send(sender, io.translate("Command.Convert.Invalid"));
         }
+
+        plugin.saveConfig();
 
         //Reloading database
         FastTravelDB.save();

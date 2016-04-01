@@ -47,11 +47,15 @@ public class FileDBHandler {
 
     private static List<String> filePlayers;
 
-    private static File saveFile;
+    public static File saveFile;
 
     static {
         plugin = FastTravel.getInstance();
         filePlayers = new ArrayList<>();
+    }
+
+    public static void setSaveFile(File saveFile) {
+        FileDBHandler.saveFile = saveFile;
     }
 
     public static void load(File saveFile) {
