@@ -51,6 +51,7 @@ public class SaveCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             FastTravelDB.save();
             io.sendTranslation(sender, "Command.Save.Saved");
+            FastTravelDB.load();
             return true;
         }
 

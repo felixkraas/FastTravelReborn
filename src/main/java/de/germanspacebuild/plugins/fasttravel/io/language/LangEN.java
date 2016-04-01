@@ -124,10 +124,14 @@ public class LangEN extends Language {
             set("Command.SetPoint.Set", "Set destination of %sign to you current location.");
             set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");
 
-            set("Command.Save.Saved", "You have saved the DB.");
-            set("Command.Save.Saved.Console", "DB was saved.");
+            set("Command.Save.Saved", "You have saved the database.");
+            set("Command.Save.Saved.Console", "Database was saved.");
 
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
+
+            set("Command.Convert.Invalid", "Invalid type of database, no changes performed.");
+            set("Command.Convert.File", "Changed type of database to YAML-File.");
+            set("Command.Convert.SQLite", "Changed type of database to SQLite.");
 
             //Warmup
             set("Warmup.Objective", "Warumup");
@@ -136,7 +140,7 @@ public class LangEN extends Language {
             set("Hooks.Dynmap", "Dynmap found, hooking into it.");
 
             //Database
-            set("DB.Empty", "No signs found in the database");
+            set("DB.Empty", "No signs found in the database.");
             set("DB.EntryCount", "%count FastTravelSigns found in the database. Starting to load them.");
             set("DB.LoadedSigns", "Loaded %count FastTravelSigns from SQLite database.");
             set("DB.Saving", "Saving database.");
