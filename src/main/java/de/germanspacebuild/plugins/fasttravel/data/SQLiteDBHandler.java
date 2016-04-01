@@ -145,6 +145,7 @@ public class SQLiteDBHandler {
             FastTravelSign sign = FastTravelDB.getSign(signName);
             if (!db.tableContains("name", signName)) {
                 addNew(sign);
+                continue;
             }
 
             PreparedStatement preparedStatement = db.dbConn.prepareStatement(
