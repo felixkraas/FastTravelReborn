@@ -45,6 +45,10 @@ public class ConvertDBCommand implements CommandExecutor {
                 plugin.getConfig().set("Plugin.Database", "SQLite");
                 io.send(sender, io.translate("Command.Convert.SQLite"));
                 break;
+            case "mysql":
+                DBType.setDBType(DBType.MySQL);
+                plugin.getConfig().set("Plugin.Database", "MySQL");
+                io.send(sender, io.translate("Command.Convert.MySQL"));
             default:
                 io.send(sender, io.translate("Command.Convert.Invalid"));
         }

@@ -132,6 +132,7 @@ public class LangEN extends Language {
             set("Command.Convert.Invalid", "Invalid type of database, no changes performed.");
             set("Command.Convert.File", "Changed type of database to YAML-File.");
             set("Command.Convert.SQLite", "Changed type of database to SQLite.");
+            set("Command.Convert.MySQL", "Changed type of database to MySQL.");
 
             //Warmup
             set("Warmup.Objective", "Warumup");

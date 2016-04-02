@@ -60,6 +60,13 @@ public enum DBType {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                break;
+            case MySQL:
+                try {
+                    SQLDBHandler.save();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
@@ -73,6 +80,9 @@ public enum DBType {
                 FileDBHandler.load(saveFile);
                 break;
             case SQLite:
+                SQLDBHandler.load();
+                break;
+            case MySQL:
                 SQLDBHandler.load();
         }
     }

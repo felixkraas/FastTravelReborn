@@ -157,6 +157,7 @@ public class FastTravel extends JavaPlugin {
             FastTravelDB.init(this, "signs.yml", true);
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("MySQL")) {
             DBType.setDBType(DBType.MySQL);
+            SQLDBHandler.load();
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {
             DBType.setDBType(DBType.SQLite);
             SQLDBHandler.load();
@@ -210,6 +211,11 @@ public class FastTravel extends JavaPlugin {
         config.addDefault("Travel.Range", true);
         config.addDefault("IO.Language", "en");
         config.addDefault("Hooks.Dynmap", false);
+        config.addDefault("MySQL.Host", "localhost");
+        config.addDefault("MySQL.Port", 3306);
+        config.addDefault("MySQL.Name", "FastTravel");
+        config.addDefault("MySQL.Username", "username");
+        config.addDefault("MySQL.Password", "password");
         config.options().copyDefaults(true);
         try {
             getConfig().save(confFile);
@@ -272,6 +278,7 @@ public class FastTravel extends JavaPlugin {
 
     private void initDB() {
         Database.registerDatabaseSystem(DBType.SQLite, new SQLite());
+        Database.registerDatabaseSystem(DBType.MySQL, new MySQL(this));
     }
 
     public static FastTravel getInstance() {
