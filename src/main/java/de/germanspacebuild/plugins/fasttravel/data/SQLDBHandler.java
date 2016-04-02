@@ -39,7 +39,7 @@ import java.util.UUID;
 /**
  * Created by oneill011990 on 30.07.2016.
  */
-public class SQLiteDBHandler {
+public class SQLDBHandler {
 
     private static Database db;
     private static FastTravel plugin;

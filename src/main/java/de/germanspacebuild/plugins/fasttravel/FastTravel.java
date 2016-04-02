@@ -159,7 +159,7 @@ public class FastTravel extends JavaPlugin {
             DBType.setDBType(DBType.MySQL);
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {
             DBType.setDBType(DBType.SQLite);
-            SQLiteDBHandler.load();
+            SQLDBHandler.load();
         } else {
             io.sendConsole(io.translate("Plugin.InvalidDB"));
         }
@@ -181,7 +181,7 @@ public class FastTravel extends JavaPlugin {
         io.sendConsole(io.translate("DB.Saving"));
         FastTravelDB.save();
         if (DBType.getDBType() == DBType.SQLite) {
-            SQLiteDBHandler.shutdown();
+            SQLDBHandler.shutdown();
         }
         io.sendConsole(io.translate("DB.Saved"));
         em.dispose();

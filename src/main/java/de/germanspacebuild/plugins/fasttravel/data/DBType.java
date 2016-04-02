@@ -56,7 +56,7 @@ public enum DBType {
                 break;
             case SQLite:
                 try {
-                    SQLiteDBHandler.save();
+                    SQLDBHandler.save();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -73,7 +73,7 @@ public enum DBType {
                 FileDBHandler.load(saveFile);
                 break;
             case SQLite:
-                SQLiteDBHandler.load();
+                SQLDBHandler.load();
         }
     }
 

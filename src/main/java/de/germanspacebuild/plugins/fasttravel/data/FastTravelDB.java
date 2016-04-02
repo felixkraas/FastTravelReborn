@@ -43,7 +43,7 @@ public class FastTravelDB {
 
     public static void init(FastTravel plugin, String saveFile, boolean load) {
         FastTravelDB.plugin = plugin;
-        FastTravelDB.saveFile = new File(plugin.getDataDir(), saveFile);
+        FastTravelDB.saveFile = new File(FastTravel.getDataDir(), saveFile);
 
         if (load)
             load();
@@ -75,7 +75,7 @@ public class FastTravelDB {
         }
         if (DBType.getDBType() == DBType.SQLite) {
             try {
-                SQLiteDBHandler.deleteSign(getSign(name));
+                SQLDBHandler.deleteSign(getSign(name));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
