@@ -59,7 +59,7 @@ public class FastTravel extends JavaPlugin {
 
     public static final String PERMS_BASE = "fasttravelsigns.";
 
-    private static EffectManager em;
+    private EffectManager em;
 
     private Map<String, PluginHook> hooks = new HashMap<>();
 
@@ -102,7 +102,7 @@ public class FastTravel extends JavaPlugin {
 
         initDB();
 
-        em = new EffectManager(this);
+        this.em = new EffectManager(this);
 
         //Init language
         initLanguages();
@@ -133,6 +133,7 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftsetpoint").setExecutor(new SetpointCommand(this));
         getCommand("ftshow").setExecutor(new ShowTPCommand(this));
         getCommand("ftconvert").setExecutor(new ConvertDBCommand(this));
+        getCommand("ftshowrange").setExecutor(new ShowRangeCommand(this));
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());
@@ -301,8 +302,8 @@ public class FastTravel extends JavaPlugin {
         return economy;
     }
 
-    public static EffectManager getEffectManager() {
-        return em;
+    public EffectManager getEffectManager() {
+        return this.em;
     }
 
     public PluginHook getHook(String hook) {

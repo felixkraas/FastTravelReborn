@@ -28,7 +28,6 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
-import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.LineEffect;
 import de.slikey.effectlib.util.DynamicLocation;
 import de.slikey.effectlib.util.ParticleEffect;
@@ -70,13 +69,12 @@ public class ShowTPCommand implements CommandExecutor {
             return false;
         }
         Location tpLoc = sign.getTPLocation().clone();
-        EffectManager em = FastTravel.getEffectManager();
-        LineEffect effect = new LineEffect(em);
+        LineEffect effect = new LineEffect(plugin.getEffectManager());
         effect.setDynamicOrigin(new DynamicLocation(tpLoc.subtract(0, tpLoc.getY(), 0)));
         effect.setDynamicTarget(new DynamicLocation(tpLoc.add(0, 255, 0)));
         effect.iterations = 10 * 20;
         effect.particles = 250;
-        effect.offset = new Vector(1, 0, 1);
+        effect.offset = new Vector(10, 0, 10);
         effect.particle = ParticleEffect.REDSTONE;
         effect.start();
 

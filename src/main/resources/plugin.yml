@@ -67,7 +67,7 @@ permissions:
         description: Allows use of /ftmenu command.
         default: op
     fasttravelsigns.show:
-        description: Allows use of /ftshow command.
+        description: Allows use of /ftshow and /ftshowrange command.
         default: op
     fasttravelsigns.convert:
         description: Allows use of /ftconvert command.
@@ -144,3 +144,8 @@ commands:
         permission: fasttravelsigns.convert
         usage: |
             /ftconvert [dbtype]
+    ftshowrange:
+        description: Shows a sphere of particles to display rqantge of sign.
+        permission: fasttravelsigns.show
+        usage: |
+            /ftshowrange [travelpoint]

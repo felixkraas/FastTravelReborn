@@ -5,9 +5,9 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'com.selesse.git.changelog'
 
 group = 'de.germanspacebuild.plugins'
-version = '1.0.0-beta3'
+version = '1.0.0-beta4'
 
-description = "FastTravel"
+description = "FastTravelSigns"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

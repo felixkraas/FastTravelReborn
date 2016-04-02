@@ -127,6 +127,8 @@ public class LangEN extends Language {
             set("Command.Save.Saved", "You have saved the database.");
             set("Command.Save.Saved.Console", "Database was saved.");
 
+            set("Command.ShowRange.Zero", "Range of &b%sign&f is &a0.");
+
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
 
             set("Command.Convert.Invalid", "Invalid type of database, no changes performed.");
