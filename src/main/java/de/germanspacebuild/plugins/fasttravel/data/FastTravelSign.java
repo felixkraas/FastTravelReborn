@@ -92,6 +92,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         this.setAutomatic(automatic);
         this.signLoc = location;
         this.tpLoc = tpLoc;
+        this.marker = marker;
     }
 
 
@@ -190,7 +191,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
         return marker;
     }
 
-    public void setMarker(Boolean marker) {
+    public void setMarked(Boolean marker) {
         this.marker = marker;
         FastTravelDB.save();
     }

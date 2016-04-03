@@ -51,7 +51,7 @@ public class DynmapHook extends PluginHook {
     public void init() {
         api = (DynmapAPI) hook;
         markers = api.getMarkerAPI().createMarkerSet("fasttravel", "FastTravelSigns", null, false);
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> processSigns(), 100L, 20L);
+        processSigns();
     }
 
     public void processSigns() {
@@ -62,7 +62,7 @@ public class DynmapHook extends PluginHook {
                 Location signLoc = sign.getSignLocation();
                 markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
                         signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(
-                                MarkerIcon.SIGN), false);
+                                MarkerIcon.SIGN), true);
             }
         }
     }

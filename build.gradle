@@ -55,7 +55,7 @@ dependencies {
     compile group: 'org.bukkit', name: 'bukkit', version: '1.9.2-R0.1-SNAPSHOT'
     compile group: 'org.mcstats.bukkit', name: 'metrics', version:'R8-SNAPSHOT'
     compile group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'
-    compile group: 'us.dynmap', name: 'dynmap', version: '2.2-SNAPSHOT'
+    compile group: 'org.dynmap', name: 'dynmap-api', version: '2.0'
 }
 
 idea {
