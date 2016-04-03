@@ -55,7 +55,7 @@ import java.util.Map;
 
 public class FastTravel extends JavaPlugin {
 
-    public static final boolean BETA = true;
+    public static final boolean BETA = false;
 
     public static final String PERMS_BASE = "fasttravelsigns.";
 
