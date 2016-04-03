@@ -28,7 +28,6 @@ import de.germanspacebuild.plugins.fasttravel.Listener.*;
 import de.germanspacebuild.plugins.fasttravel.commands.*;
 import de.germanspacebuild.plugins.fasttravel.data.*;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
-import de.germanspacebuild.plugins.fasttravel.io.language.LangDE;
 import de.germanspacebuild.plugins.fasttravel.io.language.LangEN;
 import de.germanspacebuild.plugins.fasttravel.io.language.Language;
 import de.germanspacebuild.plugins.fasttravel.tabcomplete.FtTabComplete;
@@ -272,9 +271,7 @@ public class FastTravel extends JavaPlugin {
 
     private void initLanguages() {
         Language en = new LangEN(this);
-        Language de = new LangDE(this);
         Language.addLanguage(en);
-        Language.addLanguage(de);
     }
 
     private void initDB() {

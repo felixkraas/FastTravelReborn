@@ -124,7 +124,7 @@ public class LangEN extends Language {
             set("Command.SetPoint.Set", "Set destination of %sign to you current location.");
             set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");
 
-            set("Command.Save.Saved", "You have saved the database.");
+            set("Command.Save.Saved.Player", "You have saved the database.");
             set("Command.Save.Saved.Console", "Database was saved.");
 
             set("Command.ShowRange.Zero", "Range of &b%sign&f is &a0.");

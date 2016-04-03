@@ -50,7 +50,7 @@ public class SaveCommand implements CommandExecutor {
 
         if (!(sender instanceof Player)) {
             FastTravelDB.save();
-            io.sendTranslation(sender, "Command.Save.Saved");
+            io.sendTranslation(sender, "Command.Save.Saved.Player");
             FastTravelDB.load();
             return true;
         }
@@ -59,7 +59,7 @@ public class SaveCommand implements CommandExecutor {
             io.send(sender, io.translate("Perms.Not"));
         } else if (sender.hasPermission(FastTravel.PERMS_BASE + "save")) {
             FastTravelDB.save();
-            io.sendTranslation(sender, "Command.Save.Saved");
+            io.sendTranslation(sender, "Command.Save.Saved.Player");
             if (sender instanceof Player) {
                 io.sendConsole(io.translate("Command.Save.Saved.Console"));
             }
