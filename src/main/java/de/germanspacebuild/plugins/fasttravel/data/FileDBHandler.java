@@ -34,7 +34,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,24 +42,15 @@ import java.util.UUID;
  */
 public class FileDBHandler {
 
-    private static FastTravel plugin;
-
-    private static List<String> filePlayers;
-
-    public static File saveFile;
-
-    static {
-        plugin = FastTravel.getInstance();
-        filePlayers = new ArrayList<>();
-    }
-
-    public static void setSaveFile(File saveFile) {
-        FileDBHandler.saveFile = saveFile;
-    }
+    private static File saveFile;
 
     public static void load(File saveFile) {
 
+        FastTravel plugin = FastTravel.getInstance();
+
         FileDBHandler.saveFile = saveFile;
+
+        List<String> filePlayers;
 
         YamlConfiguration signYAML = new YamlConfiguration();
 
@@ -106,7 +96,7 @@ public class FileDBHandler {
             boolean automatic = signYAML.getBoolean(signName + ".automatic", false);
             boolean marked = signYAML.getBoolean(signName + ".marked", false);
 
-            if (!checkMissing(signName, creator, locWorld, tpLocWorld)) {
+            if (!checkMissing(signName, creator, locWorld, tpLocWorld, plugin)) {
                 continue;
             }
 
@@ -161,7 +151,7 @@ public class FileDBHandler {
         }
     }
 
-    private static boolean checkMissing(String signName, UUID creator, World locWorld, World tplocWorld) {
+    private static boolean checkMissing(String signName, UUID creator, World locWorld, World tplocWorld, FastTravel plugin) {
 
         if (Bukkit.getServer().getOfflinePlayer(creator) == null) {
             plugin.getLogger()
