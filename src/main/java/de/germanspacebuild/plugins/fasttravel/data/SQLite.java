@@ -36,9 +36,15 @@ import java.sql.SQLException;
  */
 public class SQLite extends Database {
 
+    private FastTravel plugin;
+
+    public SQLite(FastTravel plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     protected void connect() throws ClassNotFoundException, SQLException {
-        File dbFile = new File(FastTravel.getDataDir() + "/signs.db");
+        File dbFile = new File(plugin.getDataFolder() + "/signs.db");
         Class.forName("org.sqlite.JDBC");
         if (!dbFile.exists())
             try {

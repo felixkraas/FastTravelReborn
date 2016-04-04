@@ -26,9 +26,7 @@ package de.germanspacebuild.plugins.fasttravel.task;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.*;
 
 import java.util.UUID;
 
@@ -40,12 +38,10 @@ public class WarmupPlayerTask extends Thread {
     private FastTravel plugin;
     private long warmup;
     private UUID player;
-    private ScoreboardManager sm;
     private IOManager io;
 
     public WarmupPlayerTask(FastTravel plugin, UUID player, long warmup) {
         this.plugin = plugin;
-        this.sm = plugin.getScoreboardManager();
         this.warmup = warmup;
         this.player = player;
         this.io = plugin.getIOManger();
@@ -54,30 +50,14 @@ public class WarmupPlayerTask extends Thread {
     @Override
     public void run() {
         long timestamp = System.currentTimeMillis();
-        Scoreboard board = sm.getNewScoreboard();
-        Team team = board.getTeam("warmup-" + this.player.toString());
-        team.setDisplayName(ChatColor.DARK_PURPLE + plugin.getName());
         //TODO get the whole team shit to work!
         Player playerRaw = plugin.getServer().getPlayer(player);
-        team.addEntry(playerRaw.getDisplayName());
-
-        Objective timer = board.registerNewObjective("timer", "dummy");
-        timer.setDisplaySlot(DisplaySlot.SIDEBAR);
-        timer.setDisplayName(ChatColor.DARK_PURPLE + plugin.getName());
-
-        Score timerCount = timer.getScore(ChatColor.GREEN + io.translate("Warmup.Objective"));
-        timerCount.setScore((int) warmup);
 
         for (int i = (int) warmup; i > 0; i--) {
             while (!((System.currentTimeMillis() - timestamp) < 1000L)) {
-                timerCount.setScore(i);
                 timestamp = System.currentTimeMillis();
             }
         }
-
-        board.clearSlot(DisplaySlot.SIDEBAR);
-        team.removeEntry(playerRaw.getDisplayName());
-
 
     }
 }

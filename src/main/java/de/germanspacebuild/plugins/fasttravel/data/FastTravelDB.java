@@ -43,7 +43,7 @@ public class FastTravelDB {
 
     public static void init(FastTravel plugin, String saveFile, boolean load) {
         FastTravelDB.plugin = plugin;
-        FastTravelDB.saveFile = new File(FastTravel.getDataDir(), saveFile);
+        FastTravelDB.saveFile = new File(plugin.getDataFolder(), saveFile);
 
         if (load)
             load();

@@ -45,7 +45,7 @@ public class LangEN extends Language {
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(FastTravel.getLangDir(), "en.lang");
+        langFile = new File(plugin.getDataFolder(), "en.lang");
         if (!langFile.exists()) {
             try {
                 langFile.createNewFile();

@@ -37,14 +37,12 @@ import de.germanspacebuild.plugins.fasttravel.thirdparty.PluginHook;
 import de.germanspacebuild.plugins.fasttravel.util.UpdateChecker;
 import de.slikey.effectlib.EffectManager;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.mcstats.Metrics;
 
 import java.io.File;
@@ -64,13 +62,12 @@ public class FastTravel extends JavaPlugin {
 
     private static FastTravel instance;
     private Configuration config;
-    private static File dataDir;
-    private static File langDir;
+    private File dataDir;
+    private File langDir;
     private Metrics metrics;
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
-    private static ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
 
     public boolean needUpdate;
     public String newVersion;
@@ -275,7 +272,7 @@ public class FastTravel extends JavaPlugin {
     }
 
     private void initDB() {
-        Database.registerDatabaseSystem(DBType.SQLite, new SQLite());
+        Database.registerDatabaseSystem(DBType.SQLite, new SQLite(this));
         Database.registerDatabaseSystem(DBType.MySQL, new MySQL(this));
     }
 
@@ -287,11 +284,7 @@ public class FastTravel extends JavaPlugin {
         return io;
     }
 
-    public static File getDataDir() {
-        return dataDir;
-    }
-
-    public static File getLangDir() {
+    public File getLangDir() {
         return langDir;
     }
 
@@ -305,9 +298,5 @@ public class FastTravel extends JavaPlugin {
 
     public PluginHook getHook(String hook) {
         return hooks.get(hook);
-    }
-
-    public ScoreboardManager getScoreboardManager() {
-        return scoreboardManager;
     }
 }
