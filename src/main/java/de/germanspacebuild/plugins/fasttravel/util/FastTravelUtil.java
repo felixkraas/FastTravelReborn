@@ -27,10 +27,12 @@ package de.germanspacebuild.plugins.fasttravel.util;
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.io.IOManager;
+import de.germanspacebuild.plugins.fasttravel.menu.SignMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,6 +123,24 @@ public class FastTravelUtil {
         }
 
         return names;
+    }
+
+    public static boolean isFastTravelMenu(Inventory inv) {
+        List<SignMenu> menus = SignMenu.getMenus();
+        List<Inventory> inventories = new ArrayList<Inventory>();
+        boolean isTravelInv = false;
+
+        for (SignMenu m : menus) {
+            inventories.addAll(m.getInventories());
+            if (inventories.contains(inv)) {
+                isTravelInv = true;
+                inventories.clear();
+                break;
+            }
+            inventories.clear();
+        }
+
+        return isTravelInv;
     }
 
     public static void formatSign(Sign sign, String name) {
