@@ -33,7 +33,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Created by oneill011990 on 03.09.2014.
+ * Created by oneill011990 on 03.09.2014
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class RemoveCommand implements CommandExecutor {
 
@@ -57,7 +60,7 @@ public class RemoveCommand implements CommandExecutor {
             FastTravelSign signRaw = FastTravelDB.getSign(sign);
 
             if (signRaw == null) {
-                io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", sign));
+                io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", sign));
                 return false;
             } else if (plugin.getServer().getPlayer(player) == null) {
                 io.send(sender, io.translate("Player.NotFound").replaceAll("%player", player));

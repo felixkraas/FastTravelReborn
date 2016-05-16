@@ -38,7 +38,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.util.Vector;
 
 /**
- * Created by oneill011990 on 03.06.2016.
+ * Created by oneill011990 on 03.06.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class ShowTPCommand implements CommandExecutor {
 
@@ -65,7 +68,7 @@ public class ShowTPCommand implements CommandExecutor {
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
 
         if (sign == null) {
-            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
             return false;
         }
         Location tpLoc = sign.getTPLocation().clone();

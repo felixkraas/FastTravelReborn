@@ -15,7 +15,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created by oneill011990 on 02.04.2016.
+ * Created by oneill011990 on 02.04.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class ShowRangeCommand implements CommandExecutor {
 
@@ -44,7 +47,7 @@ public class ShowRangeCommand implements CommandExecutor {
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
 
         if (sign == null) {
-            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
             return true;
         } else if (sign.getRange() == 0) {
             io.send(sender, io.translate("Command.ShowRange.Zero").replaceAll("%sign", sign.getName()));

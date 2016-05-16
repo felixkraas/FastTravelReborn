@@ -35,11 +35,15 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTPlayerListener implements Listener {
 
@@ -65,7 +69,7 @@ public class FTPlayerListener implements Listener {
         Sign sign = (Sign) event.getClickedBlock().getState();
 
         if (FastTravelDB.getSignsFor(event.getPlayer().getUniqueId()).contains(FastTravelDB.getSign(sign.getLine(1)))) {
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.FoundAlready".replaceAll("%sign",
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found.Already".replaceAll("%sign",
                     sign.getLine(1)));
             return;
         } else {
@@ -73,6 +77,16 @@ public class FTPlayerListener implements Listener {
                     FastTravelDB.getSign(sign.getLine(1))));
         }
 
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onPlayerJoinEvent(PlayerJoinEvent event) {
+        if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "update")) {
+            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate(
+                    "Plugin.Update.Player").replace("%old", plugin.getDescription().getVersion())
+                    .replaceAll("%new", plugin.getUpdateChecker().getVersion()).replaceAll("%link",
+                            plugin.getUpdateChecker().getLink()));
+        }
     }
 
 }

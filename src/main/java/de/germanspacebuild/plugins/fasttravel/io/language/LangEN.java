@@ -32,7 +32,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class LangEN extends Language {
 
@@ -82,20 +85,20 @@ public class LangEN extends Language {
             set("Player.Removed", "You have been removed from&b %sign&f.");
             set("Player.NotFound", "Could not find player&b %player &f.");
             set("Player.HasZero", "You haven't found any signs yet.");
+            set("Player.List", "You can travel to the following FastTravelSigns:");
 
             //Sign
-            set("Sign.PlaceAbove", "You can't place blocks above FastTravelSigns.");
+            set("Sign.PlaceAbove.Not", "You can't place blocks above FastTravelSigns.");
             set("Sign.PlaceAbove.Is", "You can't place FastTravelSigns directly below blocks.");
             set("Sign.CantBreak", "You can't break FastTravelSigns.");
             set("Sign.Removed", "You have removed point &b%sign&f.");
-            set("Sign.Found", "You found &b%sign&f. now you can travel here.");
+            set("Sign.Found.Is", "You found &b%sign&f. now you can travel here.");
             set("Sign.Found.Already", "You already found &b%sign&f.");
             set("Sign.Found.Not", "You have not found &b%sign &fyet.");
             set("Sign.InvalidName", "You may not use anything but letters in sign names.");
-            set("Sign.Exists", "&b%sign &falready exists.");
+            set("Sign.Exists.Already", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
-            set("Sign.ExistsNot", "Sign&b %sign &fdoes not exist.");
-            set("Sign.List", "You can travel to the following FastTravelSigns:");
+            set("Sign.Exists.Already.Not", "Sign&b %sign &fdoes not exist.");
 
             //Economy
             set("Econ.Disabled", "Economy support is disabled in the config.");
@@ -120,6 +123,7 @@ public class LangEN extends Language {
             set("Command.Price.Set", "Traveling to&b %sign&f now costs&a %price&f.");
 
             set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
+            set("Command.Range.Get", "Range of &b %sign&f is: &a %range&f.");
 
             set("Command.SetPoint.Set", "Set destination of %sign to you current location.");
             set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");

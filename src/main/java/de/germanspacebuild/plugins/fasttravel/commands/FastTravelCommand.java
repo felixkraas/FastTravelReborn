@@ -73,7 +73,7 @@ public class FastTravelCommand implements CommandExecutor {
             FastTravelSign ftsign = FastTravelDB.getSign(args[0]);
 
             if (ftsign == null) {
-                io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+                io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
                 return true;
             }
 

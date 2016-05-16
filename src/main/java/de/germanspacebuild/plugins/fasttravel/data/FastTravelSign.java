@@ -41,7 +41,7 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
     private String name;
     private Location tpLoc;
     private Location signLoc;
-    private Boolean automatic;
+    private Boolean automatic = false;
     private double price;
     private int range;
     private UUID creator;

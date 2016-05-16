@@ -43,7 +43,10 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTSignListener implements Listener {
 
@@ -93,7 +96,7 @@ public class FTSignListener implements Listener {
             if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                 event.getBlock().breakNaturally(new ItemStack(Material.SIGN, 1));
             }
-            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists")
+            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists.Already")
                     .replaceAll("%sign", lines[1]));
             return;
         } else {

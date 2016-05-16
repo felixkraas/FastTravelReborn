@@ -31,7 +31,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTFoundListener implements Listener {
 
@@ -44,7 +47,7 @@ public class FTFoundListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onSignFound(FastTravelFoundEvent event) {
         event.getSign().addPlayer(event.getPlayer().getUniqueId());
-        plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found".replaceAll("%sign",
+        plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found.Is".replaceAll("%sign",
                 event.getSign().getName()));
     }
 

@@ -38,7 +38,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 02.09.2014.
+ * Created by oneill011990 on 02.09.2014
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class ClearCommand implements CommandExecutor {
 
@@ -58,7 +61,7 @@ public class ClearCommand implements CommandExecutor {
         if (args.length == 0) {
             io.sendTranslation(sender, "Command.NoSign");
         } else if (FastTravelDB.getSign(args[0]) == null) {
-            io.send(sender, io.translate("Sign.ExistsNot").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
         } else {
             FastTravelSign sign = FastTravelDB.getSign(args[0]);
             List<UUID> players = sign.getPlayers();

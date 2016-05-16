@@ -296,6 +296,10 @@ public class FastTravel extends JavaPlugin {
         return this.em;
     }
 
+    public UpdateChecker getUpdateChecker() {
+        return updateChecker;
+    }
+
     public PluginHook getHook(String hook) {
         return hooks.get(hook);
     }

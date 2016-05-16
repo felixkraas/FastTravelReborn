@@ -48,7 +48,7 @@ public class FTBlockListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         if (FastTravelUtil.isFTSign(event.getBlock().getWorld().getBlockAt(event.getBlock().getX(),
                 event.getBlock().getY() - 1, event.getBlock().getZ()))) {
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.PlaceAbove");
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.PlaceAbove.Not");
             event.setCancelled(true);
         }
     }
