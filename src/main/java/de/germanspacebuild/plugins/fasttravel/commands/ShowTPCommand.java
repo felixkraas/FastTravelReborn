@@ -72,6 +72,7 @@ public class ShowTPCommand implements CommandExecutor {
             return false;
         }
         Location tpLoc = sign.getTPLocation().clone();
+        tpLoc = tpLoc.getBlock().getLocation();
         LineEffect effect = new LineEffect(plugin.getEffectManager());
         effect.setDynamicOrigin(new DynamicLocation(tpLoc.subtract(0, tpLoc.getY(), 0)));
         effect.setDynamicTarget(new DynamicLocation(tpLoc.add(0, 255, 0)));
