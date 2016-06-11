@@ -44,14 +44,16 @@ public class LangEN extends Language {
     public LangEN(FastTravel plugin) {
         super(plugin.getConfig(), plugin);
         this.plugin = plugin;
+        createLanguageFile();
+        updateLanguage();
     }
 
     @Override
     public void createLanguageFile() {
-        langFile = new File(plugin.getDataFolder(), "en.lang");
+        langFile = new File(plugin.getLangDir(), "en.lang");
         if (!langFile.exists()) {
             try {
-                langFile.createNewFile();
+                super.langFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }

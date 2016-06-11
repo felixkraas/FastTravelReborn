@@ -26,14 +26,12 @@ package de.germanspacebuild.plugins.fasttravel.Listener;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.menu.SignMenu;
-import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
@@ -61,18 +59,18 @@ public class FTInventoryListener implements Listener {
         List<SignMenu> menus = SignMenu.getMenus();
         List<Inventory> inventories = new ArrayList<Inventory>();
 
-        isTravelInv = FastTravelUtil.isFastTravelMenu(event.getInventory());
-
-        if (!isTravelInv) {
-            return;
+        for (SignMenu m : menus) {
+            inventories.addAll(m.getInventories());
+            if (inventories.contains(event.getInventory())) {
+                isTravelInv = true;
+                menu = m;
+                inventories.clear();
+                break;
+            }
+            inventories.clear();
         }
 
-        if (event.getCursor() == null) {
-
-        }
-
-
-        if (slot <= 44 && event.getCurrentItem().getType() == Material.BEACON) {
+        if (isTravelInv && slot <= 44 && event.getCurrentItem().getType() == Material.BEACON) {
             menu.travel(event.getCurrentItem().getItemMeta().getDisplayName());
         } else if (slot == 45) {
             menu.goBack();
@@ -82,19 +80,5 @@ public class FTInventoryListener implements Listener {
 
 
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onInventoryPickup(InventoryPickupItemEvent event) {
-        List<SignMenu> menus = SignMenu.getMenus();
-        List<Inventory> inventories = new ArrayList<Inventory>();
-        boolean isTravelInv = false;
-
-        isTravelInv = FastTravelUtil.isFastTravelMenu(event.getInventory());
-
-        if (!isTravelInv) {
-            event.setCancelled(true);
-        }
-    }
-
 
 }

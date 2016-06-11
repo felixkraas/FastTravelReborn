@@ -60,7 +60,7 @@ public class RemoveCommand implements CommandExecutor {
             FastTravelSign signRaw = FastTravelDB.getSign(sign);
 
             if (signRaw == null) {
-                io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", sign));
+                io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", sign));
                 return false;
             } else if (plugin.getServer().getPlayer(player) == null) {
                 io.send(sender, io.translate("Player.NotFound").replaceAll("%player", player));

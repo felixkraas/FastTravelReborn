@@ -64,25 +64,26 @@ public class UpdateChecker {
             Node latestFile = document.getElementsByTagName("item").item(0);
             NodeList children = latestFile.getChildNodes();
 
-            this.version = children.item(1).getTextContent().replaceAll("[^0-9]", "");
+            this.version = children.item(1).getTextContent().replaceAll("[^0-9.]", "");
             this.link = children.item(3).getTextContent();
+            String versionPointless = version.replaceAll("[^0-9]", "");
 
-            if (version.contains("beta")) {
+            if (versionPointless.contains("beta")) {
                 return false;
             }
 
-            int versionInt = Integer.parseInt(this.version.replaceAll("[^0-9]", ""));
+            int versionInt = Integer.parseInt(versionPointless.replaceAll("[^0-9]", ""));
             int oldInt = Integer.parseInt(plugin.getDescription().getVersion().replaceAll("[^0-9]", ""));
 
-            if (this.version.replaceAll("[^0-9]", "").length() < 3) {
+            while (versionInt < 100) {
                 versionInt = versionInt * 10;
-            } else if (plugin.getDescription().getVersion().replaceAll("[^0-9]", "").replace("-", "").length() < 3) {
+            }
+
+            while (oldInt < 100) {
                 oldInt = oldInt * 10;
             }
 
-            if (oldInt < versionInt) {
-                return true;
-            }
+            return oldInt < versionInt;
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -55,31 +55,30 @@ public class FastTravel extends JavaPlugin {
     public static final boolean BETA = false;
 
     public static final String PERMS_BASE = "fasttravelsigns.";
-
-    private EffectManager em;
-
-    private Map<String, PluginHook> hooks = new HashMap<>();
-
     private static FastTravel instance;
+    private static File langDir;
+    public boolean needUpdate;
+    public String newVersion;
+    private EffectManager em;
+    private Map<String, PluginHook> hooks = new HashMap<>();
     private Configuration config;
     private File dataDir;
-    private File langDir;
     private Metrics metrics;
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
 
-    public boolean needUpdate;
-    public String newVersion;
-
+    public static FastTravel getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
         //private variables
         instance = this;
-        config = this.getConfig();
-        dataDir = this.getDataFolder();
-        langDir = new File(getDataFolder(), "lang");
+        this.config = this.getConfig();
+        this.dataDir = this.getDataFolder();
+        langDir = new File(dataDir, "lang");
 
         if (!dataDir.exists()) {
             dataDir.mkdir();
@@ -89,6 +88,9 @@ public class FastTravel extends JavaPlugin {
             langDir.mkdir();
         }
 
+        initLanguages();
+        //Init language
+        io = new IOManager(this);
 
         setupConfig();
 
@@ -99,10 +101,6 @@ public class FastTravel extends JavaPlugin {
         initDB();
 
         this.em = new EffectManager(this);
-
-        //Init language
-        initLanguages();
-        io = new IOManager(this);
         PluginManager pm = getServer().getPluginManager();
 
         //Listener
@@ -230,7 +228,6 @@ public class FastTravel extends JavaPlugin {
         }
     }
 
-
     public void setupEconomy() {
 
         if (!config.getBoolean("Plugin.Economy")) {
@@ -276,16 +273,16 @@ public class FastTravel extends JavaPlugin {
         Database.registerDatabaseSystem(DBType.MySQL, new MySQL(this));
     }
 
-    public static FastTravel getInstance() {
-        return instance;
-    }
-
     public IOManager getIOManger() {
         return io;
     }
 
     public File getLangDir() {
         return langDir;
+    }
+
+    public File getDataDir() {
+        return dataDir;
     }
 
     public Economy getEconomy() {

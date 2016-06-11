@@ -68,7 +68,7 @@ public class ShowTPCommand implements CommandExecutor {
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
 
         if (sign == null) {
-            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", args[0]));
             return false;
         }
         Location tpLoc = sign.getTPLocation().clone();

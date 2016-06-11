@@ -44,7 +44,7 @@ public class SQLite extends Database {
 
     @Override
     protected void connect() throws ClassNotFoundException, SQLException {
-        File dbFile = new File(plugin.getDataFolder() + "/signs.db");
+        File dbFile = new File(plugin.getDataDir() + "/signs.db");
         Class.forName("org.sqlite.JDBC");
         if (!dbFile.exists())
             try {

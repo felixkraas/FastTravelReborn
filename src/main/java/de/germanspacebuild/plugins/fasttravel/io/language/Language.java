@@ -35,40 +35,16 @@ import java.util.List;
 
 public abstract class Language {
 
-    private static List<Language> languages = new ArrayList<Language>();
-    protected YamlConfiguration lang;
-    protected File langFile;
     protected static Configuration config;
     protected static FastTravel plugin;
+    private static List<Language> languages = new ArrayList<>();
+    protected YamlConfiguration lang;
+    protected File langFile;
 
     public Language(Configuration config, FastTravel plugin) {
-        languages = new ArrayList<Language>();
-        this.config = config;
-        this.plugin = plugin;
-        createLanguageFile();
-        updateLanguage();
-    }
-
-    public abstract void createLanguageFile();
-
-    public abstract void updateLanguage();
-
-    public String translate(String key) {
-        return lang.getString(key);
-    }
-
-    public File getFile() {
-        return langFile;
-    }
-
-    public YamlConfiguration getKeys() {
-        return lang;
-    }
-
-    public abstract String getName();
-
-    public void set(String key, String value) {
-        if (lang.get(key) == null) lang.set(key, value);
+        languages = new ArrayList<>();
+        Language.config = config;
+        Language.plugin = plugin;
     }
 
     public static List<Language> getLanguages() {
@@ -96,6 +72,32 @@ public abstract class Language {
         return null;
     }
 
+    public static void addLanguage(Language lang) {
+        languages.add(lang);
+    }
+
+    public abstract void createLanguageFile();
+
+    public abstract void updateLanguage();
+
+    public String translate(String key) {
+        return lang.getString(key);
+    }
+
+    public File getFile() {
+        return langFile;
+    }
+
+    public YamlConfiguration getKeys() {
+        return lang;
+    }
+
+    public abstract String getName();
+
+    public void set(String key, String value) {
+        if (lang.get(key) == null) lang.set(key, value);
+    }
+
     public void save() {
         try {
             if (lang == null) System.out.println("yml = null");
@@ -104,9 +106,5 @@ public abstract class Language {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void addLanguage(Language lang) {
-        languages.add(lang);
     }
 }

@@ -81,7 +81,7 @@ public class FTPlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "update")) {
+        if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "update") && FastTravel.getInstance().needUpdate) {
             plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate(
                     "Plugin.Update.Player").replace("%old", plugin.getDescription().getVersion())
                     .replaceAll("%new", plugin.getUpdateChecker().getVersion()).replaceAll("%link",
