@@ -64,9 +64,7 @@ public class FastTravelUtil {
             return false;
         String[] lines = ((Sign) block.getState()).getLines();
         String line1 = ChatColor.stripColor(lines[0]);
-        if (line1.equalsIgnoreCase("[fasttravel]") || line1.equalsIgnoreCase("[ft]"))
-            return true;
-        return false;
+        return line1.equalsIgnoreCase("[fasttravel]") || line1.equalsIgnoreCase("[ft]");
     }
 
 
@@ -78,9 +76,7 @@ public class FastTravelUtil {
      */
     public static boolean isFTSign(String[] lines) {
         String line1 = ChatColor.stripColor(lines[0]);
-        if (line1.equalsIgnoreCase("[fasttravel]") || line1.equalsIgnoreCase("[ft]"))
-            return true;
-        return false;
+        return line1.equalsIgnoreCase("[fasttravel]") || line1.equalsIgnoreCase("[ft]");
     }
 
     /**
@@ -125,6 +121,12 @@ public class FastTravelUtil {
         return names;
     }
 
+    /**
+     * Checks if inventory is a menu from FastTravel
+     *
+     * @param inv Inventory to check
+     * @return true if inventory is a menu from FastTravel
+     */
     public static boolean isFastTravelMenu(Inventory inv) {
         List<SignMenu> menus = SignMenu.getMenus();
         List<Inventory> inventories = new ArrayList<Inventory>();

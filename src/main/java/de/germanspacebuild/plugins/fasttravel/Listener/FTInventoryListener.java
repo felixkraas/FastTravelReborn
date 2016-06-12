@@ -27,7 +27,6 @@ package de.germanspacebuild.plugins.fasttravel.Listener;
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.menu.SignMenu;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -51,8 +50,6 @@ public class FTInventoryListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onInventoryClick(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
-        Inventory inv = event.getInventory();
         int slot = event.getRawSlot();
         boolean isTravelInv = false;
 
@@ -76,6 +73,8 @@ public class FTInventoryListener implements Listener {
             menu.goBack();
         } else if (slot == 53) {
             menu.goNext();
+        } else {
+            event.setCancelled(true);
         }
 
 
