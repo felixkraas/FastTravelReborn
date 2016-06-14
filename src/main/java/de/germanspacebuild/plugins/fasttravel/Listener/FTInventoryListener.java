@@ -69,9 +69,9 @@ public class FTInventoryListener implements Listener {
 
         if (isTravelInv && slot <= 44 && event.getCurrentItem().getType() == Material.BEACON) {
             menu.travel(event.getCurrentItem().getItemMeta().getDisplayName());
-        } else if (slot == 45) {
+        } else if (isTravelInv && slot == 45) {
             menu.goBack();
-        } else if (slot == 53) {
+        } else if (isTravelInv && slot == 53) {
             menu.goNext();
         } else {
             if (isTravelInv) {
