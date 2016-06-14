@@ -74,7 +74,9 @@ public class FTInventoryListener implements Listener {
         } else if (slot == 53) {
             menu.goNext();
         } else {
-            event.setCancelled(true);
+            if (isTravelInv) {
+                event.setCancelled(true);
+            }
         }
 
 
