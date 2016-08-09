@@ -58,8 +58,8 @@ public class UpdateChecker {
 
     public boolean updateFound() {
         try {
-            InputStream instream = this.url.openConnection().getInputStream();
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(instream);
+            InputStream inStream = this.url.openConnection().getInputStream();
+            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inStream);
 
             Node latestFile = document.getElementsByTagName("item").item(0);
             NodeList children = latestFile.getChildNodes();

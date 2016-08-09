@@ -100,7 +100,7 @@ public class LangEN extends Language {
             set("Sign.InvalidName", "You may not use anything but letters in sign names.");
             set("Sign.Exists.Already", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
-            set("Sign.Exists.Already.Not", "Sign&b %sign &fdoes not exist.");
+            set("Sign.Exists.Not", "Sign&b %sign &fdoes not exist.");
 
             //Economy
             set("Econ.Disabled", "Economy support is disabled in the config.");
@@ -127,8 +127,8 @@ public class LangEN extends Language {
             set("Command.Range.Set", "Setting range of&b %sign&f to&a %range&f.");
             set("Command.Range.Get", "Range of &b %sign&f is: &a %range&f.");
 
-            set("Command.SetPoint.Set", "Set destination of %sign to you current location.");
-            set("Command.SetPoint.Cleared", "Destination of %sign has been reset.");
+            set("Command.SetPoint.Set", "Set destination of &b%sign&f to you current location.");
+            set("Command.SetPoint.Cleared", "Destination of &b%sign&f has been reset.");
 
             set("Command.Save.Saved.Player", "You have saved the database.");
             set("Command.Save.Saved.Console", "Database was saved.");
@@ -141,6 +141,8 @@ public class LangEN extends Language {
             set("Command.Convert.File", "Changed type of database to YAML-File.");
             set("Command.Convert.SQLite", "Changed type of database to SQLite.");
             set("Command.Convert.MySQL", "Changed type of database to MySQL.");
+
+            set("Command.Move.Success", "Successfully moved &b%sign&f.");
 
             //Warmup
             set("Warmup.Objective", "Warumup");

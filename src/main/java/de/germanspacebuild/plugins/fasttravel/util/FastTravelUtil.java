@@ -33,6 +33,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,10 @@ public class FastTravelUtil {
     static {
         plugin = FastTravel.getInstance();
         io = plugin.getIOManger();
+    }
+
+    public static boolean isMoveWand(ItemStack item) {
+        return item.getItemMeta().getLore().get(0).contains("Sign");
     }
 
     /**
@@ -149,6 +154,7 @@ public class FastTravelUtil {
         // Colorize sign
         sign.setLine(0, ChatColor.DARK_PURPLE + "[FastTravel]");
         sign.setLine(1, ChatColor.DARK_BLUE + name);
+        sign.update();
 
     }
 }

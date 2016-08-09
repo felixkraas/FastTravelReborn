@@ -65,7 +65,7 @@ public class SetRangeCommand implements CommandExecutor {
 
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
         if (sign == null) {
-            io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
         } else if (args.length == 2) {
             try {
                 range = Integer.parseInt(args[1]);

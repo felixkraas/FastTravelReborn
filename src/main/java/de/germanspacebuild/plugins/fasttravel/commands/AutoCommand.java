@@ -57,7 +57,7 @@ public class AutoCommand implements CommandExecutor {
         if (args.length == 0) {
             io.sendTranslation(sender, "Command.NoSign");
         } else if (FastTravelDB.getSign(args[0]) == null) {
-            io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
         } else {
             FastTravelSign sign = FastTravelDB.getSign(args[0]);
 

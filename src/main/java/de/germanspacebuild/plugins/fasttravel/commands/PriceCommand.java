@@ -47,10 +47,11 @@ public class PriceCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (!(sender instanceof Player)) {
+            io.sendTranslation(sender, "Command.Player");
             return false;
-        }
-        if (!sender.hasPermission(FastTravel.PERMS_BASE + "price")) {
+        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "prize")) {
             io.sendTranslation(sender, "Perms.Not");
             return false;
         }
@@ -65,7 +66,7 @@ public class PriceCommand implements CommandExecutor {
 
         FastTravelSign sign = FastTravelDB.getSign(args[0]);
         if (sign == null) {
-            io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", args[0]));
+            io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
         } else if (args.length == 1) {
             io.sendTranslation(sender, "Command.Price.No");
         } else if (args.length == 2) {

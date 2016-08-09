@@ -1,6 +1,6 @@
 name: FastTravelSigns
 main: de.germanspacebuild.plugins.fasttravel.FastTravel
-version: 1.0.3
+version: @version@
 softdepend: [vault, dynmap]
 permissions:
     fasttravelsigns.use:
@@ -71,6 +71,9 @@ permissions:
         default: op
     fasttravelsigns.convert:
         description: Allows use of /ftconvert command.
+        default: op
+    fasttravelsigns.move:
+        description: Allows use of /ftmove command.
         default: op
 commands:
     ft:
@@ -145,7 +148,12 @@ commands:
         usage: |
             /ftconvert [dbtype]
     ftshowrange:
-        description: Shows a sphere of particles to display rqantge of sign.
+        description: Shows a sphere of particles to display range of sign.
         permission: fasttravelsigns.show
         usage: |
             /ftshowrange [travelpoint]
+    ftmove:
+        description: Allows to move a sign to a new physical sign.
+        permission: fasttravelsigns.move
+        usage: |
+            /ftmove [travelpoint]

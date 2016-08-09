@@ -128,6 +128,7 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftshow").setExecutor(new ShowTPCommand(this));
         getCommand("ftconvert").setExecutor(new ConvertDBCommand(this));
         getCommand("ftshowrange").setExecutor(new ShowRangeCommand(this));
+        getCommand("ftmove").setExecutor(new MoveCommand(this));
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());

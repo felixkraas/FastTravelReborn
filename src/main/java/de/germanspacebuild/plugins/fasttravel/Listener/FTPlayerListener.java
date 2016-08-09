@@ -26,14 +26,19 @@ package de.germanspacebuild.plugins.fasttravel.Listener;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
+import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.events.FastTravelFoundEvent;
 import de.germanspacebuild.plugins.fasttravel.util.BlockUtil;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -79,6 +84,37 @@ public class FTPlayerListener implements Listener {
 
     }
 
+    @EventHandler(ignoreCancelled = true)
+    public void onPlayerInteractWand(PlayerInteractEvent event) {
+        if (!Arrays.asList(BlockUtil.signBlocks).contains(event.getClickedBlock().getType())) {
+            return;
+        } else if (event.getItem() == null) {
+            return;
+        } else if (!FastTravelUtil.isMoveWand(event.getItem())) {
+            return;
+        } else {
+            if (!(event.getClickedBlock().getState() instanceof Sign)) {
+                return;
+            }
+            Sign signBlock = ((Sign) event.getClickedBlock().getState());
+            FastTravelSign sign = FastTravelDB.getSign(event.getItem().getItemMeta().getLore().get(0).
+                    replace("Sign: " + ChatColor.GOLD, ""));
+            if (sign == null) {
+                return;
+            }
+            FastTravelUtil.formatSign(signBlock, sign.getName());
+            Location loc = sign.getSignLocation();
+            loc.getBlock().setType(Material.AIR);
+            if (sign.getSignLocation() == sign.getTPLocation()) {
+                sign.setTPLocation(signBlock.getLocation());
+            }
+            sign.setSignLocation(signBlock.getLocation());
+            event.getPlayer().getInventory().remove(event.getItem());
+            plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Command.Move.Success")
+                    .replace("%sign", sign.getName()));
+        }
+    }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         if (event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "update") && FastTravel.getInstance().needUpdate) {
@@ -86,6 +122,13 @@ public class FTPlayerListener implements Listener {
                     "Plugin.Update.Player").replace("%old", plugin.getDescription().getVersion())
                     .replaceAll("%new", plugin.getUpdateChecker().getVersion()).replaceAll("%link",
                             plugin.getUpdateChecker().getLink()));
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onPlayerItemDropEvent(PlayerDropItemEvent event) {
+        if (FastTravelUtil.isMoveWand(event.getItemDrop().getItemStack())) {
+            event.setCancelled(true);
         }
     }
 

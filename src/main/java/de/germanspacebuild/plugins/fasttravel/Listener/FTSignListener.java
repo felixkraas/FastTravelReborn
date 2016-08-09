@@ -122,10 +122,6 @@ public class FTSignListener implements Listener {
             event.setLine(1, ChatColor.DARK_BLUE + lines[1]);
 
             FastTravelDB.save();
-
         }
-
-
     }
-
 }

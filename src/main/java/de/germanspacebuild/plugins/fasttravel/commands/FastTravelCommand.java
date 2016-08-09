@@ -54,8 +54,13 @@ public class FastTravelCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player) || !sender.hasPermission(FastTravel.PERMS_BASE + "travel")) {
+
+        if (!(sender instanceof Player)) {
+            io.sendTranslation(sender, "Command.Player");
+            return false;
+        } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "travel")) {
             io.sendTranslation(sender, "Perms.Not");
+            return false;
         }
 
         if (args.length == 0) {
@@ -73,7 +78,7 @@ public class FastTravelCommand implements CommandExecutor {
             FastTravelSign ftsign = FastTravelDB.getSign(args[0]);
 
             if (ftsign == null) {
-                io.send(sender, io.translate("Sign.Exists.Already.Not").replaceAll("%sign", args[0]));
+                io.send(sender, io.translate("Sign.Exists.Not").replaceAll("%sign", args[0]));
                 return true;
             }
 
