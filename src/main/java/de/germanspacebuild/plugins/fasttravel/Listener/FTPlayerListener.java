@@ -103,8 +103,13 @@ public class FTPlayerListener implements Listener {
                     return;
                 }
             }
-            FastTravelSign sign = FastTravelDB.getSign(event.getItem().getItemMeta().getLore().get(0).
-                    replace("Sign: " + ChatColor.GOLD, ""));
+            String signName = event.getItem().getItemMeta().getLore().get(0).replace("Sign: " + ChatColor.GOLD, "");
+            FastTravelSign sign = FastTravelDB.getSign(signName);
+            if (sign == null) {
+                plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists.Not").
+                        replaceAll("%sign", signName));
+                return;
+            }
             FastTravelUtil.formatSign(signBlock, sign.getName());
             Location loc = sign.getSignLocation();
             loc.getBlock().setType(Material.AIR);
