@@ -35,12 +35,22 @@ import java.util.HashMap;
  */
 public abstract class Database {
 
-    protected Connection dbConn;
-    protected Statement dbStatement;
     private static final HashMap<DBType, Database> dbSystems;
 
     static {
         dbSystems = new HashMap<>();
+    }
+
+    protected Connection dbConn;
+    protected Statement dbStatement;
+
+    //Static Stuff
+    public static void registerDatabaseSystem(DBType systemName, Database dbSystem) {
+        dbSystems.put(systemName, dbSystem);
+    }
+
+    public static Database getDatabaseBySystem(DBType systemName) {
+        return dbSystems.get(systemName);
     }
 
     protected abstract void connect() throws ClassNotFoundException, SQLException;
@@ -113,27 +123,14 @@ public abstract class Database {
             if (rs == null) return false;
             if (rs.isAfterLast()) return false;
             if (rs.isBeforeFirst()) rs.next();
-            if (rs.getInt(1) == 0) return false;
-            else return true;
+            return rs.getInt(1) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    //Static Stuff
-    public static void registerDatabaseSystem(DBType systemName, Database dbSystem) {
-        dbSystems.put(systemName, dbSystem);
-    }
-
-    public static Database getDatabaseBySystem(DBType systemName) {
-        return dbSystems.get(systemName);
-    }
-
     public boolean parseBoolean(int bool) {
-        if (bool == 1)
-            return true;
-        else
-            return false;
+        return bool == 1;
     }
 }

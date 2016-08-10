@@ -101,6 +101,7 @@ public class LangEN extends Language {
             set("Sign.Exists.Already", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
             set("Sign.Exists.Not", "Sign&b %sign &fdoes not exist.");
+            set("Sign.list", "You have found the following signs:");
 
             //Economy
             set("Econ.Disabled", "Economy support is disabled in the config.");
@@ -143,6 +144,7 @@ public class LangEN extends Language {
             set("Command.Convert.MySQL", "Changed type of database to MySQL.");
 
             set("Command.Move.Success", "Successfully moved &b%sign&f.");
+            set("Command.Move.SignNotEmpty", "The sign to move to has to be empty!");
 
             //Warmup
             set("Warmup.Objective", "Warumup");

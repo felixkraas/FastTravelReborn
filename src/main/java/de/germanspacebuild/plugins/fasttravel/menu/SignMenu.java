@@ -71,6 +71,10 @@ public class SignMenu {
 
     }
 
+    public static List<SignMenu> getMenus() {
+        return menus;
+    }
+
     public void createItemStacks() {
         for (FastTravelSign sign : signs) {
             ItemStack item = new ItemStack(Material.BEACON, 1);
@@ -117,7 +121,6 @@ public class SignMenu {
         }
 
     }
-
 
     public void fillInventories() {
         for (int i = 0; i < sites; i++) {
@@ -191,10 +194,6 @@ public class SignMenu {
         player.closeInventory();
         Bukkit.getServer().getPluginManager().callEvent(new FastTravelEvent(player,
                 FastTravelDB.getSign(displayName.substring(2))));
-    }
-
-    public static List<SignMenu> getMenus() {
-        return menus;
     }
 
 }

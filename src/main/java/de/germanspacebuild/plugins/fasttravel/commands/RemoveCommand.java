@@ -51,7 +51,7 @@ public class RemoveCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!sender.hasPermission(FastTravel.PERMS_BASE + "remove")) {
             io.sendTranslation(sender, "Perms.Not");
-        } else if (args.length == 0 || args[0] == null || args[1] == null) {
+        } else if (args.length < 2 || args[0] == null || args[1] == null) {
             io.sendTranslation(sender, "Command.InvalidArgs");
         } else {
             String sign = args[0];

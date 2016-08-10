@@ -36,9 +36,9 @@ public class BlockUtil {
     /**
      * Blocks that are safe to be traveled to.
      */
-    public static Material[] safeBlocks = {Material.AIR, Material.SIGN, Material.SIGN_POST, Material.TORCH, Material.REDSTONE_TORCH_ON,
-            Material.REDSTONE_TORCH_OFF, Material.REDSTONE, Material.LONG_GRASS, Material.YELLOW_FLOWER,
-            Material.CROPS, Material.DEAD_BUSH};
+    public static Material[] safeBlocks = {Material.AIR, Material.SIGN, Material.SIGN_POST, Material.TORCH,
+            Material.REDSTONE_TORCH_ON, Material.REDSTONE_TORCH_OFF, Material.REDSTONE, Material.LONG_GRASS,
+            Material.YELLOW_FLOWER, Material.CROPS, Material.DEAD_BUSH, Material.WALL_SIGN};
 
     /**
      * Blocks that are Signs in Bukkit.
@@ -60,9 +60,7 @@ public class BlockUtil {
         loc.setY(y);
         Material mat1 = block1.getType();
         Material mat2 = block2.getType();
-        if ((Arrays.asList(safeBlocks).contains(mat1)) && (Arrays.asList(safeBlocks).contains(mat2)))
-            return true;
-        return false;
+        return (Arrays.asList(safeBlocks).contains(mat1)) && (Arrays.asList(safeBlocks).contains(mat2));
     }
 
 

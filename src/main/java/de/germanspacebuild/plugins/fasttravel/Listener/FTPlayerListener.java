@@ -97,11 +97,14 @@ public class FTPlayerListener implements Listener {
                 return;
             }
             Sign signBlock = ((Sign) event.getClickedBlock().getState());
+            for (String line : signBlock.getLines()) {
+                if (!line.isEmpty()) {
+                    plugin.getIOManger().sendTranslation(event.getPlayer(), "Command.Move.SignNotEmpty");
+                    return;
+                }
+            }
             FastTravelSign sign = FastTravelDB.getSign(event.getItem().getItemMeta().getLore().get(0).
                     replace("Sign: " + ChatColor.GOLD, ""));
-            if (sign == null) {
-                return;
-            }
             FastTravelUtil.formatSign(signBlock, sign.getName());
             Location loc = sign.getSignLocation();
             loc.getBlock().setType(Material.AIR);

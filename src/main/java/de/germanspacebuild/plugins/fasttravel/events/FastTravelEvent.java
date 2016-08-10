@@ -53,6 +53,10 @@ public class FastTravelEvent extends Event implements Cancellable {
         this.price = price;
     }
 
+    public static HandlerList getHandlerList() {
+        return HANDLER_LIST;
+    }
+
     public Player getPlayer() {
         return player;
     }
@@ -73,10 +77,6 @@ public class FastTravelEvent extends Event implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return HANDLER_LIST;
-    }
-
-    public static HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
 

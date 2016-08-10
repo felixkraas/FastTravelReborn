@@ -32,11 +32,10 @@ import org.bukkit.entity.Player;
 
 public class IOManager {
 
+    private final String prefix;
     private FastTravel plugin;
     private Configuration config;
     private Translator translator;
-
-    private final String prefix;
 
     public IOManager(FastTravel plugin) {
         this.plugin = plugin;

@@ -26,6 +26,7 @@ package de.germanspacebuild.plugins.fasttravel.Listener;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
+import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -55,14 +56,27 @@ public class FTBlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (FastTravelUtil.isFTSign(event.getBlock()) && !event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
-            event.setCancelled(true);
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.CantBreak");
-        } else if (FastTravelUtil.isFTSign(event.getBlock()) && event.getPlayer().hasPermission(
-                FastTravel.PERMS_BASE + "break")) {
-            FastTravelDB.removeSign(((Sign) event.getBlock().getState()).getLine(1));
-            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Removed".replaceAll("%sign",
-                    ((Sign) event.getBlock().getState()).getLine(1)));
+        if (!event.getPlayer().hasPermission(FastTravel.PERMS_BASE + "break")) {
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Perms.Not");
+            return;
+        }
+
+        if (!(event.getBlock().getState() instanceof Sign)) {
+            return;
+        }
+
+        Sign signBlock = ((Sign) event.getBlock().getState());
+
+        if (FastTravelUtil.isFTSign(event.getBlock())) {
+            FastTravelSign sign = FastTravelDB.getSign(signBlock.getLine(1));
+            if (sign == null) {
+                plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists.Not")
+                        .replaceAll("%sign", signBlock.getLine(1)));
+                return;
+            }
+            FastTravelDB.removeSign(sign.getName());
+            plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Removed".replaceAll("%sign", signBlock
+                    .getLine(1)));
         }
     }
 

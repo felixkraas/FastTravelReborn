@@ -50,12 +50,11 @@ public class DeleteCommand implements CommandExecutor {
 
         if (!(sender instanceof Player)) {
             io.sendTranslation(sender, "Command.Player");
-            return false;
+            return true;
         } else if (!sender.hasPermission(FastTravel.PERMS_BASE + "delete")) {
             io.sendTranslation(sender, "Perms.Not");
-            return false;
+            return true;
         }
-
 
         if (args.length == 0) {
             io.sendTranslation(sender, "Command.NoSign");
@@ -71,7 +70,6 @@ public class DeleteCommand implements CommandExecutor {
             FastTravelDB.removeSign(args[0]);
             io.send(sender, io.translate("Sign.Removed").replaceAll("%sign", sign.getName()));
         }
-
         return true;
     }
 
