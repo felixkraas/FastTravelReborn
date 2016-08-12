@@ -84,8 +84,9 @@ public class FastTravel extends JavaPlugin {
             langDir.mkdir();
         }
 
-        initLanguages();
         //Init language
+        initLanguages();
+
         io = new IOManager(this);
 
         setupConfig();
