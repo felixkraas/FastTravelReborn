@@ -20,6 +20,7 @@
 
 package de.germanspacebuild.plugins.fasttravel.tabcomplete;
 
+import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelDB;
 import de.germanspacebuild.plugins.fasttravel.data.FastTravelSign;
 import de.germanspacebuild.plugins.fasttravel.util.FastTravelUtil;
@@ -37,14 +38,19 @@ public class FtTabComplete implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-
-        if (!command.getName().equalsIgnoreCase("ft") || args.length != 1)
+        if (args.length != 1) {
             return null;
+        }
 
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return null;
+        }
 
         Player player = ((Player) sender);
+
+        if (player.hasPermission(FastTravel.PERMS_BASE + "overrides.allpoints")) {
+            return FastTravelUtil.sendSignNames(FastTravelDB.getAllSigns());
+        }
 
         List<FastTravelSign> signs = FastTravelDB.getSignsFor(player.getUniqueId());
 

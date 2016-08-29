@@ -129,6 +129,10 @@ public class FastTravel extends JavaPlugin {
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());
+        getCommand("ftmove").setTabCompleter(new FtTabComplete());
+        getCommand("ftshow").setTabCompleter(new FtTabComplete());
+        getCommand("ftshowrange").setTabCompleter(new FtTabComplete());
+        getCommand("ftsetpoint").setTabCompleter(new FtTabComplete());
 
         //Updatecheck
         if (!BETA) {

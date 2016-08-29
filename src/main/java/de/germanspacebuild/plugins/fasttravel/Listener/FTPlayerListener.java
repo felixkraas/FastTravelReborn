@@ -86,6 +86,8 @@ public class FTPlayerListener implements Listener {
             return;
         } else if (event.getItem() == null) {
             return;
+        } else if (event.getItem().getType() != Material.BONE) {
+            return;
         } else if (!FastTravelUtil.isMoveWand(event.getItem())) {
             return;
         } else {

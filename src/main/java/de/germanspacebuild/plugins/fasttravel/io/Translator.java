@@ -96,6 +96,7 @@ public class Translator {
         if (languages.get(language).getString(key) != null)
             return languages.get(language).getString(key);
         else
+            io.sendConsole("Key " + key + " couldn't be found. Please check your lang Files and report to plugin dev.");
             return "Key " + key + " couldn't be found. Please check your lang Files and report to plugin dev.";
     }
 }

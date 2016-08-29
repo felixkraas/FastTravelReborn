@@ -112,6 +112,12 @@ public class FastTravelUtil {
             io.send(sender, pointstr);
     }
 
+    /**
+     * Creates a list of string with the names of the given signs.
+     *
+     * @param signs Signs to get names from
+     * @return Names of the signs.
+     */
     public static List<String> sendSignNames(List<FastTravelSign> signs) {
         List<String> names = new ArrayList<>();
 
