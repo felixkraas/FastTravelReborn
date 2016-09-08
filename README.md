@@ -1,4 +1,5 @@
-### FastTravelSigns ###
+### FastTravelSigns ### 
+[![Build Status](https://travis-ci.org/oneill011990/FastTravelReborn.svg?branch=master)](https://travis-ci.org/oneill011990/FastTravelReborn)
 
 **The Simple Exploration and RPG-friendly teleportation plugin for [Bukkit](http://bukkit.org)!**
 
