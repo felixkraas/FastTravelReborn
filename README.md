@@ -1,4 +1,4 @@
-### FastTravelSigns ### 
+### FastTravelSigns ###
 
 [![Build Status](https://travis-ci.org/oneill011990/FastTravelReborn.svg?branch=master)](https://travis-ci.org/oneill011990/FastTravelReborn)
 
