@@ -2,21 +2,22 @@ language: java
 notifications:
   email: false
 jdk:
-    - oraclejdk8
+- oraclejdk8
 script:
-    - jdk_switcher use oraclejdk8
-    - gradle shadowJar
+- jdk_switcher use oraclejdk8
+- gradle shadowJar
 before_cache:
-    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-    - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
-    directories:
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 deploy:
-    provider: releases
-    api_key: c4e823cef1fc05139fc76782be38924e155dd884
-    file: FastTravelReborn-@version@-all
-    skip_cleanup: true
-    on:
-        tags: true
+  provider: releases
+  api_key:
+    secure: KgH1C1vm33y/ChLxr3/FoTQu54aIGLR8qrQ6WJsOmZrYG8O1G7EXzbbwgfujieOOFqItmx2MrgOsdT+J7RcWiBczg1jeqqRntbsFOW04HNn9Q29SH3Uo7en7poQEeNaa3EaUERe73YcQsbroEwjmRd1V7sr9l0QaRZuAiguL4SpRzS4/JLZgB3nk5yI8ICYdxP2ThHe1033QqpTx+KF0Im9fU1CevkIa$
+  file: FastTravelReborn-@version@-all.jar
+  on:
+    repo: oneill011990/FastTravelReborn
+    branch: ''
