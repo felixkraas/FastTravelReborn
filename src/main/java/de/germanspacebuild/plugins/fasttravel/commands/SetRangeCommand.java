@@ -39,11 +39,10 @@ public class SetRangeCommand implements CommandExecutor {
 
     private static int range;
 
-    private FastTravel plugin;
     private IOManager io;
 
     public SetRangeCommand(FastTravel plugin) {
-        this.plugin = plugin;
+        FastTravel plugin1 = plugin;
         this.io = plugin.getIOManger();
     }
 

@@ -26,11 +26,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Created by oneill011990 on 02.04.2016.
+ * Created by oneill011990 on 02.04.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class MySQL extends Database {
 
-    FastTravel plugin;
+    private FastTravel plugin;
 
     public MySQL(FastTravel plugin) {
         this.plugin = plugin;

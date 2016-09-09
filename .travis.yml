@@ -13,11 +13,11 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-deploy:
-  provider: releases
-  api_key:
-    secure: KgH1C1vm33y/ChLxr3/FoTQu54aIGLR8qrQ6WJsOmZrYG8O1G7EXzbbwgfujieOOFqItmx2MrgOsdT+J7RcWiBczg1jeqqRntbsFOW04HNn9Q29SH3Uo7en7poQEeNaa3EaUERe73YcQsbroEwjmRd1V7sr9l0QaRZuAiguL4SpRzS4/JLZgB3nk5yI8ICYdxP2ThHe1033QqpTx+KF0Im9fU1CevkIa$
-  file: FastTravelReborn-@version@-all.jar
-  on:
-    repo: oneill011990/FastTravelReborn
-    branch: ''
+#deploy:
+#  provider: releases
+#  api_key:
+#    secure: KgH1C1vm33y/ChLxr3/FoTQu54aIGLR8qrQ6WJsOmZrYG8O1G7EXzbbwgfujieOOFqItmx2MrgOsdT+J7RcWiBczg1jeqqRntbsFOW04HNn9Q29SH3Uo7en7poQEeNaa3EaUERe73YcQsbroEwjmRd1V7sr9l0QaRZuAiguL4SpRzS4/JLZgB3nk5yI8ICYdxP2ThHe1033QqpTx+KF0Im9fU1CevkIa$
+#  file: FastTravelReborn-@version@-all.jar
+#  on:
+#    repo: oneill011990/FastTravelReborn
+#    branch: ''

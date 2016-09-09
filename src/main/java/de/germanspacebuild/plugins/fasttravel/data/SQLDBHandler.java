@@ -33,19 +33,21 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 30.07.2016.
+ * Created by oneill011990 on 30.07.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class SQLDBHandler {
 
     private static Database db;
     private static FastTravel plugin;
     private static int entries;
-    private static List<String> signNames;
 
     static {
         db = Database.getDatabaseBySystem(DBType.SQLite);
         plugin = FastTravel.getInstance();
-        signNames = new ArrayList<>();
+        List<String> signNames = new ArrayList<>();
     }
 
     public static void load() {
@@ -93,7 +95,7 @@ public class SQLDBHandler {
                 float price = rs.getFloat(15);
                 int range = rs.getInt(16);
 
-                List<UUID> players = null;
+                List<UUID> players;
 
                 players = UUIDUtil.stringToUUIDList(rs.getString(17));
 
@@ -101,8 +103,8 @@ public class SQLDBHandler {
                     players.add(creator);
                 }
 
-                Location tpLoc = null;
-                Location signLoc = null;
+                Location tpLoc;
+                Location signLoc;
 
                 signLoc = new Location(signloc_World, signloc_X, signloc_Y, signloc_Z);
                 signLoc.setYaw(signloc_Yaw);
@@ -110,7 +112,7 @@ public class SQLDBHandler {
                 tpLoc = new Location(tploc_World, tploc_X, tploc_Y, tploc_Z);
                 tpLoc.setYaw(tploc_Yaw);
 
-                FastTravelSign sign = null;
+                FastTravelSign sign;
 
                 sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, marked, players);
 

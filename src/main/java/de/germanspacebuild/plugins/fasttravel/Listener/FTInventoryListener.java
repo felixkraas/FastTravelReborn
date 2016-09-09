@@ -33,15 +33,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by oneill011990 on 14.04.2016.
+ * Created by oneill011990 on 14.04.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTInventoryListener implements Listener {
 
-    private FastTravel plugin;
     private SignMenu menu;
 
     public FTInventoryListener(FastTravel plugin) {
-        this.plugin = plugin;
+        FastTravel plugin1 = plugin;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -50,7 +52,7 @@ public class FTInventoryListener implements Listener {
         boolean isTravelInv = false;
 
         List<SignMenu> menus = SignMenu.getMenus();
-        List<Inventory> inventories = new ArrayList<Inventory>();
+        List<Inventory> inventories = new ArrayList<>();
 
         for (SignMenu m : menus) {
             inventories.addAll(m.getInventories());

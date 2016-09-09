@@ -45,11 +45,10 @@ import java.util.List;
  */
 public class MoveCommand implements CommandExecutor {
 
-    private FastTravel plugin;
     private IOManager io;
 
     public MoveCommand(FastTravel plugin) {
-        this.plugin = plugin;
+        FastTravel plugin1 = plugin;
         this.io = plugin.getIOManger();
     }
 

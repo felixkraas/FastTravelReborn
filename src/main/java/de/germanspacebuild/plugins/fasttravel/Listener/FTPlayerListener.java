@@ -72,7 +72,6 @@ public class FTPlayerListener implements Listener {
         if (FastTravelDB.getSignsFor(event.getPlayer().getUniqueId()).contains(FastTravelDB.getSign(sign.getLine(1)))) {
             plugin.getIOManger().sendTranslation(event.getPlayer(), "Sign.Found.Already".replaceAll("%sign",
                     sign.getLine(1)));
-            return;
         } else {
             plugin.getServer().getPluginManager().callEvent(new FastTravelFoundEvent(event.getPlayer(),
                     FastTravelDB.getSign(sign.getLine(1))));
@@ -83,13 +82,9 @@ public class FTPlayerListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPlayerInteractWand(PlayerInteractEvent event) {
         if (!Arrays.asList(BlockUtil.signBlocks).contains(event.getClickedBlock().getType())) {
-            return;
         } else if (event.getItem() == null) {
-            return;
         } else if (event.getItem().getType() != Material.BONE) {
-            return;
         } else if (!FastTravelUtil.isMoveWand(event.getItem())) {
-            return;
         } else {
             if (!(event.getClickedBlock().getState() instanceof Sign)) {
                 return;

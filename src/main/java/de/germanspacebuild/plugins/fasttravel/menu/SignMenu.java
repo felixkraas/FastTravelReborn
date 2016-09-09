@@ -35,7 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by oneill011990 on 13.12.2014.
+ * Created by oneill011990 on 13.12.2014
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class SignMenu {
 
@@ -52,12 +55,12 @@ public class SignMenu {
     public SignMenu(Player player) {
         this.player = player;
 
-        signs = new ArrayList<FastTravelSign>();
-        inventories = new ArrayList<Inventory>();
+        signs = new ArrayList<>();
+        inventories = new ArrayList<>();
 
         signs.addAll(FastTravelDB.getSignsFor(player.getUniqueId()));
 
-        items = new ArrayList<ItemStack>();
+        items = new ArrayList<>();
 
         sites = 1;
 
@@ -71,14 +74,14 @@ public class SignMenu {
         return menus;
     }
 
-    public void createItemStacks() {
+    private void createItemStacks() {
         for (FastTravelSign sign : signs) {
             ItemStack item = new ItemStack(Material.BEACON, 1);
             ItemMeta meta = item.getItemMeta();
 
             meta.setDisplayName(ChatColor.YELLOW + sign.getName());
 
-            List<String> lore = new ArrayList<String>();
+            List<String> lore = new ArrayList<>();
 
             if (sign.getPrice() != 0.0) {
                 lore.add("Price: " + sign.getPrice());
@@ -96,7 +99,7 @@ public class SignMenu {
         }
     }
 
-    public void createInventories() {
+    private void createInventories() {
 
         int signCount = signs.size();
         multisited = false;
@@ -118,7 +121,7 @@ public class SignMenu {
 
     }
 
-    public void fillInventories() {
+    private void fillInventories() {
         for (int i = 0; i < sites; i++) {
             for (int j = 0; j < 44 && j < signs.size(); j++) {
                 if (multisited) {
@@ -179,7 +182,7 @@ public class SignMenu {
         }
     }
 
-    public int getCurrentSite() {
+    private int getCurrentSite() {
         return currentSite;
     }
 

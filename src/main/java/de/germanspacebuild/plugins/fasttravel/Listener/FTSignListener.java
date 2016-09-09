@@ -94,7 +94,6 @@ public class FTSignListener implements Listener {
             }
             plugin.getIOManger().send(event.getPlayer(), plugin.getIOManger().translate("Sign.Exists.Already")
                     .replaceAll("%sign", lines[1]));
-            return;
         } else {
             FastTravelSign newFTSign = new FastTravelSign(lines[1], event.getPlayer().getUniqueId(), event.getBlock());
 

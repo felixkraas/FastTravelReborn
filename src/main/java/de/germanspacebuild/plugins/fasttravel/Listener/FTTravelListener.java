@@ -35,7 +35,10 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 05.03.2016.
+ * Created by oneill011990 on 05.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTTravelListener implements Listener {
 

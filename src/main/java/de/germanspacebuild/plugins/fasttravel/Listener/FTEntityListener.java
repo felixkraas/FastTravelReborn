@@ -33,7 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FTEntityListener implements Listener {
 

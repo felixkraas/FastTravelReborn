@@ -29,7 +29,10 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 04.03.2016.
+ * Created by oneill011990 on 04.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class TravelTask implements Runnable {
 

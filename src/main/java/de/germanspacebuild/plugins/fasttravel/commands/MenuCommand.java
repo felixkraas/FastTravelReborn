@@ -29,12 +29,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created by oneill011990 on 15.12.2014.
+ * Created by oneill011990 on 15.12.2014
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class MenuCommand implements CommandExecutor {
 
-    FastTravel plugin;
-    IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
     public MenuCommand(FastTravel plugin) {
         this.plugin = plugin;

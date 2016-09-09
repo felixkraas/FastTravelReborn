@@ -40,8 +40,8 @@ import java.util.List;
  * @author oneill011990
  */
 public class FastTravelCommand implements CommandExecutor {
-    FastTravel plugin;
-    IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
     public FastTravelCommand(FastTravel plugin) {
         this.plugin = plugin;

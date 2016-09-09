@@ -31,11 +31,10 @@ import org.bukkit.entity.Player;
 
 public class SetpointCommand implements CommandExecutor {
 
-    private FastTravel plugin;
     private IOManager io;
 
     public SetpointCommand(FastTravel plugin) {
-        this.plugin = plugin;
+        FastTravel plugin1 = plugin;
         this.io = plugin.getIOManger();
     }
 

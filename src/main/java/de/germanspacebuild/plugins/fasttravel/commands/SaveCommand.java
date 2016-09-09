@@ -29,15 +29,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created by oneill011990 on 11.12.2014.
+ * Created by oneill011990 on 11.12.2014
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class SaveCommand implements CommandExecutor {
 
-    private FastTravel plugin;
     private IOManager io;
 
     public SaveCommand(FastTravel plugin) {
-        this.plugin = plugin;
+        FastTravel plugin1 = plugin;
         this.io = plugin.getIOManger();
     }
 

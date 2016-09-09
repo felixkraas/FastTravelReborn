@@ -32,7 +32,10 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 /**
- * Created by oneill011990 on 03.03.2016.
+ * Created by oneill011990 on 03.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FtTabComplete implements TabCompleter {
 

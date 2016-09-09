@@ -27,26 +27,29 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 01.06.2016.
+ * Created by oneill011990 on 01.06.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class WarmupPlayerTask extends Thread {
 
     private FastTravel plugin;
     private long warmup;
     private UUID player;
-    private IOManager io;
 
     public WarmupPlayerTask(FastTravel plugin, UUID player, long warmup) {
         this.plugin = plugin;
         this.warmup = warmup;
         this.player = player;
-        this.io = plugin.getIOManger();
+        IOManager io = plugin.getIOManger();
     }
 
     @Override
     public void run() {
         long timestamp = System.currentTimeMillis();
         //TODO get the whole team shit to work!
+        //noinspection UnusedAssignment
         Player playerRaw = plugin.getServer().getPlayer(player);
 
         for (int i = (int) warmup; i > 0; i--) {

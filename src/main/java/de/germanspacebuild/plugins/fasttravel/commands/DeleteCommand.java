@@ -34,8 +34,8 @@ import org.bukkit.entity.Player;
 
 public class DeleteCommand implements CommandExecutor {
 
-    FastTravel plugin;
-    IOManager io;
+    private FastTravel plugin;
+    private IOManager io;
 
     public DeleteCommand(FastTravel plugin) {
         this.plugin = plugin;

@@ -81,14 +81,8 @@ public class UpdateChecker {
 
             return oldInt < versionInt;
 
-        } catch (IOException e) {
+        } catch (IOException | SAXException | NumberFormatException | ParserConfigurationException e) {
             e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            return false;
         }
 
         return false;

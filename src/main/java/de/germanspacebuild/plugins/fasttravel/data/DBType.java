@@ -23,9 +23,6 @@ package de.germanspacebuild.plugins.fasttravel.data;
 import java.io.File;
 import java.sql.SQLException;
 
-/**
- * Created by oneill011990 on 03.03.2016.
- */
 public enum DBType {
 
     /*
@@ -35,6 +32,12 @@ public enum DBType {
      */
     SQLite, File, MySQL;
 
+    /**
+     * Created by oneill011990 on 03.03.2016
+     * for FastTravelReborn
+     *
+     * @author oneill011990
+     */
     private static DBType type;
 
     public static void save() {

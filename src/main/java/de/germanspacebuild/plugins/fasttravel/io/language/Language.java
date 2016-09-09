@@ -88,6 +88,7 @@ public abstract class Language {
         return lang;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public abstract String getName();
 
     public void set(String key, String value) {

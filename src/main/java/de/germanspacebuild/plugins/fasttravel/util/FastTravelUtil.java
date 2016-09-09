@@ -34,17 +34,20 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Created by oneill011990 on 03.03.2016.
+ * Created by oneill011990 on 03.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FastTravelUtil {
 
-    private static FastTravel plugin;
     private static IOManager io;
 
     static {
-        plugin = FastTravel.getInstance();
+        FastTravel plugin = FastTravel.getInstance();
         io = plugin.getIOManger();
     }
 
@@ -119,13 +122,8 @@ public class FastTravelUtil {
      * @return Names of the signs.
      */
     public static List<String> sendSignNames(List<FastTravelSign> signs) {
-        List<String> names = new ArrayList<>();
 
-        for (FastTravelSign sign : signs) {
-            names.add(sign.getName());
-        }
-
-        return names;
+        return signs.stream().map(FastTravelSign::getName).collect(Collectors.toList());
     }
 
     /**
@@ -136,7 +134,7 @@ public class FastTravelUtil {
      */
     public static boolean isFastTravelMenu(Inventory inv) {
         List<SignMenu> menus = SignMenu.getMenus();
-        List<Inventory> inventories = new ArrayList<Inventory>();
+        List<Inventory> inventories = new ArrayList<>();
         boolean isTravelInv = false;
 
         for (SignMenu m : menus) {

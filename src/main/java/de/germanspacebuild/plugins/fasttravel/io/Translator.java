@@ -27,7 +27,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +36,6 @@ public class Translator {
 
     private static FastTravel plugin;
     private static HashMap<String, YamlConfiguration> languages;
-    private static Configuration config;
     private static String language;
     private static IOManager io;
 
@@ -46,21 +44,21 @@ public class Translator {
     }
 
     public void init() {
-        config = plugin.getConfig();
+        Configuration config = plugin.getConfig();
         io = plugin.getIOManger();
-        languages = new HashMap<String, YamlConfiguration>();
+        languages = new HashMap<>();
         language = config.getString("IO.Language", "en");
         List<Language> langs = Language.getLanguages();
-        List<File> loadedFiles = new ArrayList<File>();
-        for (int i = 0; i < langs.size(); i++) {
-            langs.get(i).createLanguageFile();
-            langs.get(i).updateLanguage();
-            loadedFiles.add(langs.get(i).getFile());
-            languages.put(langs.get(i).getName(), langs.get(i).getKeys());
+        List<File> loadedFiles = new ArrayList<>();
+        for (Language lang : langs) {
+            lang.createLanguageFile();
+            lang.updateLanguage();
+            loadedFiles.add(lang.getFile());
+            languages.put(lang.getName(), lang.getKeys());
         }
         File[] langFiles = plugin.getLangDir().listFiles();
-        for (int i = 0; i < langFiles.length; i++) {
-            if (loadedFiles.indexOf(langFiles[i]) == -1) loadLanguageFile(langFiles[i]);
+        for (File langFile : langFiles) {
+            if (loadedFiles.indexOf(langFile) == -1) loadLanguageFile(langFile);
         }
         if (languages.get(language) == null) {
             language = "en";
@@ -72,11 +70,7 @@ public class Translator {
         YamlConfiguration lang = new YamlConfiguration();
         try {
             lang.load(languageFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
         languages.put(languageFile.getName().split(".lang")[0], lang);

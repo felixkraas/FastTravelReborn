@@ -48,18 +48,16 @@ import java.util.Map;
 
 public class FastTravel extends JavaPlugin {
 
-    public static final boolean BETA = false;
-
     public static final String PERMS_BASE = "fasttravelsigns.";
+    private static final boolean BETA = false;
     private static FastTravel instance;
     private static File langDir;
     public boolean needUpdate;
-    public String newVersion;
+    private String newVersion;
     private EffectManager em;
     private Map<String, PluginHook> hooks = new HashMap<>();
     private Configuration config;
     private File dataDir;
-    private Metrics metrics;
     private Economy economy;
     private UpdateChecker updateChecker;
     private IOManager io;
@@ -164,7 +162,7 @@ public class FastTravel extends JavaPlugin {
 
         checkHooks();
 
-        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5 * 20, 1 * 20);
+        getServer().getScheduler().runTaskTimer(this, new CheckPlayerTask(this), 5 * 20, 20);
 
         if (BETA) {
             io.sendConsole(ChatColor.RED + "This is a beta release of FastTravelSigns. Please report any bug to the" +
@@ -230,7 +228,7 @@ public class FastTravel extends JavaPlugin {
         }
     }
 
-    public void setupEconomy() {
+    private void setupEconomy() {
 
         if (!config.getBoolean("Plugin.Economy")) {
             return;
@@ -253,10 +251,10 @@ public class FastTravel extends JavaPlugin {
         getLogger().info("Using " + economy.getName() + " for economy support.");
     }
 
-    public void metricsInit() {
+    private void metricsInit() {
         if (getConfig().getBoolean("Plugin.Metrics")) {
             try {
-                metrics = new Metrics(this);
+                Metrics metrics = new Metrics(this);
                 metrics.start();
             } catch (IOException e) {
                 // Failed to submit the stats :-(

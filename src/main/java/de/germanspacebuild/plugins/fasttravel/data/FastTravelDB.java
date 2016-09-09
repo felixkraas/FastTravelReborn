@@ -25,9 +25,13 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * Created by oneill011990 on 03.03.2016.
+ * Created by oneill011990 on 03.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FastTravelDB {
 
@@ -88,10 +92,7 @@ public class FastTravelDB {
     public static List<FastTravelSign> getSignsFor(UUID player) {
         List<FastTravelSign> playerSigns = new ArrayList<>();
         if (!signs.isEmpty()) {
-            for (FastTravelSign sign : signs.values()) {
-                if (!sign.isAutomatic() || !sign.foundBy(player))
-                    playerSigns.add(sign);
-            }
+            playerSigns.addAll(signs.values().stream().filter(sign -> !sign.isAutomatic() || !sign.foundBy(player)).collect(Collectors.toList()));
         }
         Collections.sort(playerSigns);
         return playerSigns;

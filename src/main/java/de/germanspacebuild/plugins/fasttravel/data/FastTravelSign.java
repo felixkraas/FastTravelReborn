@@ -30,7 +30,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by oneill011990 on 03.03.2016.
+ * Created by oneill011990 on 03.03.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class FastTravelSign implements Comparable<FastTravelSign> {
 

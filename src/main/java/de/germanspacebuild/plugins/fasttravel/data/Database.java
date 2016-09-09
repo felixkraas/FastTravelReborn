@@ -27,7 +27,10 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 /**
- * Created by oneill011990 on 29.04.2016.
+ * Created by oneill011990 on 29.04.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public abstract class Database {
 
@@ -64,9 +67,7 @@ public abstract class Database {
             connect();
             dbStatement = dbConn.createStatement();
             setupTables();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

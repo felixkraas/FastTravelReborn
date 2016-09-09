@@ -24,14 +24,17 @@ import de.germanspacebuild.plugins.fasttravel.FastTravel;
 import org.bukkit.plugin.Plugin;
 
 /**
- * Created by oneill011990 on 03.05.2016.
+ * Created by oneill011990 on 03.05.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public abstract class PluginHook {
 
-    FastTravel plugin;
     Plugin hook;
+    private FastTravel plugin;
 
-    public PluginHook(FastTravel plugin, Plugin hook) {
+    PluginHook(FastTravel plugin, Plugin hook) {
         this.plugin = plugin;
         this.hook = hook;
     }

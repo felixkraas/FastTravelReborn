@@ -30,12 +30,11 @@ public class IOManager {
 
     private final String prefix;
     private FastTravel plugin;
-    private Configuration config;
     private Translator translator;
 
     public IOManager(FastTravel plugin) {
         this.plugin = plugin;
-        this.config = this.plugin.getConfig();
+        Configuration config = this.plugin.getConfig();
         translator = new Translator(plugin);
         translator.init();
         prefix = ChatColor.LIGHT_PURPLE + "[" + plugin.getDescription().getName() + "] " +

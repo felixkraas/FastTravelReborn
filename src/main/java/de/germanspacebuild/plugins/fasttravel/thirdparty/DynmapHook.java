@@ -32,12 +32,15 @@ import org.dynmap.markers.MarkerSet;
 import java.util.List;
 
 /**
- * Created by oneill011990 on 03.05.2016.
+ * Created by oneill011990 on 03.05.2016
+ * for FastTravelReborn
+ *
+ * @author oneill011990
  */
 public class DynmapHook extends PluginHook {
 
-    DynmapAPI api;
-    MarkerSet markers;
+    private DynmapAPI api;
+    private MarkerSet markers;
 
     public DynmapHook(FastTravel plugin, Plugin hook) {
         super(plugin, hook);
@@ -50,16 +53,14 @@ public class DynmapHook extends PluginHook {
         processSigns();
     }
 
-    public void processSigns() {
+    private void processSigns() {
         List<FastTravelSign> signs = FastTravelDB.getAllSigns();
 
-        for (FastTravelSign sign : signs) {
-            if (sign.hasMarker()) {
-                Location signLoc = sign.getSignLocation();
-                markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
-                        signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(
-                                MarkerIcon.SIGN), true);
-            }
-        }
+        signs.stream().filter(FastTravelSign::hasMarker).forEach(sign -> {
+            Location signLoc = sign.getSignLocation();
+            markers.createMarker(sign.getName().toLowerCase(), sign.getName(), signLoc.getWorld().getName(),
+                    signLoc.getX(), signLoc.getY(), signLoc.getZ(), api.getMarkerAPI().getMarkerIcon(
+                            MarkerIcon.SIGN), true);
+        });
     }
 }

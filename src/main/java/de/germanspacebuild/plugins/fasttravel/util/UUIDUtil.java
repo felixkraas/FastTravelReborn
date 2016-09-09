@@ -22,7 +22,9 @@ package de.germanspacebuild.plugins.fasttravel.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class UUIDUtil {
     /**
@@ -32,11 +34,7 @@ public class UUIDUtil {
      * @return List of UUIDs.
      */
     public static List<UUID> stringToUUID(List<String> strings) {
-        List<UUID> ids = new ArrayList<UUID>();
-        for (String string : strings) {
-            ids.add(UUID.fromString(string));
-        }
-        return ids;
+        return strings.stream().map(UUID::fromString).collect(Collectors.toList());
     }
 
     /**
@@ -46,11 +44,7 @@ public class UUIDUtil {
      * @return Converted UUIDs.
      */
     public static List<String> uuidToString(List<UUID> ids) {
-        List<String> strings = new ArrayList<>();
-        for (UUID id : ids) {
-            strings.add(id.toString());
-        }
-        return strings;
+        return ids.stream().map(UUID::toString).collect(Collectors.toList());
     }
 
     /**
@@ -63,7 +57,7 @@ public class UUIDUtil {
     public static String uuidListToString(List<UUID> uuids) {
         String str = "NOID";
         for (UUID uuid : uuids) {
-            if (str == "NOID") {
+            if (Objects.equals(str, "NOID")) {
                 str = uuid.toString();
             } else {
                 str = str + ":" + uuid.toString();
