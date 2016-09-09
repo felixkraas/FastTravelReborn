@@ -92,6 +92,9 @@ processResources {
     from('src/main/resources') {
         filter ReplaceTokens, tokens: [version: version]
     }
+    from('.travis.yml') {
+        filter ReplaceTokens, tokens: [version: version]
+    }
 }
 
 buildscript {
