@@ -99,7 +99,7 @@ public class LangEN extends Language {
             set("Sign.Exists.Already", "&b%sign &falready exists.");
             set("Sign.Created", "You successfully created FastTravelSign &b%sign&f.");
             set("Sign.Exists.Not", "Sign&b %sign &fdoes not exist.");
-            set("Sign.list", "You have found the following signs:");
+            set("Sign.List", "You have found the following signs:");
 
             //Economy
             set("Econ.Disabled", "Economy support is disabled in the config.");
