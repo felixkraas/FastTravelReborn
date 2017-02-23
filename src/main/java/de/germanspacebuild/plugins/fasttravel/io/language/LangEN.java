@@ -75,6 +75,7 @@ public class LangEN extends Language {
                     " Get it here: %link");
             set("Plugin.Update.Console.No", "You are using the latest version of FastTravelSigns.");
             set("Plugin.InvalidDB", "Database you set in config is invalid. Falling back to YAML-File.");
+            set("Plugin.Java", "This plugin requires Java 8. Installed Java version: %version");
 
             //Permissions
             set("Perms.Not", "&4You don't have permission to do that. Contact an admin if you think this is an error.");

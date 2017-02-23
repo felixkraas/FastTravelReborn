@@ -87,6 +87,8 @@ public class FastTravel extends JavaPlugin {
 
         io = new IOManager(this);
 
+        checkJavaVerion();
+
         setupConfig();
 
         setupEconomy();
@@ -225,6 +227,14 @@ public class FastTravel extends JavaPlugin {
             hooks.put("dynmap", new DynmapHook(this, pm.getPlugin("dynmap")));
             io.sendConsole(io.translate("Hooks.Dynmap"));
             hooks.get("dynmap").init();
+        }
+    }
+
+    private void checkJavaVerion() {
+        String jVersion = System.getProperty("java.version");
+        if (!jVersion.startsWith("1.8")) {
+            io.sendConsole(io.translate("Plugin.Java").replaceAll("%version", jVersion));
+            this.getServer().getPluginManager().disablePlugin(this);
         }
     }
 
