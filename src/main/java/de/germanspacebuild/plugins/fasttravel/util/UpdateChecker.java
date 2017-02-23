@@ -82,7 +82,8 @@ public class UpdateChecker {
             return oldInt < versionInt;
 
         } catch (IOException | SAXException | NumberFormatException | ParserConfigurationException e) {
-            e.printStackTrace();
+            plugin.getIOManger().sendConsole(plugin.getIOManger().translate("Plugin.Update.Failed"));
+            version = "-1";
         }
 
         return false;

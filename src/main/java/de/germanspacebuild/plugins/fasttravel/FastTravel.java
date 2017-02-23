@@ -143,7 +143,7 @@ public class FastTravel extends JavaPlugin {
                         .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
                 needUpdate = true;
                 newVersion = updateChecker.getLink();
-            } else {
+            } else if (!updateChecker.updateFound() && updateChecker.getVersion() != "failed") {
                 io.sendConsole(io.translate("Plugin.Update.Console.No"));
             }
         }
