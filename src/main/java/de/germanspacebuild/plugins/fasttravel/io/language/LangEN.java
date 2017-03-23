@@ -110,6 +110,7 @@ public class LangEN extends Language {
 
             //Travel
             set("Travel.Success", "You traveled to&b %sign &f.");
+            set("Travel.Cooldown", "You have to wait at least %time seconds between travels.");
 
             //Commands
             set("Command.Player", "This command has to be executed by a player.");
