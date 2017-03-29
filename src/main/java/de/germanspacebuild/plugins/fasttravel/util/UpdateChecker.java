@@ -84,6 +84,9 @@ public class UpdateChecker {
         } catch (IOException | SAXException | NumberFormatException | ParserConfigurationException e) {
             plugin.getIOManger().sendConsole(plugin.getIOManger().translate("Plugin.Update.Failed"));
             version = "-1";
+            if (FastTravel.BETA == true) {
+                e.printStackTrace();
+            }
         }
 
         return false;

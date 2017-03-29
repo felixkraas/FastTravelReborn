@@ -135,6 +135,9 @@ public class LangEN extends Language {
 
             set("Command.ShowRange.Zero", "Range of &b%sign&f is &a0.");
 
+            set("Command.Reload.Reloaded", "Plugin has been reloaded by %player");
+            set("Command.Reload.Player", "Plugin has been reloaded.");
+
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
 
             set("Command.Convert.Invalid", "Invalid type of database, no changes performed.");

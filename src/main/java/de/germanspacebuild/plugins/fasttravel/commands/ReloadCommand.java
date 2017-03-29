@@ -46,7 +46,7 @@ public class ReloadCommand implements CommandExecutor {
             return false;
         }
 
-        io.sendTranslation(sender, "Command.Reload.Reloaded");
+        io.send(sender, io.translate("Command.Reload.Reloaded").replace("%player", ((Player) sender).getDisplayName()));
         io.send(sender, io.translate("Command.Reload.Player"));
         plugin.setupConfig();
 
