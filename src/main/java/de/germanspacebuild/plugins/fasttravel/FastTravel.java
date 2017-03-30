@@ -136,7 +136,8 @@ public class FastTravel extends JavaPlugin {
 
         //Updatecheck
         if (!BETA) {
-            updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
+            updateChecker = new UpdateChecker(this, "https://api.curseforge.com/servermods/files?projectIds=31383");
+            updateChecker.checkUpdate();
 
             if (updateChecker.updateFound()) {
                 io.sendConsole(io.translate("Plugin.Update.Console.Yes").replace("%old", this.getDescription().getVersion())

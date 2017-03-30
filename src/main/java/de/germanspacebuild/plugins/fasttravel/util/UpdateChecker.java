@@ -21,17 +21,16 @@
 package de.germanspacebuild.plugins.fasttravel.util;
 
 import de.germanspacebuild.plugins.fasttravel.FastTravel;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class UpdateChecker {
 
@@ -40,6 +39,8 @@ public class UpdateChecker {
 
     private String version;
     private String link;
+
+    private boolean updateFound = false;
 
     public UpdateChecker(FastTravel plugin, String url) {
         this.plugin = plugin;
@@ -52,44 +53,59 @@ public class UpdateChecker {
 
     }
 
-    public boolean updateFound() {
+
+    public void checkUpdate() {
         try {
-            InputStream inStream = this.url.openConnection().getInputStream();
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inStream);
+            URLConnection connection = url.openConnection();
 
-            Node latestFile = document.getElementsByTagName("item").item(0);
-            NodeList children = latestFile.getChildNodes();
+            connection.addRequestProperty("User-Agent", "FastTravelSings Updatechecker");
 
-            this.version = children.item(1).getTextContent().replaceAll("[^0-9.]", "");
-            this.link = children.item(3).getTextContent();
-            String versionPointless = version.replaceAll("[^0-9]", "");
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            if (versionPointless.contains("beta")) {
-                return false;
+            String response = reader.readLine();
+            JSONArray array = (JSONArray) JSONValue.parse(response);
+
+            if (array.size() > 0) {
+                JSONObject latest = (JSONObject) array.get(array.size() - 1);
+
+                if (!((String) latest.get("releaseType")).equalsIgnoreCase("release")) {
+                    updateFound = false;
+                    return;
+                }
+
+                this.version = ((String) latest.get("name")).replaceAll("[^0-9.]", "");
+                this.link = (String) latest.get("downloadUrl");
+
+                int versionInt = Integer.parseInt(version.replaceAll("[^0-9]", ""));
+                int currVersion = Integer.parseInt(plugin.getDescription().getVersion().replaceAll("[^0-9]", ""));
+
+                while (versionInt < 100) {
+                    versionInt = versionInt * 10;
+                }
+
+                while (currVersion < 100) {
+                    currVersion = currVersion * 10;
+                }
+
+                updateFound = currVersion < versionInt;
+
+            } else {
+                plugin.getIOManger().sendConsole(plugin.getIOManger().translate("Plugin.Update.Failed"));
+                version = "failed";
             }
 
-            int versionInt = Integer.parseInt(versionPointless.replaceAll("[^0-9]", ""));
-            int oldInt = Integer.parseInt(plugin.getDescription().getVersion().replaceAll("[^0-9]", ""));
-
-            while (versionInt < 100) {
-                versionInt = versionInt * 10;
-            }
-
-            while (oldInt < 100) {
-                oldInt = oldInt * 10;
-            }
-
-            return oldInt < versionInt;
-
-        } catch (IOException | SAXException | NumberFormatException | ParserConfigurationException e) {
+        } catch (IOException | NumberFormatException e) {
             plugin.getIOManger().sendConsole(plugin.getIOManger().translate("Plugin.Update.Failed"));
-            version = "-1";
+            version = "failed";
             if (FastTravel.BETA == true) {
                 e.printStackTrace();
             }
         }
+    }
 
-        return false;
+
+    public boolean updateFound() {
+        return updateFound;
     }
 
     public String getVersion() {
