@@ -42,23 +42,22 @@ public class UpdateChecker {
 
     private boolean updateFound = false;
 
-    public UpdateChecker(FastTravel plugin, String url) {
+    public UpdateChecker(FastTravel plugin, String projectID) {
         this.plugin = plugin;
 
         try {
-            this.url = new URL(url);
+            this.url = new URL("https://api.curseforge.com/servermods/files?projectIds=" + projectID);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
     }
 
-
     public void checkUpdate() {
         try {
             URLConnection connection = url.openConnection();
 
-            connection.addRequestProperty("User-Agent", "FastTravelSings Updatechecker");
+            connection.addRequestProperty("User-Agent", "CurseForge project updatechecker");
 
             final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 

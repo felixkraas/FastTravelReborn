@@ -136,7 +136,7 @@ public class FastTravel extends JavaPlugin {
 
         //Updatecheck
         if (!BETA) {
-            updateChecker = new UpdateChecker(this, "https://api.curseforge.com/servermods/files?projectIds=31383");
+            updateChecker = new UpdateChecker(this, "31383");
             updateChecker.checkUpdate();
 
             if (updateChecker.updateFound()) {
