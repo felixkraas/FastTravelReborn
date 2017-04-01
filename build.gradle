@@ -52,7 +52,7 @@ changelog {
 }
 
 dependencies {
-    compile group: 'de.slikey', name: 'EffectLib', version: '5.2'
+    compile group: 'de.slikey', name: 'EffectLib', version: '5.4'
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.11.2-R0.1-SNAPSHOT'
     compile group: 'org.mcstats.bukkit', name: 'metrics', version:'R8-SNAPSHOT'
     compile group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'

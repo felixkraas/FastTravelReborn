@@ -157,3 +157,8 @@ commands:
         permission: fasttravelsigns.move
         usage: |
             /ftmove [travelpoint]
+    ftdebug:
+        description: Enables and disables Debug-Mode.
+        permission: fasttravelsigns.debug
+        usage: |
+            /ftdebug
