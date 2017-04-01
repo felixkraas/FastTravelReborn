@@ -128,6 +128,9 @@ public class FTPlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerItemDropEvent(PlayerDropItemEvent event) {
+        if (event.getItemDrop().getItemStack().getType() != Material.BONE) {
+            return;
+        }
         if (FastTravelUtil.isMoveWand(event.getItemDrop().getItemStack())) {
             event.setCancelled(true);
         }
