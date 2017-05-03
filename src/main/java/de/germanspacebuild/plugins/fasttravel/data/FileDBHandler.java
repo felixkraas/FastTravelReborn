@@ -99,8 +99,14 @@ public class FileDBHandler {
                 continue;
             }
 
-            FastTravelDB.addSign(new FastTravelSign(signName, creator, price, location, tploc,
-                    automatic, range, marked, UUIDUtil.stringToUUID(filePlayers)));
+            FastTravelSign sign = new FastTravelSign(signName, creator, price, location, tploc,
+                    automatic, range, marked, UUIDUtil.stringToUUID(filePlayers));
+
+            if (plugin.getConfig().getBoolean("Plugin.Debug.Enabled")) {
+                plugin.getIOManger().sendConsole("Loaded sign: &b" + sign.toString());
+            }
+
+            FastTravelDB.addSign(sign);
             filePlayers.clear();
         }
 
