@@ -70,9 +70,6 @@ public class FastTravelDB {
         if (signs.containsKey(name.toLowerCase()))
             signs.remove(name.toLowerCase());
 
-        if (DBType.getDBType() == DBType.File) {
-            save();
-        }
         if (DBType.getDBType() == DBType.SQLite) {
             try {
                 SQLDBHandler.deleteSign(getSign(name));
