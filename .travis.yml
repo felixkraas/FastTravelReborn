@@ -20,3 +20,4 @@ deploy:
   file: FastTravelReborn.jar
   on:
     repo: NigelThorne/FastTravelReborn
+    tags: true
