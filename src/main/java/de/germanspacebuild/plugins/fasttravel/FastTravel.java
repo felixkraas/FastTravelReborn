@@ -150,10 +150,7 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftsetpoint").setTabCompleter(new FtTabComplete());
 
         //Database
-        if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
-            DBType.setDBType(DBType.File);
-            FastTravelDB.init(this, "signs.yml", true);
-        } else if (config.getString("Plugin.Database").equalsIgnoreCase("MySQL")) {
+        if (config.getString("Plugin.Database").equalsIgnoreCase("MySQL")) {
             DBType.setDBType(DBType.MySQL);
             SQLDBHandler.load();
         } else if (config.getString("Plugin.Database").equalsIgnoreCase("SQLite")) {

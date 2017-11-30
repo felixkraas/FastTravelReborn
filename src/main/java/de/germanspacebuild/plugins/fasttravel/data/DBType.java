@@ -27,10 +27,9 @@ public enum DBType {
 
     /*
      * 1 = SQLite
-     * 2 = File
-     * 3 = MySQL
+     * 2 = MySQL
      */
-    SQLite, File, MySQL;
+    SQLite, MySQL;
 
     /**
      * Created by oneill011990 on 03.03.2016
@@ -40,19 +39,8 @@ public enum DBType {
      */
     private static DBType type;
 
-    public static void save() {
-        switch (type) {
-            case File:
-                FileDBHandler.save();
-                break;
-        }
-    }
-
     public static void save(File saveFile) {
         switch (type) {
-            case File:
-                FileDBHandler.save(saveFile);
-                break;
             case SQLite:
                 try {
                     SQLDBHandler.save();
@@ -75,9 +63,6 @@ public enum DBType {
 
     public static void load(File saveFile) {
         switch (type) {
-            case File:
-                FileDBHandler.load(saveFile);
-                break;
             case SQLite:
                 SQLDBHandler.load();
                 break;

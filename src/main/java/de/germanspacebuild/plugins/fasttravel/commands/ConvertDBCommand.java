@@ -54,12 +54,6 @@ public class ConvertDBCommand implements CommandExecutor {
         String newDBType = args[0];
 
         switch (newDBType.toLowerCase()) {
-            case "file":
-                DBType.setDBType(DBType.File);
-                io.send(sender, io.translate("Command.Convert.File"));
-                FastTravelDB.init(plugin, "signs.yml", false);
-                plugin.getConfig().set("Plugin.Database", "File");
-                break;
             case "sqlite":
                 DBType.setDBType(DBType.SQLite);
                 plugin.getConfig().set("Plugin.Database", "SQLite");
