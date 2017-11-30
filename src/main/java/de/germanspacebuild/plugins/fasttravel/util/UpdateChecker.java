@@ -59,6 +59,10 @@ public class UpdateChecker {
 
             connection.addRequestProperty("User-Agent", "CurseForge project updatechecker");
 
+            System.out.println(connection.getURL());
+            System.out.println(connection.toString());
+            System.out.println(connection.getRequestProperties());
+
             final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String response = reader.readLine();
