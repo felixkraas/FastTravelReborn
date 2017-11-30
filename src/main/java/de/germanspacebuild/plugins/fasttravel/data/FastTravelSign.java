@@ -197,7 +197,16 @@ public class FastTravelSign implements Comparable<FastTravelSign> {
 
     @Override
     public String toString() {
-        return getName();
+        return "FastTravelSign{" +
+                "name='" + name + '\'' +
+                ", tpLoc=" + tpLoc +
+                ", signLoc=" + signLoc +
+                ", automatic=" + automatic +
+                ", price=" + price +
+                ", range=" + range +
+                ", creator=" + creator +
+                ", players=" + players +
+                ", marker=" + marker +
+                '}';
     }
-
 }

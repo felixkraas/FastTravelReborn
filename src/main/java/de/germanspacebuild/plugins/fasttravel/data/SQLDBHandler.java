@@ -117,7 +117,7 @@ public class SQLDBHandler {
                 sign = new FastTravelSign(name, creator, price, signLoc, tpLoc, automatic, range, marked, players);
 
                 if (plugin.getConfig().getBoolean("Plugin.Debug.Enabled")) {
-                    plugin.getLogger().info("Loaded sign: " + sign.getName());
+                    plugin.getIOManger().sendConsole("Loaded sign: &b" + sign.toString());
                 }
 
                 FastTravelDB.addSign(sign);

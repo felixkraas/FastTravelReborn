@@ -39,7 +39,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +48,7 @@ import java.util.Map;
 public class FastTravel extends JavaPlugin {
 
     public static final String PERMS_BASE = "fasttravelsigns.";
-    private static final boolean BETA = false;
+    public static final boolean BETA = false;
     private static FastTravel instance;
     private static File langDir;
     public boolean needUpdate;
@@ -89,11 +88,24 @@ public class FastTravel extends JavaPlugin {
 
         checkJavaVerion();
 
+        //Updatecheck
+        if (!BETA) {
+            updateChecker = new UpdateChecker(this, "31383");
+            updateChecker.checkUpdate();
+
+            if (updateChecker.updateFound()) {
+                io.sendConsole(io.translate("Plugin.Update.Console.Yes").replace("%old", this.getDescription().getVersion())
+                        .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
+                needUpdate = true;
+                newVersion = updateChecker.getLink();
+            } else if (!updateChecker.updateFound() && updateChecker.getVersion() != "failed") {
+                io.sendConsole(io.translate("Plugin.Update.Console.No"));
+            }
+        }
+
         setupConfig();
 
         setupEconomy();
-
-        metricsInit();
 
         initDB();
 
@@ -126,6 +138,9 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftconvert").setExecutor(new ConvertDBCommand(this));
         getCommand("ftshowrange").setExecutor(new ShowRangeCommand(this));
         getCommand("ftmove").setExecutor(new MoveCommand(this));
+        if (config.getBoolean("Plugin.Debug.Enabled")) {
+            getCommand("ftdebug").setExecutor(new DebugCommand(this));
+        }
 
         //Tab-Completer
         getCommand("ft").setTabCompleter(new FtTabComplete());
@@ -133,20 +148,6 @@ public class FastTravel extends JavaPlugin {
         getCommand("ftshow").setTabCompleter(new FtTabComplete());
         getCommand("ftshowrange").setTabCompleter(new FtTabComplete());
         getCommand("ftsetpoint").setTabCompleter(new FtTabComplete());
-
-        //Updatecheck
-        if (!BETA) {
-            updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/fasttravel/files.rss");
-
-            if (updateChecker.updateFound()) {
-                io.sendConsole(io.translate("Plugin.Update.Console.Yes").replace("%old", this.getDescription().getVersion())
-                        .replaceAll("%new", updateChecker.getVersion()).replaceAll("%link", updateChecker.getLink()));
-                needUpdate = true;
-                newVersion = updateChecker.getLink();
-            } else if (!updateChecker.updateFound() && updateChecker.getVersion() != "failed") {
-                io.sendConsole(io.translate("Plugin.Update.Console.No"));
-            }
-        }
 
         //Database
         if (config.getString("Plugin.Database").equalsIgnoreCase("FILE")) {
@@ -232,7 +233,7 @@ public class FastTravel extends JavaPlugin {
 
     private void checkJavaVerion() {
         String jVersion = System.getProperty("java.version");
-        if (!jVersion.startsWith("1.8")) {
+        if (!jVersion.startsWith("1.8") || jVersion == "9") {
             io.sendConsole(io.translate("Plugin.Java").replaceAll("%version", jVersion));
             this.getServer().getPluginManager().disablePlugin(this);
         }
@@ -259,18 +260,6 @@ public class FastTravel extends JavaPlugin {
             return;
         }
         getLogger().info("Using " + economy.getName() + " for economy support.");
-    }
-
-    private void metricsInit() {
-        if (getConfig().getBoolean("Plugin.Metrics")) {
-            try {
-                Metrics metrics = new Metrics(this);
-                metrics.start();
-            } catch (IOException e) {
-                // Failed to submit the stats :-(
-            }
-
-        }
     }
 
     private void initLanguages() {

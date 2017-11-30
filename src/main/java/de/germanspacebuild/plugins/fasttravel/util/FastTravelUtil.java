@@ -52,7 +52,8 @@ public class FastTravelUtil {
     }
 
     public static boolean isMoveWand(ItemStack item) {
-        return item.getItemMeta().getLore().get(0).contains("Sign");
+        List<String> lore = item.getItemMeta().getLore();
+        return lore != null && lore.size() > 0 && lore.get(0).contains("Sign");
     }
 
     /**

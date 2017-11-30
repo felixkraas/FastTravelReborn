@@ -79,8 +79,8 @@ public class FTTravelListener implements Listener {
                     String.valueOf(plugin.getConfig().getLong("Travel.Warmup"))));
             plugin.getServer().getScheduler().runTask(plugin, new WarmupPlayerTask(plugin,
                     event.getPlayer().getUniqueId(), plugin.getConfig().getLong("Travel.Warmup")));
-            plugin.getServer().getScheduler().runTaskLater(plugin, new TravelTask(plugin, player.getUniqueId(), sign),
-                    plugin.getConfig().getLong("Travel.Warmup") * 20);
+            plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new TravelTask(plugin,
+                    player.getUniqueId(), sign), plugin.getConfig().getLong("Travel.Warmup") * 20);
             cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
         }
 

@@ -1,3 +1,8 @@
 .idea/
 .gradle/
 build/
+<<<<<<< .merge_file_a05196
+=======
+gradle/
+settings.gradle
+>>>>>>> .merge_file_a10040

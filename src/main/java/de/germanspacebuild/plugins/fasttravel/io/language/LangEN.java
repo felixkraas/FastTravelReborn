@@ -110,6 +110,8 @@ public class LangEN extends Language {
 
             //Travel
             set("Travel.Success", "You traveled to&b %sign &f.");
+            set("Travel.Cooldown", "You have to wait at least %time seconds between travels.");
+            set("Travel.WarmingUp", "Travel warming up, stand still for %time seconds");
 
             //Commands
             set("Command.Player", "This command has to be executed by a player.");
@@ -133,6 +135,9 @@ public class LangEN extends Language {
             set("Command.Save.Saved.Console", "Database was saved.");
 
             set("Command.ShowRange.Zero", "Range of &b%sign&f is &a0.");
+
+            set("Command.Reload.Reloaded", "Plugin has been reloaded by %player");
+            set("Command.Reload.Player", "Plugin has been reloaded.");
 
             set("Command.Menu.Disabled", "Inventory menus are disabled.");
 
