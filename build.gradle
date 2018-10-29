@@ -79,7 +79,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.2'
         classpath 'gradle.plugin.com.selesse:gradle-git-changelog:0.4.0-SNAPSHOT'
     }
 }
